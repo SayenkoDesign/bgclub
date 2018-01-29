@@ -1,0 +1,307 @@
+/*
+Header
+---------------------------------------------- */
+
+// Fix for sticky header
+.site-header.fixed {
+    top: 46px;
+
+    @media screen and (min-width: 783px) {
+        top: 32px;
+    }      
+ }
+
+
+.site-header {
+     
+    background: #fff;
+    width: 100%;
+    z-index: 999;
+        
+    .wrap {
+          
+         .columns {
+            position: relative;   
+            
+            @include breakpoint(large) {
+                display: flex;
+                flex-direction: row;
+                
+                .header-widgets {
+                    margin-left: auto;
+                    order: 3;
+                }
+                
+                .nav-primary {
+                    margin-left: auto;
+                }
+            }
+        }
+                
+        .site-title {
+            
+            display: inline-block;
+            
+            padding: 14px 0;
+            
+            padding-left: rem-calc(map-get($grid-column-gutter, small) /2 );  
+            
+            @include breakpoint(medium) {
+                padding-left: rem-calc(map-get($grid-column-gutter, medium) /2 );  
+            }
+            
+            @include breakpoint(large) {
+                padding-left: 0;  
+            }
+            
+            a {
+                display: block;   
+            }
+        }
+                         
+    }
+    
+    .header-widgets {
+        
+        @include breakpoint(large) {
+            padding: 10px 0 0;
+        }
+                
+        @include breakpoint(medium) {
+            text-align: right;   
+        }
+        
+        @include breakpoint(medium only) {
+            position: absolute;
+            top: 10px;
+            right: 80px;
+        }
+        
+        > * {
+            @include breakpoint(medium) {
+                display: inline-block;
+            }
+        }
+        
+        .widget {
+            
+        }
+        
+        
+        
+        .widget_nav_menu {
+                        
+            .widget-title {
+                display: none;   
+            }
+            
+            ul {
+                @include list-reset;  
+                position: relative;
+                @include clearfix;
+                
+                 
+                li {
+                    position: relative;
+                    z-index: 2;
+                    padding: 10px 10px 0 0;
+                    
+                    a {
+                        font-weight: 700;   
+                    }
+                    
+                    @include breakpoint(small only) {
+                        width: 50%;
+                        float: right;   
+                        margin: 0;   
+                        padding: 0;
+                        
+                        a {
+                            text-align: center; 
+                            color: #fff;  
+                            height: 54px;
+                            line-height: 54px;
+                            padding: 0 5px;
+                        }
+                        
+                        &.donate a:hover {
+                            background: $green;
+                            color: #fff;
+                        }
+                    }
+                                     
+                    a {
+                        font-size: 15px;
+                        padding: 10px 5px;
+                        z-index: 2;
+                    }
+
+                    
+                    &.register {
+                        
+                        @include breakpoint(medium) {
+                            a {
+                                color: $blue;
+                                font-weight: 700;   
+                            }
+                        }
+                    }
+                    
+                    &.club {
+                        
+                        a {
+                            font-weight: 700;  
+                            position: relative;
+                            background-color: $blue;
+                            
+                            &:before {
+                                content: '';
+                                background-image: url('data:image/svg+xml;utf8,<svg width="16" height="23" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="a" d="M13.5 39H0V0h27v39H13.5z"/></defs><g transform="translate(-4 -10)" fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><path d="M19.622 15.725c-.083-.307-.251-.634-.376-.92C17.761 11.267 14.514 10 11.892 10 8.382 10 4.517 12.331 4 17.135v.98c0 .042.014.41.034.595.29 2.288 2.114 4.722 3.477 7.011 1.465 2.453 2.986 4.867 4.493 7.279.93-1.575 1.856-3.17 2.763-4.703.248-.45.535-.898.783-1.328.164-.287.48-.573.624-.838C17.64 23.473 20 20.795 20 18.157v-1.083c0-.286-.358-1.288-.378-1.349zM11.885 21c-1.065 0-2.23-.52-2.806-1.958-.086-.229-.079-.688-.079-.73v-.646C9 15.834 10.592 15 11.977 15 13.681 15 15 16.334 15 18c0 1.667-1.41 3-3.115 3z" fill="#fff" mask="url(#b)"/></g></svg>');
+                                width: 16px;
+                                height: 23px;
+                                display: inline-block;
+                                position: relative;
+                                top: 5px;
+                                margin-right: 12px;
+                                
+                            }
+                            
+                            @include breakpoint(medium) {
+                                background-color: transparent;
+                                color: $blue;
+                                padding-left: 20px;
+                                
+                                &:before {
+                                    content: '';
+                                    background-image: url('data:image/svg+xml;utf8,<svg width="16" height="23" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="a" d="M13.5 39H0V0h27v39H13.5z"/></defs><g transform="translate(-4 -10)" fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><path d="M19.622 15.725c-.083-.307-.251-.634-.376-.92C17.761 11.267 14.514 10 11.892 10 8.382 10 4.517 12.331 4 17.135v.98c0 .042.014.41.034.595.29 2.288 2.114 4.722 3.477 7.011 1.465 2.453 2.986 4.867 4.493 7.279.93-1.575 1.856-3.17 2.763-4.703.248-.45.535-.898.783-1.328.164-.287.48-.573.624-.838C17.64 23.473 20 20.795 20 18.157v-1.083c0-.286-.358-1.288-.378-1.349zM11.885 21c-1.065 0-2.23-.52-2.806-1.958-.086-.229-.079-.688-.079-.73v-.646C9 15.834 10.592 15 11.977 15 13.681 15 15 16.334 15 18c0 1.667-1.41 3-3.115 3z" fill="#0081C6" mask="url(#b)"/></g></svg>');
+                                    display: block;
+                                    position: absolute;
+                                    left: 0;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                }
+                            }
+                        }
+                    }
+                    
+                    &.donate {
+                        
+                        a {
+                            
+                            min-width: inherit;
+                            background-color: $green;
+                            border-color: $green;
+                            color: $white;
+                            
+                            &:visited,
+                            &:focus {
+                                color: $white;
+                            }
+                            
+                            &:active {
+                                color: $green;
+                            }
+                    
+                            &:hover{
+                                background-color: $white;
+                                border-color: $green;
+                                color: $green;
+                            }
+                            
+                            @include breakpoint(medium) {
+                                @include button;
+                                padding: 9px 13px!important;  
+                                min-width: inherit;
+                                
+                            }
+                                                    
+                        }
+                    }
+                }
+            }
+        }
+          
+    }
+    
+    .menu-toggle {
+        position: absolute;
+        top: 24px;
+        right: rem-calc(map-get($grid-column-gutter, small) /2 );  
+        z-index: 999;
+        
+        @include breakpoint(medium) {
+            right: rem-calc(map-get($grid-column-gutter, medium) /2 );  
+        }
+    }
+    
+    
+    /*
+    &:not(.fixed) {
+        
+        @include breakpoint(large) {
+            position: relative;
+            line-height: 0;
+            
+            &:after {
+                content: url('data:image/svg+xml;utf8,<svg  viewBox="0 0 1440 27" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd">
+            <path d="M411.09 9.298C856.422 25.541 1174.724 20 1439.34.07c51.405-3.872 51.546 2.772.423 19.931H0C9.944 3.232 146.974-.335 411.09 9.298z" fill="#D7D5D5"/>
+            <path d="M.752 1.5c449.505 25.5 389.72 11.208 919.871 0C1065.306-1.559 1238.432 3.041 1440 15.3V27H.752c-299.67-34-299.67-42.5 0-25.5z" fill="#0081C6"/>
+          </g>
+        </svg>');
+                
+                width: 100%;
+                height: auto;
+                
+            }
+        }
+    }*/
+    
+}
+
+
+.site-header {
+
+	&.fixed {
+		display: none;
+		
+		@media #{$xlarge-up} {
+      		//display: block;
+		}
+		
+		transition: transform .25s ease-in-out;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		z-index: 1006;
+		transform: translateY(-150%);
+		background-color: white;
+		box-shadow: 0px 1px 4px #888888;	
+        
+        .wrap {
+            position: relative;
+            top: auto;   
+        }
+        
+        .widget_text {
+            
+            .widget-title {
+                color: $navy;
+            }
+            
+            > div {
+                a {
+                    color: $navy; 
+                }
+            }
+            
+        }
+
+	}
+
+	&.fixed.show {
+		transform: translateY(0);
+	}
+}

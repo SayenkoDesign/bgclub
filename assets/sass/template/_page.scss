@@ -1,0 +1,33 @@
+html, body {
+	height: 100%;
+    background: $navy;
+    
+    #content {
+        background: #fff;   
+    }
+      
+}
+
+body {
+   &:focus {
+      outline: none!important;
+   }
+}
+
+#wpadminbar {
+    z-index: 999999;   
+}
+
+
+button:focus {
+    outline: none;   
+}
+
+.wave-top,
+.wave-bottom {
+    line-height: 0;
+}
+
+.site-main .wave-bottom {
+    margin-bottom: 32px;    // remove after developement
+}

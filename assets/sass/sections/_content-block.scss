@@ -1,0 +1,81 @@
+/* CSS Document */
+
+section.content-block {
+    
+    position: relative;
+ 
+    &.background-gray {
+        background-color: $light-gray;   
+    }
+    
+    min-height: 300px;
+    
+    @include breakpoint(large) {
+        min-height: 500px;   
+        
+        .columns  {
+            min-height: 500px;  
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
+    }
+    
+    .entry-content {
+         *:last-child {
+            margin-bottom: 0;   
+         }
+    }
+    
+    .entry-content {
+        //padding-top: rem-calc(map-get($grid-column-gutter, small) /2 );  
+        //padding-bottom: rem-calc(map-get($grid-column-gutter, small) /2 );  
+        padding-top: 40px;
+        padding-bottom: 40px;
+        
+        @include breakpoint(medium) {
+            //padding-top: rem-calc(map-get($grid-column-gutter, medium) /2 );  
+            //padding-bottom: rem-calc(map-get($grid-column-gutter, medium) /2 );  
+        }
+    }
+    
+    @include breakpoint(large) {
+        
+        .entry-content {
+            padding: 40px 0 40px 40px;   
+        }
+        
+        .large-pull-6 .entry-content {
+            padding: 40px 40px 40px 0;   
+        }
+    }
+    
+    
+    
+    .photo {
+        background-size: cover;
+        background-repeat: no-repeat; 
+        padding-top: 50%;  
+        
+        @include breakpoint(medium) {
+            min-height: 500px; 
+        }
+         
+        @include breakpoint(large) {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            padding-top: 0;
+            
+            &.photo-left {
+            left: 0;    
+            }
+            
+            &.photo-right {
+            right: 0;    
+            }
+       }
+    }
+    
+}

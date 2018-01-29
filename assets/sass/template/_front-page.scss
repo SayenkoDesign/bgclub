@@ -1,0 +1,16 @@
+//
+// Front Page
+//
+
+.home .hero {
+    
+    @include breakpoint(large) {
+        min-height: 480px;
+    }
+    
+    .wrap {
+        padding: 5% 0;   
+        
+    }
+
+}
