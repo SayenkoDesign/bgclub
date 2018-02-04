@@ -8,8 +8,11 @@ Section - Content
 if( ! function_exists( 'section_content' ) ) {
  
     function section_content() {
-        
-        global $post;
+                
+        // Classes & Styles need to be an array
+        $classes = array( 'section-content-block' );
+        $styles = array();
+        $output = '';
               
         $prefix = 'content';
         $prefix = set_field_prefix( $prefix );
@@ -23,10 +26,7 @@ if( ! function_exists( 'section_content' ) ) {
         $photo	            = $fields['photo'];
         $photo_alignment	= strtolower( $fields['photo_alignment'] );
         $button             = $fields['button'];
-        
-        // Classes & Styles need to be an array
-        $classes = array( 'content-block' );
-        $styles = array();
+         
           
         $content = '';
          

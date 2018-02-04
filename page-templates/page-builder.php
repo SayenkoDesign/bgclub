@@ -27,15 +27,18 @@ get_header(); ?>
 	function page_builder() {
 	
 		global $post;
-  		
+        
+        // Cache meta, helps speed things up a little
+        $meta = get_post_meta( $post->ID );
+        
+        $data = array();
+          		
 		if ( have_rows('sections') ) {
 		
 			while ( have_rows('sections') ) { 
 			
 				the_row();
-                
-                $data = get_fields();
-			
+                			
 				$row_layout = str_replace( '_section', '', get_row_layout() );
                 
                 // Use custom template part function so we can pass data

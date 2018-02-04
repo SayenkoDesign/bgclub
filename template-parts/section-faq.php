@@ -1,17 +1,27 @@
 <?php
+// FAQ Section
 
-section_faq();
+if( ! function_exists( 'section_faq' ) ) {
+
     function section_faq() {
-        
+                
         $prefix = 'faq';
         $prefix = set_field_prefix( $prefix );
         
-        $rows = get_field( sprintf( '%saccordion', $prefix ) );
-                        
+                
+        // Heading/Description
+        $section = get_sub_field( sprintf( '%ssection', $prefix ) );
+        $heading = $section['heading'];
+        $description = $section['description'];
+        
+        $rows = get_sub_field( 'faq_accordion' );
+        
         if( empty( $rows ) ) {
             return false;
         }
         
+        $settings = get_sub_field( 'faq_settings' );
+                
         $fa = new Foundation_Accordion;
         
         $columns = '';
@@ -26,14 +36,10 @@ section_faq();
         $attr = array( 'id' => 'faq', 'class' => 'section faq' );        
           
         _s_section_open( $attr );	
-        
-        $heading = get_field( sprintf( '%sheading', $prefix ) );
-          
+                  
         if( !empty( $heading ) ) {
             $heading    = _s_get_heading( $heading );
-            $subheading = get_field( sprintf( '%ssubheading', $prefix ) );
-            $subheading = _s_get_heading( $subheading, 'h5' );	
-            printf( '<div class="column row"><header class="entry-header">%s%s</header></div>', $heading, $subheading );
+            printf( '<div class="column row"><header class="entry-header">%s</header>%s</div>', $heading, $description );
         }
            
         print( '<div class="entry-content">' );
@@ -54,7 +60,7 @@ section_faq();
         }
         
         print( '</div>' );
-
+    
         
         
         _s_section_close();	
@@ -64,3 +70,7 @@ section_faq();
         
            
     }
+
+}
+
+section_faq();

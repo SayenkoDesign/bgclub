@@ -23,10 +23,7 @@
         img,
         svg {
             margin-bottom: 10px;   
-            
-            @include breakpoint(small only) {
-                max-width: 90%;
-            }
+            max-width: 170px;
         }
         
         .button {
@@ -44,13 +41,6 @@
         font-size: 14px;
         line-height: 20px;   
         margin-bottom: 20px;
-    }
-    
-    .widget-three {
-       
-       p > a {
-           color: red;
-       }
     }
     
 }

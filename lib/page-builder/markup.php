@@ -21,9 +21,14 @@ if( ! function_exists( '_s_section' ) ) {
         // Parse default args
         $args = wp_parse_args( $args, $defaults );
         
-        // Get settings
-        $settings = _s_parse_section_settings( $settings );
-        
+        // Get settings, make sure they are not empty
+        if( is_array( $settings ) && !empty( $settings ) ) {
+            $settings = _s_parse_section_settings( $settings );
+        }
+        else {
+            $settings = array( 'class' => array(), 'style' => array() );
+        }
+                
         $classes = array_merge( $args['class'], $settings['class'] );
         $styles  = array_merge( $args['style'], $settings['style'] );
         
@@ -38,6 +43,22 @@ if( ! function_exists( '_s_section' ) ) {
         
         _s_section_close();
                      
+    }
+    
+}
+
+if( ! function_exists( '_s_section' ) ) {
+    
+    function _s_section() {
+       // Heading/Description
+        $section = get_sub_field( sprintf( '%ssection', $prefix ) );
+        $heading = $section['heading'];
+        $description = $section['description'];
+                  
+        if( !empty( $heading ) ) {
+            $heading    = _s_get_heading( $heading );
+            printf( '<div class="column row"><header class="entry-header">%s</header>%s</div>', $heading, $description );
+        }   
     }
     
 }

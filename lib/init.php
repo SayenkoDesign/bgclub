@@ -25,14 +25,6 @@
     include_once( 'includes/theme-functions/array.php' );
 
 /****************************************
-	include_onces (Foundation)
-*****************************************/
-
-include_once( 'foundation/class-foundation.php' );
-include_once( 'foundation/class-foundation-accordion.php' );
-include_once( 'foundation/class-foundation-tabs.php' );
-
-/****************************************
 	Functions
 *****************************************/
 
@@ -64,6 +56,14 @@ include_once( 'foundation/class-foundation-tabs.php' );
 
     include_once( 'functions/addtoany.php' );
 
+/****************************************
+	include_onces (Foundation)
+*****************************************/
+
+include_once( 'foundation/class-foundation.php' );
+include_once( 'foundation/class-foundation-accordion.php' );
+include_once( 'foundation/class-foundation-tabs.php' );
+include_once( 'foundation/class-foundation-grid.php' );
 
 /****************************************
 	Page Builder
@@ -79,7 +79,7 @@ include_once( 'foundation/class-foundation-tabs.php' );
 	include_once( 'page-builder/filters.php' );
 
 	// Load modules
-    include_once( 'page-builder/modules/cta.php' );
+    include_once( 'page-builder/modules/button.php' );
 	//include_once( 'page-builder/modules/content-block.php' );
     //include_once( 'page-builder/modules/list.php' );
 	//include_once( 'page-builder/modules/grid.php' );

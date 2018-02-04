@@ -1,5 +1,4 @@
 <?php
-
 function _s_blog_template_redirect( $template ) {
 	if ( is_author() || is_search() ) 
 		$template = get_query_template( 'home' );	

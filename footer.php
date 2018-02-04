@@ -23,7 +23,9 @@ get_template_part( 'template-parts/section', 'footer-cta' );
 <?php
 printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bottom' ) );
 
-?>
+// $facebook = get_option( 'options_facebook' );
+ 
+ ?>
 
     <div class="wrap">
         <div class="row">
@@ -38,8 +40,20 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
             <?php
             // Social Icons
             if( function_exists( '_s_get_social_icons' ) ) {
-                if( !empty( _s_get_social_icons() ) ) {
-                    printf( '<div class="widget widget-two"><h3>Stay Connected!</h3>%s</div>', _s_get_social_icons() );
+                
+                $social_profiles = array( 
+                      'facebook' => _s_get_acf_option( 'facebook' ),
+                      'twitter' => _s_get_acf_option( 'twitter' ),
+                      'instagram' => _s_get_acf_option( 'instagram' ),
+                      'linkedin' => _s_get_acf_option( 'linkedin' ),
+                      'youtube' => _s_get_acf_option( 'youtube' ),
+                 );
+                 
+                                
+                $profiles = _s_get_social_icons( $social_profiles );
+                
+                if( !empty( $profiles ) ) {
+                    printf( '<div class="widget widget-two"><h3>Stay Connected!</h3>%s</div>', $profiles );
                 }
              }
              // Signup Form
@@ -81,6 +95,7 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
  </footer><!-- #colophon -->
 
 <?php 
+ 
 wp_footer(); 
 ?>
 </body>

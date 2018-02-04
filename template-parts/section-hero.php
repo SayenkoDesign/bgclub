@@ -11,6 +11,8 @@ if( ! function_exists( 'section_hero' ) ) {
         
         global $post;
         
+        
+        
         $prefix = 'hero';
         $prefix = set_field_prefix( $prefix );
         

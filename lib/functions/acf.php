@@ -21,7 +21,8 @@ if( function_exists('acf_add_options_sub_page') ) {
         'menu_slug' 	=> 'theme-settings-social',
         'parent' 		=> 'theme-settings',
 		'capability' => 'edit_posts',
- 		'redirect' 	=> false
+ 		'redirect' 	=> false,
+        'autoload' => true,
 	));
     
     acf_add_options_sub_page(array(
@@ -30,7 +31,8 @@ if( function_exists('acf_add_options_sub_page') ) {
         'menu_slug' 	=> 'theme-settings-footer',
         'parent' 		=> 'theme-settings',
 		'capability' => 'edit_posts',
- 		'redirect' 	=> false
+ 		'redirect' 	=> false,
+        'autoload' => true,
 	));
     
     /*
@@ -44,6 +46,36 @@ if( function_exists('acf_add_options_sub_page') ) {
 	));
     */
 
+}
+
+
+
+function _s_get_acf_options() {
+    
+    $all_options = wp_load_alloptions();
+    $acf_options  = array();
+     
+    foreach ( $all_options as $name => $value ) {
+        if ( substr( $name, 0, 8 ) === "options_" ) {
+            $name = str_replace( 'options_', '', $name );
+            $acf_options[ $name ] = $value;
+        }
+    }
+        
+    return $acf_options;
+   
+}
+
+
+function _s_get_acf_option( $name = '' ) {
+    
+    $acf_options = _s_get_acf_options();
+    
+    if( isset( $acf_options[$name] ) && !empty( $acf_options[$name] ) ) {
+        return $acf_options[$name];
+    }
+    
+    return false;
 }
 
 
