@@ -90,12 +90,12 @@ msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: page-templates/contact.php:2
-msgid "Contact"
+#: single-club.php:2, page-templates/page-builder.php:2
+msgid "Page Builder"
 msgstr ""
 
-#: page-templates/page-builder.php:2
-msgid "Page Builder"
+#: page-templates/contact.php:2
+msgid "Contact"
 msgstr ""
 
 #: template-parts/content-none.php:13

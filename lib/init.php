@@ -87,5 +87,8 @@ include_once( 'foundation/class-foundation-grid.php' );
 /****************************************
 	Post Types
 *****************************************/
-
-	//include_once( 'post-types/cpt-case-studies.php' );
+    
+    include_once( 'post-types/cpt-club.php' );
+    include_once( 'post-types/cpt-event.php' );
+	include_once( 'post-types/cpt-program.php' );
+    include_once( 'post-types/cpt-footer_cta.php' );

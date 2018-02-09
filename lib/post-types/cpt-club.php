@@ -1,12 +1,12 @@
 <?php
  
 /**
- * Create new CPT - FAQ
+ * Create new CPT - Club
  */
  
-class CPT_FAQ extends CPT_Core {
+class CPT_Club extends CPT_Core {
 
-    const POST_TYPE = 'faq';
+    const POST_TYPE = 'club';
 	const TEXTDOMAIN = '_s';
 	
 	/**
@@ -20,24 +20,24 @@ class CPT_FAQ extends CPT_Core {
         parent::__construct(
         
         	array(
-				__( 'FAQ', self::TEXTDOMAIN ), // Singular
-				__( 'FAQs', self::TEXTDOMAIN ), // Plural
+				__( 'Club', self::TEXTDOMAIN ), // Singular
+				__( 'Clubs', self::TEXTDOMAIN ), // Plural
 				self::POST_TYPE // Registered name/slug
 			),
 			array( 
-				'public'              => false,
-				'publicly_queryable'  => false,
+				'public'              => true,
+				'publicly_queryable'  => true,
 				'show_ui'             => true,
 				'query_var'           => true,
 				'capability_type'     => 'post',
-				'has_archive'         => false,
+				'has_archive'         => true,
 				'hierarchical'        => false,
 				'show_ui'             => true,
 				'show_in_menu'        => true,
 				'show_in_nav_menus'   => false,
-				'exclude_from_search' => true,
-				'rewrite'             => false,
-				'supports' => array( 'title', 'editor', 'page-attributes', 'revisions' ),
+				'exclude_from_search' => false,
+				'rewrite'             => array( 'slug' => 'clubs' ),
+				'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'revisions' ),
 			)
 
         );
@@ -49,4 +49,4 @@ class CPT_FAQ extends CPT_Core {
  
 }
 
-new CPT_FAQ();
+new CPT_Club();

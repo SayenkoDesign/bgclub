@@ -24,7 +24,7 @@ if( ! function_exists( 'section_hero' ) ) {
         $background_image       = $fields['background_image'];
         $background_position_x  = $fields['background_position_x'];
         $background_position_y  = $fields['background_position_y'];
-        $hero_overlay           = $fields['hero_overlay'];
+        $hero_overlay           = $fields['hoverlay'];
         $hero_overlay           = $hero_overlay ? ' hero-overlay' : '';
         
         $buttons                = $fields['buttons'];

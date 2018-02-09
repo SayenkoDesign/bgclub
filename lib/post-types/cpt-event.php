@@ -6,7 +6,7 @@
  
 class CPT_Event extends CPT_Core {
 
-    const POST_TYPE = 'bg_event';
+    const POST_TYPE = 'event';
 	const TEXTDOMAIN = '_s';
 	
 	/**
@@ -51,7 +51,7 @@ class CPT_Event extends CPT_Core {
 
     function pre_get_posts($query) {
 						
-		if ( $query->is_main_query() && is_post_type_archive( self::$post_type ) ) {
+		if ( $query->is_main_query() && is_post_type_archive( self::POST_TYPE ) ) {
 														
 			$query->set('posts_per_page', '-1' );
 			
@@ -69,9 +69,7 @@ class CPT_Event extends CPT_Core {
 				)
 			);
 			
-			//if( !is_admin() ) {
-				$query->set( 'meta_query', $meta_query );
-			//}
+		    $query->set( 'meta_query', $meta_query );
 		
 		}
 			

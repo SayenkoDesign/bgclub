@@ -6,50 +6,75 @@ Section - Footer CTA
 
  _s_footer_cta();
 function _s_footer_cta() {
-	
-	global $post;
+	        
+    $footer_cta = false;
     
-       
-    if( is_post_type_archive( 'case_study' ) || is_singular( 'case_study' ) || is_tax( 'case_study_cat' ) ) {
-		$post_id = CASE_STUDY_PAGE_ID;	
-	}
-    else if( is_home() || is_category() || is_author() || is_singular( 'post' ) ) {
-        $post_id = get_option('page_for_posts');
+    if( is_single() ) {
+        $footer_cta = get_field( 'choose_footer_cta' );
     }
-    else if( is_singular() ) {
-        $post_id = get_the_ID();
+    else {
+        
+        if( is_post_type_archive( 'program' ) ) {
+           $field = get_field( 'program_archive_footer_cta', 'options' );
+           if( isset( $field['choose_footer_cta'] ) ) {
+               $footer_cta = $field['choose_footer_cta'];
+           }
+           
+        }
+        else if( is_post_type_archive( 'club' ) ) {
+           $field = get_field( 'club_archive_footer_cta', 'options' );
+           if( isset( $field['choose_footer_cta'] ) ) {
+               $footer_cta = $field['choose_footer_cta'];
+           }
+        }
+        else {
+           $post_id = get_option('page_for_posts');         
+           $footer_cta = get_field( 'choose_footer_cta', $post_id );
+        }
     }
-	else {
-		$post_id = false;	
-	}
-	
-	if( ! $post_id ) {
-		return false;
-	}
-	
-    	
- 	$prefix = 'footer_cta';
-	$prefix = set_field_prefix( $prefix );
-	
-	$show_in_footer = get_post_meta( $post_id, 'show_in_footer', true );
-	
-	if( ! $show_in_footer ) {
-		return false;
-	}
     
-	$heading = get_field( 'cta_heading', $post_id );
-    $heading = _s_get_heading( $heading );
+    // Check for Global backup
+    if( empty( $footer_cta ) ) {
+        $field = get_field( 'global_footer_cta', 'options' );
+           if( isset( $field['choose_footer_cta'] ) ) {
+               $footer_cta = $field['choose_footer_cta'];
+           }
+         
+    }
     
-    $button = get_field( 'cta_button_button', $post_id );
-	$button = pb_get_cta_button( $button, array( 'class' => 'button orange' ) );
-	
-	if( !empty( $button ) ) {
-		$button = sprintf( '<p>%s</p>', $button );
-	}
-				
+    if( empty( $footer_cta ) ) {
+         return;
+    }
+    
+    $content = '';
+    
+    $heading        = get_field( 'cta_heading', $footer_cta );
+    $description    = get_field( 'cta_description', $footer_cta );
+    $buttons        = get_field( 'cta_buttons', $footer_cta );
+    $buttons = $buttons['buttons'];
+    
+    if( !empty( $heading ) ) {
+        $content .= _s_get_heading( $heading, 'h2' );
+    }
+    
+    
+    if( !empty( $description ) ) {
+        $content .= $description;
+     }
+
+    if( !empty( $buttons ) ) {
+        $button_group = '';
+        $button_classes = array( 'button secondary', 'button secondary' );
+        foreach( $buttons as $key => $button ) {
+             $button_group .= pb_get_cta_button( $button['button'], array( 'class' => $button_classes[$key] ) ); 
+        }
+        
+        $content .= sprintf( '<p class="button-group">%s</p>', $button_group );
+    }
+		
 	$attr = array( 'id' => 'footer-cta', 'class' => 'section footer-cta' );
 					
-	_s_section_open( $attr );
-		printf( '<div class="column row">%s%s</div>', $heading, $button );
+	_s_section_open( $attr );  
+		printf( '<div class="column row">%s</div>', $content );
 	_s_section_close();		
  }

@@ -35,6 +35,28 @@ if( function_exists('acf_add_options_sub_page') ) {
         'autoload' => true,
 	));
     
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Footer CTA',
+		'menu_title' 	=> 'Footer CTA',
+        'menu_slug' 	=> 'theme-settings-footer-cta',
+        'parent' 		=> 'theme-settings',
+		'capability' => 'edit_posts',
+ 		'redirect' 	=> false,
+        'autoload' => true,
+	));
+    
+	acf_add_options_sub_page(array(
+		'title'      => 'Program Settings',
+		'parent'     => 'edit.php?post_type=program',
+		'capability' => 'edit_posts'
+	));
+    
+    acf_add_options_sub_page(array(
+		'title'      => 'Club Settings',
+		'parent'     => 'edit.php?post_type=club',
+		'capability' => 'edit_posts'
+	));
+    
     /*
  	 acf_add_options_page(array(
 		'page_title' 	=> 'Error 404 Page Settings',
