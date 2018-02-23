@@ -55,6 +55,8 @@
 	include_once( 'functions/widgets.php' );
 
     include_once( 'functions/addtoany.php' );
+    
+    include_once( 'functions/store-locator.php' );
 
 /****************************************
 	include_onces (Foundation)
@@ -87,7 +89,7 @@ include_once( 'foundation/class-foundation-grid.php' );
 /****************************************
 	Post Types
 *****************************************/
-    
+    include_once( 'post-types/cpt-story.php' );
     include_once( 'post-types/cpt-club.php' );
     include_once( 'post-types/cpt-event.php' );
 	include_once( 'post-types/cpt-program.php' );

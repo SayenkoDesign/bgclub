@@ -24,12 +24,7 @@
     }
     
     .entry-content {
-        max-width: 540px;
-        
-        @include breakpoint(small only) {
-            text-align: center;
-        }
-        
+        text-align: center;
     }
      
     h1,

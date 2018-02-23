@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: archive-case_study.php:65, lib/functions/scripts.php:25, lib/functions/scripts.php:26
+#: archive-case_study.php:65, lib/functions/scripts.php:27, lib/functions/scripts.php:28
 msgid "Menu"
 msgstr ""
 
@@ -48,27 +48,27 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:71
+#: functions.php:69
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:117
+#: functions.php:115
 msgid "Primary"
 msgstr ""
 
-#: functions.php:118
+#: functions.php:116
 msgid "Header"
 msgstr ""
 
-#: functions.php:119
+#: functions.php:117
 msgid "Footer 1"
 msgstr ""
 
-#: functions.php:120
+#: functions.php:118
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:130
+#: functions.php:128
 msgid "Widget area for %s"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: single-club.php:2, page-templates/page-builder.php:2
+#: single-club.php:2, single-program.php:2, page-templates/page-builder.php:2
 msgid "Page Builder"
 msgstr ""
 

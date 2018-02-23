@@ -9,7 +9,7 @@
     text-align: center;
     color: white;
     font-size: 13px;
-    font-weight: normal;
+    font-weight: 700;
     line-height: 20px;
     text-transform: uppercase;
     text-decoration: none!important;
@@ -35,25 +35,47 @@
 
 .button {
     @include button;
-    background-color: $blue;
-    border-color: $blue;
-    color: $white;
     
     
-    &:visited,
-    &:active,
-    &:focus {
+    &.blue {
+        background-color: $blue;
+        border-color: $blue;
         color: $white;
+        
+        
+        &:visited,
+        &:active,
+        &:focus {
+            color: $white;
+        }
+        
+        &:hover{
+            background-color: $navy;
+            border-color: $navy;
+            color: $white;
+        }   
     }
     
-    &:hover{
-        background-color: $navy;
-        border-color: $navy;
+    &.blue-alt {
+        background-color: transparent;
+        border-color: $white;
         color: $white;
+        
+        &:visited,
+        &:active,
+        &:focus {
+            color: $white;
+        }
+
+        &:hover{
+            background-color: $blue;
+            border-color: $blue;
+            color: $white;
+        }
     }
     
     
-    &.secondary {
+    &.green {
         background-color: $green;
         border-color: $green;
         color: $white;
@@ -76,10 +98,10 @@
     }
     
     
-    &.white {
+    &.green-alt {
         background-color: transparent;
-        border-color: $white;
-        color: $white;
+        border-color: $green;
+        color: $green;
         
         &:visited,
         &:active,
@@ -88,8 +110,8 @@
         }
 
         &:hover{
-            background-color: $blue;
-            border-color: $blue;
+            background-color: $green;
+            border-color: $green;
             color: $white;
         }
     }

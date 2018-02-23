@@ -33,11 +33,9 @@ if ( ! function_exists( '_s_setup' ) ) :
 		define( 'THEME_NAME', sanitize_title( wp_get_theme() ) );
 		define( 'THEME_VERSION', '1.0' );	
 		
-    	//define( 'GOOGLE_API_KEY', '' );	
-        
-        define( 'CASE_STUDY_PAGE_ID', 289 );
-        define( 'MY_ACCOUNT_PAGE_ID', 371 );
-		
+    	define( 'GOOGLE_API_KEY', 'AIzaSyCy-SPSX_CcRah5C4J4OLe0LMsfc5CM61g' );	
+
+
 		/**
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.

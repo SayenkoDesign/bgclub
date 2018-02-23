@@ -67,7 +67,7 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
             
             $button  = get_field( 'footer_widget_three_button', 'options' );
             if( ! empty( $button ) ) {
-                $button = sprintf( '<p>%s</p>', pb_get_cta_button( $button['button'], array( 'class' => 'button secondary' ) ) ); 
+                $button = sprintf( '<p>%s</p>', pb_get_cta_button( $button['button'], array( 'class' => 'button green' ) ) ); 
             }
             printf( '<div class="widget widget-three">%s%s</div>', $content, $button );
             ?>

@@ -24,7 +24,7 @@ if( ! function_exists( 'section_grid' ) ) {
         $button = get_sub_field( sprintf( '%sbutton', $prefix ) );
         
         if( !empty( $button ) ) {
-            $button = sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button secondary' ) ) );
+            $button = sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button green' ) ) );
         }  
                 
         $settings = get_sub_field( 'grid_settings' );

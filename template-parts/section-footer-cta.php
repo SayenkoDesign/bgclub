@@ -64,7 +64,7 @@ function _s_footer_cta() {
 
     if( !empty( $buttons ) ) {
         $button_group = '';
-        $button_classes = array( 'button secondary', 'button secondary' );
+        $button_classes = array( 'button green', 'button green' );
         foreach( $buttons as $key => $button ) {
              $button_group .= pb_get_cta_button( $button['button'], array( 'class' => $button_classes[$key] ) ); 
         }

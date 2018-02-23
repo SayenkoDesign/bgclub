@@ -38,28 +38,6 @@ a {
 } // a
 
 
-
-
-a[href^="tel"]:link,
-a[href^="tel"]:visited, 
-a[href^="tel"]:hover {
-    text-decoration: none;
-    pointer-events: none;
-    cursor: default;
-}
-
-// Adjust based on theme
-@include breakpoint(xlarge down) {
-    a[href^="tel"]:link,
-    a[href^="tel"]:visited,
-    a[href^="tel"]:hover {
-        text-decoration: none;
-        pointer-events: auto;
-        cursor: pointer;
-    }
-}
-
-
 strong {
 	font-weight: 700;	
 }

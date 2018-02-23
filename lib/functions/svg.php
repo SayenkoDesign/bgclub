@@ -69,6 +69,17 @@ function get_svg( $type = '' ) {
 	    
         'play' => '<svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65"><g fill="none" fill-rule="evenodd" transform="translate(3 3)"><circle cx="29.5" cy="29.5" r="29.5" fill="#F48C38" stroke="#FFF" stroke-width="5"/><path fill="#FFF" d="M45 30L21 42V18"/></g><span class="screen-reader-text">play icon</span></svg>',
         
+        'map-icon-small' => '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="23">
+  <defs>
+    <path id="a" d="M13.5 39H0V0h27v39H13.5z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-4 -10)">
+    <mask id="b" fill="#fff">
+      <use xlink:href="#a"/>
+    </mask>
+    <path fill="#0081C6" d="M19.622 15.725c-.083-.307-.251-.634-.376-.92C17.761 11.267 14.514 10 11.892 10 8.382 10 4.517 12.331 4 17.135v.98c0 .042.014.41.034.595.29 2.288 2.114 4.722 3.477 7.011 1.465 2.453 2.986 4.867 4.493 7.279.93-1.575 1.856-3.17 2.763-4.703.248-.45.535-.898.783-1.328.164-.287.48-.573.624-.838C17.64 23.473 20 20.795 20 18.157v-1.083c0-.286-.358-1.288-.378-1.349zM11.885 21c-1.065 0-2.23-.52-2.806-1.958-.086-.229-.079-.688-.079-.73v-.646C9 15.834 10.592 15 11.977 15 13.681 15 15 16.334 15 18c0 1.667-1.41 3-3.115 3z" mask="url(#b)"/>
+  </g>
+</svg>'
         
         
 	);

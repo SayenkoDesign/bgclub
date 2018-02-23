@@ -68,7 +68,7 @@
 } // .menu
 
 
-.no-touchevents a[href^="tel:"] {
+.no-touchevents a[href^="tel:"]:not(.button) {
 	pointer-events: none;    /* prevents click event */
     cursor: text;            /* use text highlight cursor*/
 }

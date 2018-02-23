@@ -5,7 +5,7 @@ global $social_profiles;
 /**
  * Echo social icons.
  */
-function _s_get_social_icons( $profiles = array() ) { 
+function _s_get_social_icons( $profiles = array(), $post_id = 'options' ) { 
 
 	if( !is_array( $profiles ) || empty( array_filter( $profiles ) ) ) {
 		

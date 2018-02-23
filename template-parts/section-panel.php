@@ -23,7 +23,7 @@ if( ! function_exists( 'section_panel' ) ) {
                       
         $heading 		    = $fields['heading'];
         $editor	            = $fields['editor'];
-        $button             = $fields['button'];
+        $buttons            = $fields['buttons'];
          
           
         $content = '';
@@ -38,9 +38,15 @@ if( ! function_exists( 'section_panel' ) ) {
             $content .= $editor;
          }
 
-        if( !empty( $button ) ) {
-            $content .= sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button secondary' ) ) );
-        }        
+        if( !empty( $buttons ) ) {
+            $button_group = '';
+            foreach( $buttons as $key => $button ) {
+                 $button_group .= pb_get_cta_button( $button['button'], array( 'class' => 'button green-alt' ) ); 
+            }
+            
+            $content .= sprintf( '<p class="button-group">%s</p>', $button_group );
+        }
+           
                  
         $content = sprintf( '<div class="small-12 large-8 large-center columns">
                             <div class="entry-content">%s</div></div>', $content );

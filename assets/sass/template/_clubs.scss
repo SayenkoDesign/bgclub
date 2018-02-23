@@ -1,0 +1,196 @@
+/// Clubs
+
+.post-type-archive-club {
+    
+    .site-content {
+        padding-bottom: 60px;   
+    }
+    
+    .bh-sl-container > * {
+        box-sizing: inherit;   
+    }
+    
+    .bh-sl-container .bh-sl-map-container {
+        margin-bottom: 0;
+    }
+    
+    .bh-sl-container {
+        box-sizing: inherit;
+        color: inherit;
+        float: none;
+        font: inherit;
+        padding: 0;
+        width: 100%;
+    }
+    
+    
+    .bh-sl-form-container {
+        max-width: 520px;
+        min-height: 120px;
+        border-radius: 1px;
+        background-color: #FFFFFF;
+        border-top: 5px solid $blue;
+        box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.13);
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        z-index: 9;
+        margin: 0 auto 20px;
+        margin-top: -50px;
+        float: none;
+        clear: none;
+        box-sizing: inherit!important;  
+        
+        @include breakpoint(medium) {
+            padding: 60px;
+            min-width: 520px;
+            min-height: inherit;
+            margin-top: -80px;
+            margin-bottom: 40px;
+            
+        }
+        
+        form > * {
+            float: none;
+            display: inline-block;   
+            width: auto;
+            
+            svg {
+                position: relative;
+                top: 5px;   
+            }
+            
+        }
+        
+        form button {
+            @include button;
+            @extend .button.green;   
+            min-width: inherit;
+            padding: 9px 24px;
+            margin: 0 auto;
+        }
+    }
+    
+    
+     
+    .bh-sl-container .bh-sl-loc-list {
+        font-size: 14px;
+        height: 600px;
+        width: 100%;
+        @include breakpoint(xlarge) {
+            height: 800px;
+        }
+    }
+    
+    .bh-sl-container .bh-sl-loc-list .list-details {
+        float: none;
+        margin-left: 0;
+        width: 100%;
+    }
+       
+    .bh-sl-container .bh-sl-map {
+        float: none;
+        height: 400px;
+        width: 100%;
+        margin-bottom: 12px;
+        
+        @include breakpoint(xlarge) {
+            height: 800px;
+        }
+    }
+    
+    @include breakpoint(xlarge) {
+        .bh-sl-container .bh-sl-loc-list {
+            width: 24%;            
+        }
+        
+        .bh-sl-container .bh-sl-map {
+            width: calc(76% - 12px );
+            float: right;
+            margin-left: 12px;
+        }
+    }
+    
+    
+    .bh-sl-container .bh-sl-loc-list ul li {
+        border: 1px solid #D7D5D5;
+	    border-radius: 8px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        margin-bottom: 12px;
+        position: relative;
+        text-align: center;
+        
+        &.list-focus {
+            background-color: $light-gray!important;   
+            
+            .list-label span {
+                background-color: $green;   
+            }
+        }
+        
+    }
+    
+    
+    .bh-sl-container .bh-sl-loc-list .list-label {
+        background: transparent;
+        border-radius: 0;
+        display: block;
+        float: none;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        width: 24px;
+        min-width: inherit;
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        span {
+            background: $blue;
+            color: #fff;
+            display: inline-block;
+            float: none;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            width: auto;
+            min-width: 24px;
+            width: 24px;
+            height: 0;
+            padding: 50% 0;
+            border-radius: 50%;  
+            line-height: 0; 
+        }
+    }
+    
+    
+    .bh-sl-container .bh-sl-loc-list .list-details .list-content {
+        padding: 36px 12px 18px;
+        
+        .loc-city {
+            color: $blue;
+            font-size: 22px;
+            line-height: 32px;
+            font-weight: 700;
+        }
+        
+        .loc-name {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: normal;
+        }
+        
+        .loc-addr,
+        .loc-phone,
+        .loc-links {
+            padding-top: 14px;
+        }
+    }
+    
+}
+

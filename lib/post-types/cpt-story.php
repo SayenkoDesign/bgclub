@@ -6,7 +6,7 @@
  
 class CPT_Story extends CPT_Core {
 
-    const POST_TYPE = 'bg_story';
+    const POST_TYPE = 'story';
 	const TEXTDOMAIN = '_s';
 	
 	/**
@@ -21,7 +21,7 @@ class CPT_Story extends CPT_Core {
         
         	array(
 				__( 'Story', self::TEXTDOMAIN ), // Singular
-				__( 'Storys', self::TEXTDOMAIN ), // Plural
+				__( 'Stories', self::TEXTDOMAIN ), // Plural
 				self::POST_TYPE // Registered name/slug
 			),
 			array( 
@@ -37,38 +37,50 @@ class CPT_Story extends CPT_Core {
 				'show_in_nav_menus'   => false,
 				'exclude_from_search' => false,
 				'rewrite'             => array( 'slug' => 'stories' ),
-				'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'revisions' ),
+				'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+                'menu_position' => 5
 				 )
 
         );
 		
-              
-             add_action('init', array( $this, 'add_tags' ));
+        add_action('pre_get_posts', array( $this, 'add_post_types_to_loop' ) );  
+        
+        add_action( 'save_post', array( $this, 'save_default_category' ), 10, 3 );
+      
+        add_action('init', array( $this, 'add_tags' ) );
 
      }
-	     
+     
+     
+     public function save_default_category( $post_id, $post, $update ) {
+        
+        if ( self::POST_TYPE == $post->post_type ) { // replace `cpt` with your custom post type slug
+            /**
+             * Replace `taxo` by the taxonomy slug you want to control/set
+             * … and replace `default-term` by the default term slug (or name)
+             * (or you can use a `get_option( 'my-default-term', 'default term' )` option instead, which is much better)
+             */
+            if ( empty( wp_get_post_terms( $post_id, 'category' ) ) ) {
+                wp_set_object_terms( $post_id, 1, 'category' );
+            }
+        }
+    }
+
+
+	 
+     
+    public function add_post_types_to_loop($query) {
+        if ( $query->is_main_query() && ( $query->is_home() || $query->is_category() || $query->is_tag() ) ) {
+            $query->set('post_type', array('post', self::POST_TYPE ) );
+        }
+    }
     
-    function add_tags(){
-        register_taxonomy_for_object_type('post_tag', 'bg_story');
+    public function add_tags(){
+        register_taxonomy_for_object_type('post_tag', self::POST_TYPE );
+        register_taxonomy_for_object_type('category', self::POST_TYPE );
     }
 
  
 }
 
 new CPT_Story();
-
-
-$story_categories = array(
-    __( 'Story Category', CPT_Story::TEXTDOMAIN ), // Singular
-    __( 'Story Categories', CPT_Story::TEXTDOMAIN ), // Plural
-    'story_cat' // Registered name
-);
-
-register_via_taxonomy_core( $story_categories, 
-	array(
-		'hierarchical' => true,
-        'show_in_nav_menus'   => false,
-        'rewrite' => array( 'slug' => 'story-categories' ),
-	), 
-	array( CPT_Story::POST_TYPE ) 
-);

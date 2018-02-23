@@ -17,7 +17,7 @@ if( ! function_exists( 'section_grid' ) ) {
         
         $grid_type = get_sub_field( 'grid_type' );
         
-        $class = 'default' == strtolower( $grid_type ) ? 'learn-more' : 'button secondary';
+        $class = 'default' == strtolower( $grid_type ) ? 'learn-more' : 'button green';
         
         $grid_items = get_sub_field( 'grid_grid' );
         if( !empty( $grid_items ) ) {

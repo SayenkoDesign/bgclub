@@ -56,7 +56,7 @@ if( ! function_exists( 'section_content' ) ) {
          }
 
         if( !empty( $button ) ) {
-            $content .= sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button secondary' ) ) );
+            $content .= sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button green' ) ) );
         }        
                  
         $content = sprintf( '<div class="small-12 large-6 %s columns"><div class="entry-content">%s</div></div>', $right, $content );

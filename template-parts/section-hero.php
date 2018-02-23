@@ -24,7 +24,7 @@ if( ! function_exists( 'section_hero' ) ) {
         $background_image       = $fields['background_image'];
         $background_position_x  = $fields['background_position_x'];
         $background_position_y  = $fields['background_position_y'];
-        $hero_overlay           = $fields['hoverlay'];
+        $hero_overlay           = $fields['overlay'];
         $hero_overlay           = $hero_overlay ? ' hero-overlay' : '';
         
         $buttons                = $fields['buttons'];
@@ -57,7 +57,7 @@ if( ! function_exists( 'section_hero' ) ) {
 
         if( !empty( $buttons ) ) {
             $button_group = '';
-            $button_classes = array( 'button secondary', 'button white' );
+            $button_classes = array( 'button green', 'button blue-alt' );
             foreach( $buttons as $key => $button ) {
                  $button_group .= pb_get_cta_button( $button['button'], array( 'class' => $button_classes[$key] ) ); 
             }

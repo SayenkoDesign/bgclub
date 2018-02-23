@@ -12,5 +12,15 @@
         padding: 5% 0;   
         
     }
+    
+    .entry-content {
+        max-width: 540px;
+        text-align: left;
+        
+        @include breakpoint(small only) {
+            text-align: center;
+        }
+        
+    }
 
 }

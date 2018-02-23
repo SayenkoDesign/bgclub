@@ -9,6 +9,8 @@ function _s_register_scripts() {
     
 	// Frontpage
 	wp_register_script( 'front-page', trailingslashit( THEME_JS ) . 'front-page.min.js', array('jquery'), '', true );
+        
+    
 
 	// Project
  	wp_register_script( 'project' , trailingslashit( THEME_JS ) . 'project.js',
