@@ -390,17 +390,18 @@ endif;
         <main id="main" class="site-main" role="main">
             <div class="bh-sl-container">
               
-        
-              <div class="bh-sl-form-container">
-                <form id="bh-sl-user-location" method="post" action="#">
-                    <div class="form-input">
-                      <label for="bh-sl-address"><?php echo get_svg('map-icon-small');?><span class="screen-reader-text">Zip Code</span></label>
-                      <input type="text" id="bh-sl-address" name="bh-sl-address" placeholder="Enter Zip Code" />
-                    </div>
-        
-                    <button id="bh-sl-submit" type="submit">Find A Club</button>
-                </form>
-              </div>
+                <section class="section-intro">
+                  <div class="box bh-sl-form-container">
+                    <form id="bh-sl-user-location" method="post" action="#">
+                        <div class="form-input">
+                          <label for="bh-sl-address"><?php echo get_svg('map-icon-small');?><span class="screen-reader-text">Zip Code</span></label>
+                          <input type="text" id="bh-sl-address" name="bh-sl-address" placeholder="Enter Zip Code" />
+                        </div>
+            
+                        <button id="bh-sl-submit" type="submit">Find A Club</button>
+                    </form>
+                  </div>
+              </section>
         
               <div id="bh-sl-map-container" class="bh-sl-map-container">
                 <div id="bh-sl-map" class="bh-sl-map"></div>

@@ -31,7 +31,7 @@ if( ! function_exists( 'section_current_opening' ) ) {
                   
         if( !empty( $heading ) ) {
             $heading    = _s_get_heading( $heading );
-            $output   .= sprintf( '<div class="column row"><header class="entry-header">%s</header>%s</div>', 
+            $output   .= sprintf( '<div class="column row"><header class="entry-header">%s%s</header></div>', 
                         $heading, $description );
         }   
         

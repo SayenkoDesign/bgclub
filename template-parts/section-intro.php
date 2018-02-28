@@ -40,11 +40,10 @@ if( ! function_exists( 'section_intro' ) ) {
             $content .= sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button green' ) ) );
         }        
                  
-        $content = sprintf( '<div class="small-12 large-6 large-center columns">
-                            <div class="entry-content">%s</div></div>', $content );
+        $content = sprintf( '<div class="entry-content">%s</div>', $content );
         
         
-        $output = sprintf( '<div class="row">%s</div>', $content );
+        $output = sprintf( '<div class="column row"><div class="box">%s</div></div>', $content );
         
         // Do not change
         

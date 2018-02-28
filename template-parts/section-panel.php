@@ -30,14 +30,14 @@ if( ! function_exists( 'section_panel' ) ) {
         
         $content = sprintf( '<div class="logo-mark">%s</div>', get_svg( 'logo-mark' ) );
         
+                  
         if( !empty( $heading ) ) {
-            $content .= _s_get_heading( $heading, 'h2' );
-        }
+            $heading    = _s_get_heading( $heading );
+            $content   .= sprintf( '<div class="column row"><header class="entry-header">%s%s</header></div>', 
+                        $heading, $editor );
+        }  
         
-        if( !empty( $editor ) ) {
-            $content .= $editor;
-         }
-
+         
         if( !empty( $buttons ) ) {
             $button_group = '';
             foreach( $buttons as $key => $button ) {
@@ -48,11 +48,10 @@ if( ! function_exists( 'section_panel' ) ) {
         }
            
                  
-        $content = sprintf( '<div class="small-12 large-8 large-center columns">
-                            <div class="entry-content">%s</div></div>', $content );
+        $content = sprintf( '<div class="entry-content">%s</div>', $content );
         
         
-        $output = sprintf( '<div class="row">%s</div>', $content );
+        $output = sprintf( '<div class="column row">%s</div>', $content );
         
         // Do not change
         

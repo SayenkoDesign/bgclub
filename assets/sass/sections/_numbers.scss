@@ -1,0 +1,62 @@
+/* CSS Document */
+
+.section-numbers {
+        
+    .wrap {
+        max-width: 800px;   
+        margin: 0 auto;   
+    }
+    
+    .entry-header {
+        padding-bottom: 30px;   
+        
+        p {
+            margin-bottom: 0;   
+        }
+    }
+    
+    
+    .column {
+        text-align: center;
+        
+        .thumbnail {
+            height: 106px;
+            position: relative;
+            margin: 0 auto 15px;
+            
+            svg, img {
+                max-height: 106px;  
+                position: absolute;
+                bottom: 0; 
+                left: auto;
+                transform: translateX(-50%);
+            }
+        }
+        
+        h3 {
+            margin-bottom: 5px;  
+            color: $green;
+            font-size: 50px;
+            line-height: 68px;
+            font-weight: 800;
+        }
+        
+        .description {
+            margin-bottom: 22px;   
+            
+            p {
+                font-size: 22px;
+                line-height: 32px;
+                font-weight: 700;   
+                margin-bottom: 21px;
+            }
+        }
+        
+        
+        
+        a {
+            margin: 0 auto;   
+        }
+    
+    }
+}

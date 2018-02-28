@@ -30,7 +30,7 @@ if( ! function_exists( 'section_quote' ) ) {
          
         if( !empty( $photo ) ) {
             $attachment_id = $photo;
-            $size = 'large';
+            $size = 'quote';
             $photo = wp_get_attachment_image( $attachment_id, $size );
             
             // Alignment
@@ -46,7 +46,8 @@ if( ! function_exists( 'section_quote' ) ) {
         
         
         if( !empty( $editor ) ) {
-            $quote .= $editor;
+            $icon = sprintf( '<div class="quote">%s</div>', get_svg( 'quote' ) );
+            $quote .= sprintf( '%s%s', $editor, $icon );
          }
       
                  

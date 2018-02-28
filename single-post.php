@@ -36,7 +36,7 @@ function section_hero() {
 	$out .= _s_structural_wrap( 'open', false );
 	
 	
-	$out .= sprintf( '<div class="row"><div class="small-12 columns">%s%s%s%s</div></div>', $post_categories, $heading, $description, $post_author );
+	$out .= sprintf( '<div class="row"><div class="small-12 columns">%s%s%s%s</div></div>', $description, $heading, $post_categories, $post_author );
 	
 	$out .= _s_structural_wrap( 'close', false );
 	$out .= '</section>';
@@ -67,10 +67,10 @@ function section_hero() {
                     endwhile;
                     
                     $previous = sprintf( '%s<span class="%s"></span>', 
-                                         get_svg( 'next-arrow' ), __( 'Previous Post', '_s') );
+                                         get_svg( 'arrow' ), __( 'Previous Post', '_s') );
                     
                     $next = sprintf( '%s<span class="%s"></span>', 
-                                         get_svg( 'prev-arrow' ), __( 'Next Post', '_s') );
+                                         get_svg( 'arrow' ), __( 'Next Post', '_s') );
                     
                     the_post_navigation( array( 'prev_text' => $previous, 'next_text' => $next ) );
                     
@@ -92,7 +92,7 @@ function section_hero() {
 
 <?php
 
-section_related_articles();
+// section_related_articles();
 function section_related_articles() {
     global $post;
     

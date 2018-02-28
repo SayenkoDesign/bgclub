@@ -32,7 +32,6 @@
     }
     
     h3 {
-        color: #3F3E3E;
         margin-bottom: 15px;
     }
     
@@ -48,38 +47,18 @@
 
 
 .footer-widgets .social-icons {
-    @include list-reset;
-    height: 45px;
-      
-    li {
-       display: inline-block;
-       padding: 0 5px;   
-       height: 45px;
-      
-    }
     
     a {
-        transition: $transition;
-        width: 45px;
-        height: 45px;
-        display: block;
+       
         background-color: $blue;
-        border-radius: 50%;
-        position: relative;
+       
         &:hover {
             background-color: $navy;
-            border-radius: 50%;
         }
     }
     
     svg {
-        width: 34px;
-        height: 34px;
         fill: $white;  
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);  
     }    
    
 }
@@ -99,6 +78,7 @@
         
         span {
              display: block;
+             margin-bottom: 5px;
         }
         
         a {

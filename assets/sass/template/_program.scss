@@ -1,0 +1,103 @@
+// Programs
+
+.section-program-menu {
+ 
+    .program-icon {
+        margin-top: -140px;
+        position: relative;
+        z-index: 9;
+        
+        span {
+            display: block;
+            width: 168px;
+            height: 168px;
+            margin: 0 auto;
+            background-color: $navy;   
+            border-radius: 50%;
+            border: 5px solid #FFFFFF;
+            box-shadow: 1px 1px 6px 0 #979797;
+            
+            > * {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);   
+            }
+        }
+    }
+    
+}
+
+
+
+.single-program {
+ 
+    h3 {
+        font-size: 30px;
+        color: $dark-gray;   
+    }
+    
+}
+
+
+
+.nav-links {
+    @extend .clear;
+    margin: 0 auto 30px;
+    position: relative;
+    z-index: 9;
+    
+    > div {
+        display: inline-block;
+		width: 65px;
+		height: 65px;    
+     }
+ 
+    a {
+        transition: ease opacity 0.3s;
+		cursor: pointer;
+        display: block;
+		width: 65px;
+		height: 65px;      
+        opacity: 1;
+        border: 3px solid $blue;
+        border-radius: 50%;
+        position: relative;
+        
+        
+        svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);  
+            width: 31px;
+            height: 22px; 
+        }
+        
+        svg .arrow {
+            fill: $blue!important;    
+        }
+        
+        svg .line {
+            stroke: $blue!important;    
+        }
+		
+		&:hover {
+			opacity: .5;	
+		}
+    }
+    
+     .nav-next a {
+        transform: rotate(-180deg);
+    }
+    
+    .nav-previous {
+        float: right;
+    }
+    
+    .nav-next {
+        //float: right;
+    }
+    
+}
+

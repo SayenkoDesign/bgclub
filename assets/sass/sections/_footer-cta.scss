@@ -3,32 +3,68 @@
 .footer-cta {
  
     background-color: $navy;
-    background-size: cover;
-    background-position: center top;   
-    background-repeat: no-repeat;
-    background-image: url(assets/images/bg-footer-cta.jpg);
+    
+    margin-top: 0;
     
     position: relative;
     z-index: 2;
     
     .wrap {
-        padding: 75px 0!important;   
+        padding: 75px 0 45px!important;  
+        
+        @include breakpoint(large) {
+            padding: 75px 0 53px!important;  
+        }
     }
     
-    .column {
-     
-        text-align: center;
+    .row {
+        @include breakpoint(large) {
+            display: flex;
+            align-items: center;  
+        }
+    }
+    
+    .column {    
+    
+        margin-bottom: $global-margin;   
         
-        > * {
-            display: inline-block;   
-            vertical-align: middle;
-            padding: 15px;
-            margin: 0;
+        @include breakpoint(large) {
+            margin-bottom: 0;
+        }
+        
+        h2,
+        p {
+           color: #fff;  
         }
         
         h2 {
-            color: #fff;   
-            font-weight: 300;
+            margin-bottom: 5px;
+            &:after {
+                display: none;   
+            }
+        }
+        
+        p {
+            font-size: 22px;
+            line-height: 30px;
+            font-weight: 700;   
+        }
+        
+        text-align: center;
+        
+        &:first-child {
+            *:last-child {
+                margin-bottom: $global-margin;   
+            }
+        }
+        
+        @include breakpoint(large) {
+            &:first-child {
+                text-align: left; 
+            }
+            &:last-child {
+                text-align: right; 
+            }
         }
         
     }

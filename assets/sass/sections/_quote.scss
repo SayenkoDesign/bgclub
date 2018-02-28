@@ -1,0 +1,32 @@
+// Quote
+
+.section-quote {
+    
+    margin-bottom: 60px;
+    
+    .entry-quote {
+        padding-top: 60px;  
+        
+        p:first-child:before {
+            content: '" ';
+            font-style: italic;   
+        }
+    }
+    
+    .quote {
+        padding: 20px 0 30px;   
+    }
+    
+    img {
+        
+    }
+    
+    p {
+        font-size: 22px;  
+        font-weight: 700;
+        line-height: 30px; 
+        
+    }
+
+       
+}

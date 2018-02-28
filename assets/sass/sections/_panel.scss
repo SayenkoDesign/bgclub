@@ -1,0 +1,33 @@
+// Panel
+
+.section-panel {
+        
+    text-align: center;
+    
+    .wrap {
+        
+    }
+ 
+    svg {
+        width: 90px;
+        margin: 0 auto 15px;   
+    }
+    
+    .entry-content {
+        
+        max-width: 800px;
+        margin: 0 auto;
+        border: 5px solid #EEDDFF;
+        border-radius: 13px;   
+        padding: 30px 60px;
+        
+        h2 {
+            margin-bottom: 10px;   
+        }
+        
+        p {
+            margin-bottom: 21px;   
+        }
+    }
+    
+}

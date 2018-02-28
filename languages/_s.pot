@@ -13,15 +13,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: archive-case_study.php:65, lib/functions/scripts.php:27, lib/functions/scripts.php:28
-msgid "Menu"
-msgstr ""
-
-#: category.php:65, home.php:65, single-post.php:70
+#: archive-event.php:102, category.php:65, home.php:65, single-event.php:71, single-post.php:70, single-program.php:83, single-story.php:70, tag.php:65
 msgid "Previous Post"
 msgstr ""
 
-#: category.php:68, home.php:68, single-post.php:73
+#: archive-event.php:105, category.php:68, home.php:68, single-event.php:74, single-post.php:73, single-program.php:86, single-story.php:73, tag.php:68
 msgid "Next Post"
 msgstr ""
 
@@ -90,12 +86,20 @@ msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: single-club.php:2, single-program.php:2, page-templates/page-builder.php:2
+#: page-templates/landing-page.php:2
+msgid "Landing Page"
+msgstr ""
+
+#: page-templates/page-builder.php:2
 msgid "Page Builder"
 msgstr ""
 
-#: page-templates/contact.php:2
-msgid "Contact"
+#: template-parts/content-event.php:46, template-parts/content-post.php:44, template-parts/content-story.php:49
+msgid "Continue Reading"
+msgstr ""
+
+#: template-parts/content-event.php:57, template-parts/content-post.php:55, template-parts/content-story.php:60
+msgid "Share This:"
 msgstr ""
 
 #: template-parts/content-none.php:13
@@ -122,24 +126,12 @@ msgstr ""
 msgid "Edit %s"
 msgstr ""
 
-#: template-parts/content-post.php:44
-msgid "Continue Reading"
-msgstr ""
-
-#: template-parts/content-post.php:55
-msgid "Share This:"
-msgstr ""
-
 #: template-parts/content.php:27
 msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: template-parts/section-case-studies.php:80
-msgid "Case Studies"
-msgstr ""
-
-#: template-parts/section-case-studies.php:82
-msgid "The facts. Charges. Verdict."
+#: lib/functions/scripts.php:27, lib/functions/scripts.php:28
+msgid "Menu"
 msgstr ""
 
 #: lib/functions/template-tags.php:77

@@ -21,7 +21,13 @@ svg, img[src$=".svg"] {
   max-width: 100%; // use max-width for it to work
 }
 
+svg {
+   overflow: visible!important;   
+}
 
+svg:not(:root) {
+    overflow: visible!important;
+}
 
 .embed-container { 
 	position: relative; 

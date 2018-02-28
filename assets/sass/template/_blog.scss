@@ -1,10 +1,7 @@
 /* CSS Document */
 
-.blog {
-    
-    .hero {
-        margin-bottom: 60px;   
-    }
+.blog,
+.post-type-archive-event {
     
     .post-hero {
         background: $gray;
@@ -43,8 +40,17 @@
             padding: 70px 12px;
             text-align: center;
             
+            h3 {
+                margin-top: -15px;   
+                margin-bottom: 15px;   
+            }
+            
             h2 a {
                 color: #fff;
+            }
+            
+            h3 {
+                color: #fff;   
             }
             
             .post-categories {
@@ -59,7 +65,7 @@
                 
                 a {
                     display: block;
-                    padding: 12px 8px;
+                    padding: 13px 30px;
                     background-color: transparent;
                     text-align: center;
                     color: white;
@@ -68,6 +74,7 @@
                     border: solid 2px $white;
                     transition: ease all 0.3s;
                     letter-spacing: 1px;
+                    border-radius: $global-radius;
                     
                     &:hover {
                         background-color: $white;
@@ -105,38 +112,9 @@
 }
 
 
-.nav-links {
-    @extend .clear;
-    margin-bottom: 60px;
-    
-    > div {
-        display: inline-block;
-		width: 65px;
-		height: 65px;    
-     }
- 
-    a {
-        transition: ease opacity 0.3s;
-		cursor: pointer;
-        display: block;
-		width: 65px;
-		height: 65px;      
-        opacity: 1;
-        
-        
-		&:hover svg {
-			opacity: .8;	
-		}
-    }
-    
-    .nav-previous {
-        float: right;
-    }
-    
-}
-
-
-.single-post {
+.single-post,
+.single-story,
+.single-event {
  
     .hero {
         margin-bottom: 120px;  
@@ -148,14 +126,14 @@
         &.flex {
             
             @media #{$large-up} {
-                min-height: 450px; 
+                min-height: 350px; 
             }
              
             .wrap {            
                 padding: 75px 0 100px;
         
                  @media #{$xlarge-up} {
-                    padding: 150px 0 50px; 
+                    padding: 100px 0 50px; 
                 } 
             }
         }
@@ -174,7 +152,7 @@
         
         ul.post-categories {
             @include list-reset;
-            margin: 0 0 20px -12px;
+            margin: 0 0 50px -12px;
             text-align: center;
             
             li {
@@ -184,7 +162,7 @@
             
             a {
                 display: block;
-                padding: 12px 8px;
+                padding: 13px 30px;
                 background-color: transparent;
                 text-align: center;
                 color: white;
@@ -193,6 +171,7 @@
                 border: solid 2px $white;
                 transition: ease all 0.3s;
                 letter-spacing: 1px;
+                border-radius: $global-radius;
                 
                 &:hover {
                     background-color: $white;
@@ -224,21 +203,23 @@
     article {
         margin-bottom: 0px;
         
-        p:first-child {
-            font-size: 22px;
-            line-height: 28px;  
-          }
-        
-        p:first-child:first-letter {
-            color: #4A4A4A;
-            font-size: 56px;
-            line-height: 42px; 
-            float: left;
-            padding-top: 8px;
-            padding-right: 8px;
-            padding-left: 3px;  
+        .entry-content {
+            h4:first-child {
+                font-size: 22px;
+                line-height: 28px;  
+                margin-bottom: 40px;
+              }
+            
+            h4:first-child:first-letter {
+                color: #4A4A4A;
+                font-size: 56px;
+                line-height: 42px; 
+                float: left;
+                padding-top: 8px;
+                padding-right: 8px;
+                padding-left: 3px;  
+            }
         }
-        
         
         
     }
@@ -249,7 +230,7 @@
         padding: 40px 0;   
         
         h4 {
-            margin-bottom: 2px;   
+            margin-bottom: 10px;   
         }
     }
     

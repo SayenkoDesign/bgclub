@@ -23,7 +23,4 @@ add_action( 'wp_enqueue_scripts', '_s_enqueue_stylesheet', 15 );
 	*****************************************/
 
 add_image_size( 'hero', 1600, 999 );
-add_image_size( 'why-us', 938, 999 );
-add_image_size( 'special-offer', 938, 999 );
-add_image_size( 'case-study-thumbnail', 400, 265, true );
-add_image_size( 'people-thumbnail', 380, 340 );
+add_image_size( 'quote', 500, 500, true );

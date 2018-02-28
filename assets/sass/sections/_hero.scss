@@ -5,7 +5,9 @@
 	background-position: center;
 	background-repeat: no-repeat;
     position: relative;
-    min-height: 288px;    
+    min-height: 288px;   
+    
+    margin-top: 0; 
     
     &.hero-overlay:after {
         content: '';
@@ -20,7 +22,8 @@
       
     .wrap {
         position: relative;
-        z-index: 3;   
+        z-index: 3;
+        padding: 5% 0;   
     }
     
     .entry-content {

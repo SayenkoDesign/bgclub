@@ -1,0 +1,191 @@
+// Blog
+
+
+.section-blog {
+    
+    margin-bottom: 0;
+ 
+    .story {
+        background-size: cover;  
+        background-position: center center;
+        min-height: 720px;
+        padding: 40px 20px;
+        
+        @include breakpoint(medium) {
+            padding: 40px;
+        }
+        
+        @include breakpoint(large) {
+            padding: 80px;
+        }
+        
+        .entry-title {
+            
+            margin-bottom: 30px;
+            
+            @include breakpoint(large) {
+                
+                display: flex;
+                align-items: center;
+                
+                h2 {
+                    margin-left: 20px;
+                    margin-top: 0;
+                }
+            }
+        }
+        
+        h2 {
+            
+            margin-top: 20px;
+                        
+            &:after {
+                display: none;
+            }
+        }
+        
+        h2, 
+        p {
+            color: #fff;   
+        }
+        
+        button {
+            cursor: pointer;
+            
+            &:hover {
+                svg circle {
+                    fill: $green;   
+                }
+            }
+        }
+        
+        .entry-content {
+            @include breakpoint(large) {
+                max-width: 75%;  
+            }
+            
+            @include breakpoint(xxxlarge) {
+                max-width: 60%;  
+            }
+        }
+        
+        .quote {
+            padding: 20px 0 30px;   
+        }
+        
+        p {
+            font-size: 22px;  
+            line-height: 30px; 
+            font-weight: 700;
+            
+        }
+
+    }
+    
+    .blog-post {
+        background-color: #ececec;
+        position: relative;
+        min-height: 310px;
+        @include breakpoint(xxlarge) {
+            min-height: 50%; 
+        }
+        
+        
+        @include breakpoint(large) {
+            padding-right: 50%;   
+        }
+        
+        .entry-content {
+            padding: 40px 28px; 
+            
+            h3,
+            h4 {
+                font-weight: 700;   
+            }
+            
+            h4 {
+                color: $navy; 
+                margin-bottom:20px;  
+            }
+            
+            h3 {
+                color: $blue;   
+                margin-bottom: 25px;
+            }
+            
+            p {
+                font-size: 14px;
+                line-height: 20px;   
+            }
+        }
+        
+        .thumbnail {
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 310px; 
+            
+            @include breakpoint(medium) {
+                @include arrow-left;
+            }
+            
+            @include breakpoint(large) {
+                width: 50%;
+                height: 100%;  
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+        
+        p.links {
+            margin: 0 -10px;
+ 
+            a {
+                margin: 0 auto 20px;   
+            }
+            
+            @include breakpoint(medium) {
+                a {
+                    margin: 0 10px $global-margin;   
+                }
+            }
+        }
+        
+    }
+    
+    .events {
+        padding: 40px 28px; 
+        
+        h2:after {
+            margin-left: 0;   
+        }
+        
+        ul {
+            list-style-type: none;
+            
+            li {
+                position: relative;
+                min-height: 24px;
+                padding-left: 30px;
+                margin-bottom: 12px;
+                
+                &:before {
+                    content: '';
+                    display: block;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cg fill='none' fill-rule='evenodd' transform='translate%281 1%29'%3E%3Cpath fill='%230081C6' d='M17.07 11.128l.298-.297-.12-.12-3.59-3.59-.12-.12-.382.383.12.12 3.32 3.32-3.33 3.33-.116.117.388.389.117-.117 3.415-3.415z'/%3E%3Cpath stroke='%230081C6' stroke-linecap='square' stroke-width='1.6' d='M5.754 10.83h10.83'/%3E%3Ccircle cx='11' cy='11' r='11' stroke='%230081C6' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");  
+                    width: 24px;
+                    height: 24px; 
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                
+                a {
+                    color: $gray;
+                }
+            }
+        }
+    }
+    
+}

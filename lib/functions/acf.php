@@ -57,7 +57,13 @@ if( function_exists('acf_add_options_sub_page') ) {
 		'capability' => 'edit_posts'
 	));
     
-    /*
+    acf_add_options_sub_page(array(
+		'title'      => 'Event Settings',
+		'parent'     => 'edit.php?post_type=event',
+		'capability' => 'edit_posts'
+	));
+    
+    
  	 acf_add_options_page(array(
 		'page_title' 	=> 'Error 404 Page Settings',
 		'menu_title' 	=> 'Error 404 Page Settings',
@@ -66,7 +72,7 @@ if( function_exists('acf_add_options_sub_page') ) {
 		'capability' => 'edit_posts',
  		'redirect' 	=> false
 	));
-    */
+    
 
 }
 

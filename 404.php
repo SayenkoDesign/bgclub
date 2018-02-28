@@ -11,71 +11,67 @@ get_header(); ?>
 
 <?php
 // Hero
+page_404_hero();
+function page_404_hero() {
+        
+    $post_id = 'options';    
 
-
+    $fields = get_field( 'hero_404', 'options' );
     
+    if( empty( $fields ) ) {
+        return;
+    }
+          
+    $heading 		= $fields['heading'];
+    $description	= $fields['description'];
     
-section_hero();
-function section_hero() {
-    global $post;
-    
-    $prefix = 'hero_404';
-    $prefix = set_field_prefix( $prefix );
-
-    $heading = get_field( sprintf( '%stitle', $prefix ), 'option' );
-    $description	= get_field( sprintf( '%sdescription', $prefix ), 'option' );
-    
-    $background_image = get_field( sprintf( '%sbackground_image', $prefix ), 'option' );
-
+    $background_image       = $fields['background_image'];
+    $background_position_x  = $fields['background_position_x'];
+    $background_position_y  = $fields['background_position_y'];
+    $hero_overlay           = $fields['overlay'];
+    $hero_overlay           = $hero_overlay ? ' hero-overlay' : '';
+        
     $style = '';
     $content = '';
-    $photo_source = '';
-    
+     
     if( !empty( $background_image ) ) {
         $attachment_id = $background_image;
         $size = 'hero';
         $background = wp_get_attachment_image_src( $attachment_id, $size );
         $style = sprintf( 'background-image: url(%s);', $background[0] );
         
-        $photo_source = get_post_field( 'post_content', $attachment_id );
-          
-        if( !empty( $photo_source ) ) {
-            $photo_source = sprintf( '<div class="photo-source">%s</div>', $photo_source );
+        if( !empty( $style ) ) {
+            $style .= sprintf( ' background-position: %s %s;', $background_position_x, $background_position_y );
         }
     }
     
-            
+    
     if( !empty( $heading ) ) {
-        $content .= sprintf( '<h1>%s</h1>', $heading );
+        $content .= _s_get_heading( $heading, 'h1' );
     }
+    
     
     if( !empty( $description ) ) {
         $description = _s_wrap_text( $description, "\n" );
-        $content .= sprintf( '<h3>%s</h3>', $description );
-    }
+        $description = _s_get_heading( nl2br( $description ), 'h3' );
+        $content .= $description;
+     }
 
-
-    $args = array(
-        'html5'   => '<section %s>',
-        'context' => 'section',
-        'attr' => array( 'id' => 'hero', 'class' => 'section hero', 'style' => $style ),
-        'echo' => false
-    );
+    $attr = array( 'id' => 'hero', 'class' => 'section hero flex', 'style' => $style );
     
-    $out = _s_markup( $args );
-    $out .= '<div class="flex">';
-    $out .= _s_structural_wrap( 'open', false );
+    $attr['class'] .= $hero_overlay;
+        
     
+    _s_section_open( $attr );	
+       
+    printf( '<div class="column row"><div class="entry-content">%s</div></div>', $content );
     
-    $out .= sprintf( '<div class="row"><div class="small-12 columns">%s%s</div></div>', $content, $photo_source );
-    
-    $out .= _s_structural_wrap( 'close', false );
-    $out .= '</div>';
-    $out .= '</section>';
-    
-    echo $out;
+     _s_section_close();
+     
+     printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bottom' ) );
         
 }
+
 
 ?>
 
@@ -83,7 +79,7 @@ function section_hero() {
 
 	<main id="main" class="site-main" role="main">
 	
-		<section class="section default">
+		<section class="section-default">
 			<div class="column row">
 	
 				<div class="entry-content">

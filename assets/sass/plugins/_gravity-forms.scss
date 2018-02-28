@@ -120,19 +120,19 @@ li.gfield.gfield_error {
 	input[type="text"],
     input[type="tel"],
     input[type="email"], {
- 		padding: 12px 12px 13px 12px!important;
+ 		padding: 8px!important;
 		margin-top: 0!important;	
 	}
 	
 	
 	select {
 		color: #4A4A4A!important;
- 		padding: 10px!important;
+ 		padding: 8px!important;
 	}
 	
 	textarea {
 		margin-top: 8px;	
-		padding: 12px!important;
+		padding: 8px!important;
 	}
 	
 	select {
@@ -154,14 +154,39 @@ li.gfield.gfield_error {
 		text-align: center;
 		
 		input {
-			@extend %btn-primary;
-			text-align: center;	
-			min-width: 280px;
-            padding: 8px 8px!important;
+			@include button;
+            @extend .button.green;
+			border-radius: 23px;
+            border: 2px solid transparent;
+            display: block;
+            min-width: 185px;
+            max-width: 280px;
+            padding: 13px 30px;
+            margin: 0;
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 20px;
+            text-transform: uppercase;
+            text-decoration: none!important;
+            letter-spacing: 1px;
+            
+            background-color: $green;
+            border-color: $green;
+            color: $white;
             
             &:hover{
-               //border: solid $red 2px!important;
-          }
+                background-color: $white;
+                border-color: $green;
+                color: $green;
+            }
+
+            
+            @include breakpoint(medium) {
+                display: inline-block;
+                max-width: none;
+            }         
 		}
 	}
 

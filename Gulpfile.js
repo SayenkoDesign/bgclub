@@ -222,7 +222,8 @@ gulp.task( 'concat', () => {
 		.pipe( babel( {
 			'presets': [
 				[ 'env', {
-					'targets': {
+					modules: false,
+                    'targets': {
 						'browsers': [ 'last 2 versions' ]
 					}
 				} ]

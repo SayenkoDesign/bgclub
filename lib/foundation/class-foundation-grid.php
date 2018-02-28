@@ -91,10 +91,11 @@ class Foundation_Grid extends Foundation {
             
             $button = $row['grid_button'];
 
-            $anchor_open = $anchor_close = '';
+            $anchor_open = '<div class="panel">';
+            $anchor_close = '</div>';
             
             if( 'block' == $format ) {
-                
+                  
                 if ( $button['link'] == 'Page' ) {
                     if ( ! empty( $button['page'] ) ) {
                         $url = $page;
@@ -110,13 +111,17 @@ class Foundation_Grid extends Foundation {
                 }
                 
                 if( !empty( $url ) ) {
-                    $anchor_open = sprintf( '<a href="%s">', $url );
+                    $anchor_open = sprintf( '<a href="%s" class="panel">', $url );
                     $anchor_close = '</a>';
                     $button = sprintf( '<p><span class="more">%s</span></p>', $button['text'] );
                 }
+                else {
+                    $button = '';   
+                }
+                
             }
              
-            $grid_items[] = sprintf( '<div class="column">%s%s%s%s%s%s%s</div>', 
+            $grid_items[] = sprintf( '<div class="column column-block">%s%s%s<div class="description" data-equalizer-watch>%s%s</div>%s%s</div>', 
                                      $anchor_open, $title_before, $photo, $title_after, $description, $button, $anchor_close );
         }
         
@@ -128,7 +133,7 @@ class Foundation_Grid extends Foundation {
             return $grid_items;
         }
         
-        $grid = sprintf( '<div class="%s">%s</div>', $class, join( '', $grid_items ) );
+        $grid = sprintf( '<div class="%s" data-equalizer data-equalize-on="medium" data-equalize-by-row="true">%s</div>', $class, join( '', $grid_items ) );
         
         if( $echo ) {
             echo $grid;

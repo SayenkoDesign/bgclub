@@ -78,18 +78,19 @@
             
             a {
                 display: block;
-                padding: 12px 12px;
+                padding: 13px 30px;
                 background-color: transparent;
                 text-align: center;
-                color: #979797;
+                color: $green;
                 font-size: 13px;
                 line-height: 1.5;
-                border: solid 2px #979797;
+                border: solid 2px $green;
                 transition: ease all 0.3s;
                 letter-spacing: 1px;
+                border-radius: $global-radius;
                 
                 &:hover {
-                    background-color: #979797;
+                    background-color: $green;
                     color: #fff;   
                 }
              }
@@ -97,6 +98,44 @@
         
     }
     
+}
+
+
+.social-icons {
+    @include list-reset;
+    height: 45px;
+      
+    li {
+       display: inline-block;
+       padding: 0 10px 0 0;   
+       height: 45px;
+      
+    }
+    
+    a {
+        transition: $transition;
+        width: 45px;
+        height: 45px;
+        display: block;
+        background-color: $blue;
+        border-radius: 50%;
+        position: relative;
+        &:hover {
+            background-color: $navy;
+            border-radius: 50%;
+        }
+    }
+    
+    svg {
+        width: 34px;
+        height: 34px;
+        fill: $white;  
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);  
+    }    
+   
 }
 
 

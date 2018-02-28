@@ -42,9 +42,7 @@ class CPT_Story extends CPT_Core {
 				 )
 
         );
-		
-        add_action('pre_get_posts', array( $this, 'add_post_types_to_loop' ) );  
-        
+		        
         add_action( 'save_post', array( $this, 'save_default_category' ), 10, 3 );
       
         add_action('init', array( $this, 'add_tags' ) );
@@ -69,11 +67,7 @@ class CPT_Story extends CPT_Core {
 
 	 
      
-    public function add_post_types_to_loop($query) {
-        if ( $query->is_main_query() && ( $query->is_home() || $query->is_category() || $query->is_tag() ) ) {
-            $query->set('post_type', array('post', self::POST_TYPE ) );
-        }
-    }
+    
     
     public function add_tags(){
         register_taxonomy_for_object_type('post_tag', self::POST_TYPE );

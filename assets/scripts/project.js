@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * This script adds the accessibility-ready responsive menus Genesis Framework child themes.
  *
@@ -396,8 +394,205 @@
 		}
 	});
 })(document, jQuery);
-"use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+/*!
+ * headroom.js v0.9.4 - Give your page some headroom. Hide your header until you need it
+ * Copyright (c) 2017 Nick Williams - http://wicky.nillia.ms/headroom.js
+ * License: MIT
+ */
+
+!function (a, b) {
+  "use strict";
+  "function" == typeof define && define.amd ? define([], b) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = b() : a.Headroom = b();
+}(this, function () {
+  "use strict";
+  function a(a) {
+    this.callback = a, this.ticking = !1;
+  }function b(a) {
+    return a && "undefined" != typeof window && (a === window || a.nodeType);
+  }function c(a) {
+    if (arguments.length <= 0) throw new Error("Missing arguments in extend function");var d,
+        e,
+        f = a || {};for (e = 1; e < arguments.length; e++) {
+      var g = arguments[e] || {};for (d in g) {
+        "object" != _typeof(f[d]) || b(f[d]) ? f[d] = f[d] || g[d] : f[d] = c(f[d], g[d]);
+      }
+    }return f;
+  }function d(a) {
+    return a === Object(a) ? a : { down: a, up: a };
+  }function e(a, b) {
+    b = c(b, e.options), this.lastKnownScrollY = 0, this.elem = a, this.tolerance = d(b.tolerance), this.classes = b.classes, this.offset = b.offset, this.scroller = b.scroller, this.initialised = !1, this.onPin = b.onPin, this.onUnpin = b.onUnpin, this.onTop = b.onTop, this.onNotTop = b.onNotTop, this.onBottom = b.onBottom, this.onNotBottom = b.onNotBottom;
+  }var f = { bind: !!function () {}.bind, classList: "classList" in document.documentElement, rAF: !!(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) };return window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame, a.prototype = { constructor: a, update: function update() {
+      this.callback && this.callback(), this.ticking = !1;
+    }, requestTick: function requestTick() {
+      this.ticking || (requestAnimationFrame(this.rafCallback || (this.rafCallback = this.update.bind(this))), this.ticking = !0);
+    }, handleEvent: function handleEvent() {
+      this.requestTick();
+    } }, e.prototype = { constructor: e, init: function init() {
+      if (e.cutsTheMustard) return this.debouncer = new a(this.update.bind(this)), this.elem.classList.add(this.classes.initial), setTimeout(this.attachEvent.bind(this), 100), this;
+    }, destroy: function destroy() {
+      var a = this.classes;this.initialised = !1;for (var b in a) {
+        a.hasOwnProperty(b) && this.elem.classList.remove(a[b]);
+      }this.scroller.removeEventListener("scroll", this.debouncer, !1);
+    }, attachEvent: function attachEvent() {
+      this.initialised || (this.lastKnownScrollY = this.getScrollY(), this.initialised = !0, this.scroller.addEventListener("scroll", this.debouncer, !1), this.debouncer.handleEvent());
+    }, unpin: function unpin() {
+      var a = this.elem.classList,
+          b = this.classes;!a.contains(b.pinned) && a.contains(b.unpinned) || (a.add(b.unpinned), a.remove(b.pinned), this.onUnpin && this.onUnpin.call(this));
+    }, pin: function pin() {
+      var a = this.elem.classList,
+          b = this.classes;a.contains(b.unpinned) && (a.remove(b.unpinned), a.add(b.pinned), this.onPin && this.onPin.call(this));
+    }, top: function top() {
+      var a = this.elem.classList,
+          b = this.classes;a.contains(b.top) || (a.add(b.top), a.remove(b.notTop), this.onTop && this.onTop.call(this));
+    }, notTop: function notTop() {
+      var a = this.elem.classList,
+          b = this.classes;a.contains(b.notTop) || (a.add(b.notTop), a.remove(b.top), this.onNotTop && this.onNotTop.call(this));
+    }, bottom: function bottom() {
+      var a = this.elem.classList,
+          b = this.classes;a.contains(b.bottom) || (a.add(b.bottom), a.remove(b.notBottom), this.onBottom && this.onBottom.call(this));
+    }, notBottom: function notBottom() {
+      var a = this.elem.classList,
+          b = this.classes;a.contains(b.notBottom) || (a.add(b.notBottom), a.remove(b.bottom), this.onNotBottom && this.onNotBottom.call(this));
+    }, getScrollY: function getScrollY() {
+      return void 0 !== this.scroller.pageYOffset ? this.scroller.pageYOffset : void 0 !== this.scroller.scrollTop ? this.scroller.scrollTop : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    }, getViewportHeight: function getViewportHeight() {
+      return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    }, getElementPhysicalHeight: function getElementPhysicalHeight(a) {
+      return Math.max(a.offsetHeight, a.clientHeight);
+    }, getScrollerPhysicalHeight: function getScrollerPhysicalHeight() {
+      return this.scroller === window || this.scroller === document.body ? this.getViewportHeight() : this.getElementPhysicalHeight(this.scroller);
+    }, getDocumentHeight: function getDocumentHeight() {
+      var a = document.body,
+          b = document.documentElement;return Math.max(a.scrollHeight, b.scrollHeight, a.offsetHeight, b.offsetHeight, a.clientHeight, b.clientHeight);
+    }, getElementHeight: function getElementHeight(a) {
+      return Math.max(a.scrollHeight, a.offsetHeight, a.clientHeight);
+    }, getScrollerHeight: function getScrollerHeight() {
+      return this.scroller === window || this.scroller === document.body ? this.getDocumentHeight() : this.getElementHeight(this.scroller);
+    }, isOutOfBounds: function isOutOfBounds(a) {
+      var b = a < 0,
+          c = a + this.getScrollerPhysicalHeight() > this.getScrollerHeight();return b || c;
+    }, toleranceExceeded: function toleranceExceeded(a, b) {
+      return Math.abs(a - this.lastKnownScrollY) >= this.tolerance[b];
+    }, shouldUnpin: function shouldUnpin(a, b) {
+      var c = a > this.lastKnownScrollY,
+          d = a >= this.offset;return c && d && b;
+    }, shouldPin: function shouldPin(a, b) {
+      var c = a < this.lastKnownScrollY,
+          d = a <= this.offset;return c && b || d;
+    }, update: function update() {
+      var a = this.getScrollY(),
+          b = a > this.lastKnownScrollY ? "down" : "up",
+          c = this.toleranceExceeded(a, b);this.isOutOfBounds(a) || (a <= this.offset ? this.top() : this.notTop(), a + this.getViewportHeight() >= this.getScrollerHeight() ? this.bottom() : this.notBottom(), this.shouldUnpin(a, c) ? this.unpin() : this.shouldPin(a, c) && this.pin(), this.lastKnownScrollY = a);
+    } }, e.options = { tolerance: { up: 0, down: 0 }, offset: 0, scroller: window, classes: { pinned: "headroom--pinned", unpinned: "headroom--unpinned", top: "headroom--top", notTop: "headroom--not-top", bottom: "headroom--bottom", notBottom: "headroom--not-bottom", initial: "headroom" } }, e.cutsTheMustard = "undefined" != typeof f && f.rAF && f.bind && f.classList, e;
+});
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*
+ Original Plugin by Osvaldas Valutis, www.osvaldas.info
+ http://osvaldas.info/drop-down-navigation-responsive-and-touch-friendly
+ Available for use under the MIT License
+ */
+/**
+ * jquery-doubleTapToGo plugin
+ * Copyright 2017 DACHCOM.DIGITAL AG
+ * @author Marco Rieser
+ * @author Volker Andres
+ * @author Stefan Hagspiel
+ * @version 3.0.2
+ * @see https://github.com/dachcom-digital/jquery-doubletaptogo
+ */
+(function ($, window, document, undefined) {
+    'use strict';
+
+    var pluginName = 'doubleTapToGo',
+        defaults = {
+        automatic: true,
+        selectorClass: 'doubletap',
+        selectorChain: 'li:has(ul)'
+    };
+
+    function DoubleTapToGo(element, options) {
+        this.element = element;
+        this.settings = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    $.extend(DoubleTapToGo.prototype, {
+        preventClick: false,
+        currentTap: $(),
+        init: function init() {
+            $(this.element).on('touchstart', '.' + this.settings.selectorClass, this._tap.bind(this)).on('click', '.' + this.settings.selectorClass, this._click.bind(this)).on('remove', this._destroy.bind(this));
+
+            this._addSelectors();
+        },
+
+        _addSelectors: function _addSelectors() {
+            if (this.settings.automatic !== true) {
+                return;
+            }
+            $(this.element).find(this.settings.selectorChain).addClass(this.settings.selectorClass);
+        },
+
+        _click: function _click(event) {
+            if (this.preventClick) {
+                event.preventDefault();
+            } else {
+                this.currentTap = $();
+            }
+        },
+
+        _tap: function _tap(event) {
+            var $target = $(event.target).closest('li');
+            if (!$target.hasClass(this.settings.selectorClass)) {
+                this.preventClick = false;
+                return;
+            }
+            if ($target.get(0) === this.currentTap.get(0)) {
+                this.preventClick = false;
+                return;
+            }
+            this.preventClick = true;
+            this.currentTap = $target;
+            event.stopPropagation();
+        },
+
+        _destroy: function _destroy() {
+            $(this.element).off();
+        },
+
+        reset: function reset() {
+            this.currentTap = $();
+        }
+    });
+
+    $.fn[pluginName] = function (options) {
+        var args = arguments,
+            returns;
+        if (options === undefined || (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+            return this.each(function () {
+                if (!$.data(this, pluginName)) {
+                    $.data(this, pluginName, new DoubleTapToGo(this, options));
+                }
+            });
+        } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+            this.each(function () {
+                var instance = $.data(this, pluginName),
+                    methodName = options === 'destroy' ? '_destroy' : options;
+                if (instance instanceof DoubleTapToGo && typeof instance[methodName] === 'function') {
+                    returns = instance[methodName].apply(instance, Array.prototype.slice.call(args, 1));
+                }
+                if (options === 'destroy') {
+                    $.data(this, pluginName, null);
+                }
+            });
+            return returns !== undefined ? returns : this;
+        }
+    };
+})(jQuery, window, document);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*!
@@ -477,8 +672,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a = a || "", a.replace(/^\//, "").replace(/(?:index|default).[a-zA-Z]{3,4}$/, "").replace(/\/$/, "");
   }, a.fn.smoothScroll.defaults = d;
 });
-"use strict";
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*! modernizr 3.5.0 (Custom Build) | MIT *
@@ -599,8 +792,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     Modernizr._q[k]();
   }e.Modernizr = Modernizr;
 }(window, document);
-'use strict';
-
 (function (document, window, $) {
 
 	'use strict';
@@ -614,62 +805,94 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		}
 	});
 })(document, window, jQuery);
-'use strict';
-
 (function (document, window, $) {
 
-	'use strict';
+  'use strict';
 
-	// Scroll up show header
+  // Scroll up show header
 
-	var $site_header = $('.site-header');
+  var $site_header = $('.site-header');
 
-	// clone header
-	var $sticky = $site_header.clone().prop('id', 'masthead-fixed').attr('aria-hidden', 'true').addClass('fixed').insertBefore('#masthead');
+  // clone header
+  var $sticky = $site_header.clone().prop('id', 'masthead-fixed').attr('aria-hidden', 'true').addClass('fixed').insertBefore('#masthead');
 
-	var header_height = $site_header.height();
-	var lastScrollTop = 0;
-	var wait = 25; // distance in pixels to wait before showing
+  $sticky.each(function () {
+    var $win = $(window),
+        $self = $(this),
+        isShow = false,
+        delta = 300,
+        // distance from top hwere its active
+    lastScrollTop = 0;
 
-	$(window).scroll(function () {
+    $win.on('scroll', function () {
+      var scrollTop = $win.scrollTop();
+      var offset = scrollTop - lastScrollTop;
+      lastScrollTop = scrollTop;
 
-		var scroll = $(window).scrollTop();
-
-		if (scroll < 400) {
-			$sticky.removeClass("show");
-			return;
-		}
-
-		var st = $(this).scrollTop();
-
-		console.log('st: ' + st);
-		console.log('lastScrollTop: ' + lastScrollTop);
-
-		if (st > lastScrollTop) {
-			// downscroll code
-			$sticky.removeClass("show");
-		} else {
-			// upscroll code
-
-			if (lastScrollTop - st >= wait) {
-				$sticky.addClass("show");
-			}
-		}
-		lastScrollTop = st;
-	});
+      // min-offset, min-scroll-top
+      if (offset < 0 && scrollTop > delta) {
+        if (!isShow) {
+          $self.addClass('fixed-show');
+          isShow = true;
+        }
+      } else if (offset > 0 || offset < lastScrollTop) {
+        if (isShow) {
+          $self.removeClass('fixed-show');
+          isShow = false;
+        }
+      }
+    });
+  });
 })(document, window, jQuery);
-'use strict';
-
 (function (document, window, $) {
 
-   'use strict';
+  'use strict';
 
-   // Load Foundation
+  // Load Foundation
 
-   $(document).foundation();
+  $(document).foundation();
+
+  $(window).on('load changed.zf.mediaquery', function (event, newSize, oldSize) {
+
+    $('.nav-primary').doubleTapToGo();
+
+    if (!Foundation.MediaQuery.atLeast('xlarge')) {
+      $('.nav-primary').doubleTapToGo('destroy');
+    }
+  });
+
+  $(document).on('click', '.play-video', playVideo);
+
+  function playVideo() {
+
+    var $this = $(this);
+
+    var url = $this.data('src');
+
+    var $modal = $('#' + $this.data('open'));
+
+    /*
+    $.ajax(url)
+      .done(function(resp){
+        $modal.find('.flex-video').html(resp).foundation('open');
+    });
+    */
+
+    var $iframe = $('<iframe>', {
+      src: url,
+      id: 'video',
+      frameborder: 0,
+      scrolling: 'no'
+    });
+
+    $iframe.appendTo('.video-placeholder', $modal);
+  }
+
+  // Make sure videos don't play in background
+  $(document).on('closed.zf.reveal', '#modal-video', function () {
+    $(this).find('.video-placeholder').html('');
+  });
 })(document, window, jQuery);
-'use strict';
-
 (function (document, window, $) {
 
 	'use strict';
@@ -703,8 +926,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		}, 'xml');
 	});
 })(document, window, jQuery);
-'use strict';
-
 (function (document, window, $) {
 
 	'use strict';

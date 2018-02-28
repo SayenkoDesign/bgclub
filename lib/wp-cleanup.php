@@ -8,6 +8,10 @@
  */
 
 
+
+// add_filter( 'wp_unique_post_slug_is_bad_attachment_slug', '__return_true' );
+
+
 //add_filter( 'posts_results', 'cache_meta_data', 9999, 2 );
 function cache_meta_data( $posts, $object ) {
     $posts_to_cache = array();

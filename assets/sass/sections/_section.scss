@@ -1,0 +1,22 @@
+// Section
+
+section {
+    
+    &.background-gray {
+        background: $light-gray;   
+    }
+    
+    margin-top: 45px;
+ 
+    h2 {
+        @include bottom-bar;  
+    }
+    
+    
+    &.section-content {
+        h2:after {
+            margin: 10px auto 40px;   
+        }
+    }
+    
+}

@@ -11,6 +11,7 @@
     }
     
     .bh-sl-container .bh-sl-map-container {
+        margin-top: 0;
         margin-bottom: 0;
     }
     
@@ -25,30 +26,10 @@
     
     
     .bh-sl-form-container {
-        max-width: 520px;
-        min-height: 120px;
-        border-radius: 1px;
-        background-color: #FFFFFF;
-        border-top: 5px solid $blue;
-        box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.13);
-        padding: 20px;
-        text-align: center;
-        position: relative;
-        z-index: 9;
-        margin: 0 auto 20px;
-        margin-top: -50px;
-        float: none;
-        clear: none;
-        box-sizing: inherit!important;  
-        
-        @include breakpoint(medium) {
-            padding: 60px;
-            min-width: 520px;
-            min-height: inherit;
-            margin-top: -80px;
-            margin-bottom: 40px;
-            
-        }
+       
+       float: none;
+       clear: none;
+       width: auto;
         
         form > * {
             float: none;

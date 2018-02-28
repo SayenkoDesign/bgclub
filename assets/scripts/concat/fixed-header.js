@@ -13,40 +13,34 @@
 							   .addClass('fixed')
 							   .insertBefore('#masthead');
      
-
-	var header_height = $site_header.height();
-	var lastScrollTop = 0;
-    var wait = 25; // distance in pixels to wait before showing
-
-	$(window).scroll(function() {
-
-		var scroll = $(window).scrollTop();
-
-		if (scroll < 400 ) {
-            $sticky.removeClass("show");
-            return;
-		} 
-
-	   var st = $(this).scrollTop();
-       
-       console.log('st: ' + st);
-       console.log('lastScrollTop: ' + lastScrollTop);
-       
-	   if (st > lastScrollTop){
-		   // downscroll code
-		   $sticky.removeClass("show");
-	   } else {
-		  // upscroll code
+    $sticky.each(function () {
+        var $win = $(window), 
+            $self = $(this),
+            isShow = false,
+            delta = 300, // distance from top hwere its active
+            lastScrollTop = 0;
+    
+        $win.on('scroll', function () {
+          var scrollTop = $win.scrollTop();
+          var offset = scrollTop - lastScrollTop;
+          lastScrollTop = scrollTop;
           
-          if( lastScrollTop - st >= wait ) {
-              $sticky.addClass("show");
+    
+    
+          // min-offset, min-scroll-top
+          if (offset < 0 && scrollTop > delta ) {
+            if (!isShow) {
+              $self.addClass('fixed-show');
+              isShow = true;
+            }
+          } else if (offset > 0 || offset < lastScrollTop ) {
+            if (isShow) {
+              $self.removeClass('fixed-show');
+              isShow = false;
+            }
           }
-          
-		  
-	   }
-	   lastScrollTop = st;
-
-	});
+        });
+    });
     
 
 }(document, window, jQuery));

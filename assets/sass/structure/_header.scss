@@ -3,7 +3,7 @@ Header
 ---------------------------------------------- */
 
 // Fix for sticky header
-.site-header.fixed {
+.logged-in .site-header.fixed {
     top: 46px;
 
     @media screen and (min-width: 783px) {
@@ -270,7 +270,7 @@ Header
 		display: none;
 		
 		@media #{$xlarge-up} {
-      		//display: block;
+      		display: block;
 		}
 		
 		transition: transform .25s ease-in-out;
@@ -305,7 +305,7 @@ Header
 
 	}
 
-	&.fixed.show {
+	&.fixed.fixed-show {
 		transform: translateY(0);
 	}
 }

@@ -1,5 +1,22 @@
 <?php
 
+function array_insert_after( array $array, $key, array $new ) {
+    // Never position zero
+    if( is_int( $key ) ) {
+        if( ! $key ) {
+           $key = 1; 
+        }
+        $pos = $key;
+    }
+    else {
+        $keys = array_keys( $array );
+        $index = array_search( $key, $keys );
+        $pos = false === $index ? count( $array ) : $index + 1;
+    }
+    
+    return array_merge( array_slice( $array, 0, $pos ), $new, array_slice( $array, $pos ) );
+}
+
 /**
 	 * Splits an array into N number of evenly distributed partitions (useful for
 	 * splitting a list into columns).

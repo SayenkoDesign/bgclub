@@ -1,4 +1,44 @@
 <?php
+
+
+// Add stories and events to main loop
+function _s_add_post_types_to_loop($query) {
+        if ( $query->is_main_query() && ( $query->is_home() || $query->is_category() || $query->is_tag() ) ) {
+            $query->set('post_type', array('post', 'story', 'event' ) );
+        }
+    }
+add_action('pre_get_posts', '_s_add_post_types_to_loop' );  
+
+
+
+function _s_blog_pre_get_posts($query) {
+						
+    if ( $query->is_main_query() && ( $query->is_home() || $query->is_category() || $query->is_tag() ) ) {
+                                                                
+        // Order By
+        $query->set( 'orderby', 'meta_value_num, date' );
+        $query->set( 'order', 'ASC' );
+        $query->set( 'meta_key', 'event_start_date' );
+        
+        // Only show future concerts
+        $meta_query = array(
+            array(
+                'key' => 'event_end_date',
+                'value' => date_i18n('Ymd'),
+                'compare' => '>='
+            )
+        );
+        
+        $query->set( 'meta_query', $meta_query );
+    
+    }
+        
+    return $query;
+}
+
+//add_action( 'pre_get_posts','_s_blog_pre_get_posts' );
+
+
 function _s_blog_template_redirect( $template ) {
 	if ( is_author() || is_search() ) 
 		$template = get_query_template( 'home' );	
@@ -15,6 +55,24 @@ function _s_add_blog_class( $classes ) {
    return $classes;
 }
 add_filter( 'body_class', '_s_add_blog_class' );
+
+
+
+add_action( 'get_previous_post_where', 'misha_posts_and_page', 20 );
+add_action( 'get_next_post_where', 'misha_posts_and_page', 20 );
+ 
+function misha_posts_and_page( $where ){
+	// $where looks like WHERE p.post_date < '2017-08-02 09:07:03' AND p.post_type = 'post' AND ( p.post_status = 'publish' OR p.post_status = 'private' )
+	// In code $where looks like $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where", $post->post_date, $post->post_type )
+	// Parameters $op and another $where can not be passed to this action hook
+	// So, I think the best way is to use str_replace()
+	return str_replace(
+		array( "p.post_type = 'post'", "p.post_type = 'story'", "p.post_type = 'event'" ),
+		"(p.post_type = 'post' OR p.post_type = 'story' OR p.post_type = 'event')",
+		$where
+	);
+ 
+}
 
 
  

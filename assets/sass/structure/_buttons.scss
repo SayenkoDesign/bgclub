@@ -1,11 +1,11 @@
 @mixin button {
-    border-radius: 23px;
+    border-radius: $global-radius;
     border: 2px solid transparent;
     display: block;
     min-width: 185px;
     max-width: 280px;
     padding: 13px 30px;
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
     color: white;
     font-size: 13px;
@@ -17,6 +17,8 @@
     
     @include breakpoint(medium) {
         display: inline-block;
+        max-width: none;
+        margin: 0;
     }
     
     &.disabled {
@@ -131,8 +133,58 @@
     
     @include breakpoint(medium) {
         a {
-            margin: 0 10px 20px;   
+            margin: 0 10px $global-margin;   
         }
     }
     
+}
+
+
+
+a.learn-more,
+a.arrow,
+a.tel {
+    color: #0094D0;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 18px;
+    text-align: center;
+    position: relative;
+    padding-right: 26px;
+    text-transform: uppercase;
+    text-decoration: none!important;
+    
+    &:before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: $blue;
+        border-radius: 50%;  
+        position: absolute;
+        right: 0;
+        top: -1px; 
+    }
+    
+    &:after {
+        content: ''; 
+        right: 8px;
+        top: 6px;
+        position: absolute;
+
+        width: 6px;
+        height: 6px;
+        border: solid $white;
+        border-width: 0 1px 1px 0;
+        transform: rotate(-45deg);  
+    }
+}
+
+a.tel {
+    padding-right: 0;
+    &:after,
+    &:before {
+        display:none;   
+    }
 }

@@ -1,0 +1,48 @@
+// Programs
+
+
+
+.post-type-archive-program {
+    .content-area {
+        
+        padding: 60px 0;
+        
+        h2 {
+            @include bottom-bar;   
+            margin: 44px auto 24px;
+            
+            text-align: center;
+
+        }
+        
+        
+        .thumbnail {
+            background-size: cover;
+            padding: 70% 20px 4%; 
+            border-bottom: 5px solid $green; 
+            
+            h3 {
+                color: #fff;
+                padding-bottom: 14px; 
+                @include bottom-bar;  
+                
+                &:after {
+                    margin: 0;   
+                }
+            }
+             
+        }
+        
+        .entry-content {
+            border-radius: 1px;
+            background-color: #FFFFFF;
+            box-shadow: 1px 1px 6px 0 #979797;
+            padding: 20px 20px 28px;
+        }
+        
+        .description {
+            margin-bottom: 22px;   
+        }
+    }
+    
+}

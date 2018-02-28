@@ -46,12 +46,13 @@ function _s_footer_cta() {
          return;
     }
     
+        
     $content = '';
     
     $heading        = get_field( 'cta_heading', $footer_cta );
     $description    = get_field( 'cta_description', $footer_cta );
     $buttons        = get_field( 'cta_buttons', $footer_cta );
-    $buttons = $buttons['buttons'];
+    $buttons        = $buttons['buttons'];
     
     if( !empty( $heading ) ) {
         $content .= _s_get_heading( $heading, 'h2' );
@@ -69,12 +70,12 @@ function _s_footer_cta() {
              $button_group .= pb_get_cta_button( $button['button'], array( 'class' => $button_classes[$key] ) ); 
         }
         
-        $content .= sprintf( '<p class="button-group">%s</p>', $button_group );
+        $button_group = sprintf( '<p class="button-group">%s</p>', $button_group );
     }
 		
 	$attr = array( 'id' => 'footer-cta', 'class' => 'section footer-cta' );
 					
 	_s_section_open( $attr );  
-		printf( '<div class="column row">%s</div>', $content );
+		printf( '<div class="row"><div class="large-6 columns">%s</div><div class="large-6 columns">%s</div></div>', $content, $button_group );
 	_s_section_close();		
  }

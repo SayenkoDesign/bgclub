@@ -50,11 +50,13 @@
     
     include_once( 'functions/mega-menu.php' );
 
-	//include_once( 'functions/gravity-forms.php' );
+	include_once( 'functions/gravity-forms.php' );
 
 	include_once( 'functions/widgets.php' );
 
     include_once( 'functions/addtoany.php' );
+    
+    include_once( 'functions/videos.php' );
     
     include_once( 'functions/store-locator.php' );
 

@@ -25,6 +25,7 @@ $blue: #0081c7;
 $navy: #004a87;
 $light-gray: #ececec;
 $gray: #454C54;
+$dark-gray: #3F3E3E;
 
 $transition: ease all 0.3s;
 
@@ -33,11 +34,11 @@ $body-font-color: #454C54;
 $body-font-family: 'Open Sans', sans-serif;
 
 
-$global-margin: 30px;
+$global-margin: 22px;
 $global-padding: 10px;
 $global-weight-normal: normal;
 $global-weight-bold: 700;
-$global-radius: 0;
+$global-radius: 23px;
 $global-text-direction: ltr;
 
 
@@ -98,7 +99,7 @@ $header-styles: (
   ),
 ) !default;
 
-$header-color: $blue;
+$header-color: $gray;
 $header-lineheight: 1.4;
 $header-margin-bottom: 30px;
 $small-font-size: 14px;
@@ -106,11 +107,11 @@ $header-small-font-color: $blue;
 
 $paragraph-font-family: $body-font-family;
 $paragraph-font-style: normal;
-$paragraph-font-weight: 300;
-$paragraph-font-size: 14px;
-$paragraph-line-height: 20px;
+$paragraph-font-weight: normal;
+$paragraph-font-size: 16px;
+$paragraph-line-height: 22px;
 $paragraph-font-color: #454C54;
-$paragraph-margin-bottom: 30px;
+$paragraph-margin-bottom: 22px;
 
 $anchor-color: $blue;
 $anchor-color-hover: scale-color($blue, $lightness: 20%);

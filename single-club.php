@@ -1,9 +1,4 @@
 <?php
-/*
-Template Name: Page Builder
-*/
-
-
 /**
  * Custom Body Class
  *
@@ -118,7 +113,7 @@ get_header(); ?>
         
         $content .= sprintf( '<p><a href="%s" class="arrow">%s</a></p>', $location['directions'], 'Get Directions' );
         
-        $content .= sprintf( '<p><a href="%s">%s %s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us', $location['phone'] );
+        $content .= sprintf( '<p><a href="%s" class="tel">%s %s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us', $location['phone'] );
         
         $content .= $social;
         $left = sprintf( '<div class="large-6 columns">%s</div>', $content );
@@ -129,17 +124,17 @@ get_header(); ?>
         
         $left = sprintf( '<div class="row">%s%s</div>', $left, $right );
         
-        $left = sprintf( '<div class="large-8 columns">%s</div>',  $left );
+        $left = sprintf( '<div class="medium-6 large-8 columns">%s</div>',  $left );
         
         $content = sprintf( '<p><a href="%s" class="button green">%s</a></p>', '#send-message', 'Message Us' );
         $content .= sprintf( '<p><a href="%s" class="button green">%s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us' );
-        $right = sprintf( '<div class="large-4 columns">%s</div>',  $content );
+        $right = sprintf( '<div class="medium-6 large-4 columns">%s</div>',  $content );
         
-        $attr = array( 'id' => 'club-intro', 'class' => 'section intro' );        	
+        $attr = array( 'id' => 'club-intro', 'class' => 'section-intro' );        	
         
         _s_section_open( $attr );	
            
-        printf( '<div class="column row">%s%s</div>', $left, $right );
+        printf( '<div class="column row"><div class="box"><div class="row">%s%s</div></div></div>', $left, $right );
         
         _s_section_close();
         

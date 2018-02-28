@@ -30,7 +30,7 @@ $loop = new WP_Query( $args );
 if ( $loop->have_posts() ) : 
 	while ( $loop->have_posts() ) : $loop->the_post(); 
 	
-		get_template_part( 'template-parts/section', 'hero' );
+		get_template_part( 'template-parts/blog', 'hero' );
  
 	endwhile;
 endif;
@@ -57,7 +57,7 @@ wp_reset_postdata();
         
                         the_post();
         
-                        get_template_part( 'template-parts/content', 'post' );
+                        get_template_part( 'template-parts/content', get_post_type() );
         
                     endwhile;
                     

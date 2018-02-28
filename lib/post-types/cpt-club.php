@@ -45,6 +45,33 @@ class CPT_Club extends CPT_Core {
 		
      }
 	 
+     
+     
+     /**
+	 * Registers admin columns to display. Hooked in via CPT_Core.
+	 * @since  0.1.0
+	 * @param  array  $columns Array of registered column names/labels
+	 * @return array           Modified array
+	 */
+	public function columns( $columns ) {
+		$new_column = array(
+			'club_id' => 'Club ID',
+		);
+		return array_insert_after( $columns, 2, $new_column );
+	}
+
+	/**
+	 * Handles admin column display. Hooked in via CPT_Core.
+	 * @since  0.1.0
+	 * @param  array  $column Array of registered column names
+	 */
+	public function columns_display( $column, $post_id ) {
+		switch ( $column ) {
+			case 'club_id':
+				the_ID();
+				break;
+		}
+	}
 	 
  
 }

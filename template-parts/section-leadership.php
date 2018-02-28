@@ -17,10 +17,12 @@ if( ! function_exists( 'section_leadership' ) ) {
         $section = get_sub_field( sprintf( '%ssection', $prefix ) );
         $heading = $section['heading'];
         $description = $section['description'];
+        
+         $output .= '<div class="column row">';
                   
         if( !empty( $heading ) ) {
             $heading    = _s_get_heading( $heading );
-            $output   .= sprintf( '<div class="column row"><header class="entry-header">%s</header>%s</div>', 
+            $output   .= sprintf( '<header class="entry-header">%s%s</header>', 
                         $heading, $description );
         }   
         
@@ -32,6 +34,7 @@ if( ! function_exists( 'section_leadership' ) ) {
         $staff_heading    = _s_get_heading( $staff_heading, 'h3' );
         
         $staff_items = get_sub_field( 'staff_staff' );
+       
         
         // Array ( [0] => Array ( [staff_photo] => 224 [staff_name] => [staff_position] => [staff_email] => [staff_phone] => ) )
         
@@ -51,11 +54,11 @@ if( ! function_exists( 'section_leadership' ) ) {
                 $phone = ! empty(  $member['staff_phone'] ) ? sprintf( '<p><a href="%s">%s</a></p>', 
                                    _s_format_telephone_url( $member['staff_phone'] ), $member['staff_phone'] ) : '';
                                    
-                $staff .= sprintf( '<div class="column">%s<div class="details">%s%s%s%s</div></div>', 
+                $staff .= sprintf( '<div class="column column-block">%s<div class="details" data-equalizer-watch>%s%s%s%s</div></div>', 
                                    $photo, $name, $position, $email, $phone );                    
             }
             
-            $output .= sprintf( '<div class="row small-up-1 medium-up-2 large-up-3 xlarge-up-5">%s</div>', $staff );
+            $output .= sprintf( '<div class="row small-up-1 medium-up-2 large-up-3 xlarge-up-5 grid-staff" data-equalizer data-equalize-on="medium">%s</div>', $staff );
         }
         
         
@@ -100,11 +103,13 @@ if( ! function_exists( 'section_leadership' ) ) {
             $board_items = c2c_array_partition( $board_items, $columns );
             $board_columns = '';
             foreach( $board_items as $array => $column ) {
-                $board_columns .= sprintf( '<div class="column">%s</div>', join( '', $column ) );
+                $board_columns .= sprintf( '<div class="column column-block">%s</div>', join( '', $column ) );
             }
             
-            $output .= sprintf( '<div class="row small-up-1%s">%s</div>', $column_classes[$columns], $board_columns );
+            $output .= sprintf( '<div class="row small-up-1%s grid-board">%s</div>', $column_classes[$columns], $board_columns );
         }
+        
+        $output .= '</div>';
             
         $settings = get_sub_field( 'leadership_settings' );
         

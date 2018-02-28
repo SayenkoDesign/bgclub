@@ -1,0 +1,59 @@
+// Intro Background
+
+.section-intro-background { 
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    .wrap {
+        padding: 10% 0;
+        
+        @include breakpoint(xxlarge) {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    
+    .thumbnail {
+        height: 175px;
+        position: relative;
+        margin: 0 auto -65px;
+        z-index: 10;
+        
+        svg, img {
+            max-height: 175px; 
+            width: auto; 
+            position: absolute;
+            bottom: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    
+    .box {
+        max-width: 560px;
+        margin: 0 auto 0;
+        border-radius: 1px;
+        background-color: #FFFFFF;
+        border-top: 5px solid $blue;
+        box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.13);
+        padding: 70px 28px 38px;
+        text-align: center;
+        position: relative;
+        z-index: 9;
+        margin: 0 auto 0;
+        
+        @include breakpoint(xlarge) {
+            padding: 70px 60px 60px;
+        }
+                
+        p {
+            font-size: 16px;
+            line-height: 29px;
+            font-weight: 700;   
+        }
+    }
+}
