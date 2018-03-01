@@ -5,7 +5,7 @@
 .post-type-archive-program {
     .content-area {
         
-        padding: 60px 0;
+        padding: 0px 0 60px;
         
         h2 {
             @include bottom-bar;   
@@ -15,16 +15,36 @@
 
         }
         
+        .panel {
+            box-shadow: 1px 1px 6px 0 #979797;
+        }   
+        
         
         .thumbnail {
             background-size: cover;
+            display: block;
             padding: 70% 20px 4%; 
             border-bottom: 5px solid $green; 
+            position: relative;
+            
+            
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: block;
+                background: linear-gradient(180deg, rgba(0,75,135,0) 0%, #004B87 100%);   
+            }
             
             h3 {
                 color: #fff;
                 padding-bottom: 14px; 
                 @include bottom-bar;  
+                position: relative;
+                z-index: 3;
                 
                 &:after {
                     margin: 0;   
@@ -36,7 +56,6 @@
         .entry-content {
             border-radius: 1px;
             background-color: #FFFFFF;
-            box-shadow: 1px 1px 6px 0 #979797;
             padding: 20px 20px 28px;
         }
         

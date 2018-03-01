@@ -63,7 +63,21 @@
     }
     
     .grid-board {
-        text-align: center;  
+        text-align: center; 
+        
+        @include breakpoint(large) {
+            display: flex;
+            align-items: center;  
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            
+            .column {
+                float: none;
+                width: auto;
+                padding: 0 45px;
+            }
+        }
         
         p {
             font-size: 18px;

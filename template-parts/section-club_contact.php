@@ -42,7 +42,7 @@ if( ! function_exists( 'section_club_contact' ) ) {
         
         // Do not change
         
-        $args = array( 'class' => $classes, 'style' => $styles );
+        $args = array( 'id' => 'club-contact', 'class' => $classes, 'style' => $styles );
          
         _s_section( $output, $settings, $args );
             

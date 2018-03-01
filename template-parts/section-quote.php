@@ -46,7 +46,7 @@ if( ! function_exists( 'section_quote' ) ) {
         
         
         if( !empty( $editor ) ) {
-            $icon = sprintf( '<div class="quote">%s</div>', get_svg( 'quote' ) );
+            $icon = sprintf('<div class="quote"><img src="%sicons/quote.svg" width="69px" height="49px" /></div>', trailingslashit( THEME_IMG ) );
             $quote .= sprintf( '%s%s', $editor, $icon );
          }
       

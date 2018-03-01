@@ -142,14 +142,10 @@
             margin: 0 -10px;
  
             a {
-                margin: 0 auto 20px;   
+                margin: 0 10px $global-margin auto;   
+                display: inline-block;
             }
             
-            @include breakpoint(medium) {
-                a {
-                    margin: 0 10px $global-margin;   
-                }
-            }
         }
         
     }

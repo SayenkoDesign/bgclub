@@ -37,9 +37,10 @@ if( ! function_exists( 'section_panel' ) ) {
                         $heading, $editor );
         }  
         
-         
+        
+        $button_group = '';
         if( !empty( $buttons ) ) {
-            $button_group = '';
+
             foreach( $buttons as $key => $button ) {
                  $button_group .= pb_get_cta_button( $button['button'], array( 'class' => 'button green-alt' ) ); 
             }

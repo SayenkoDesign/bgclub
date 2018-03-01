@@ -104,7 +104,7 @@ if( ! function_exists( '_get_story' ) ) {
                 
                 $title = the_title( '<h2>', '</h2>', false );
                 $description  = sprintf( '<div class="entry-content">%s</div>', apply_filters( 'the_content', get_the_excerpt() ) );
-                $quote = sprintf( '<div class="quote">%s</div>', get_svg( 'quote' ) );
+                $quote = sprintf('<div class="quote"><img src="%sicons/quote.svg" width="69px" height="49px" /></div>', trailingslashit( THEME_IMG ) );
                 $permalink  = sprintf( '<p><a href="%s" class="button green">%s</a></p>', get_permalink(), 'Full Story' );
                 
                 $out = sprintf( '<div class="story"%s data-equalizer-watch><div class="entry-title clearfix">%s%s</div>%s%s%s</div>', $background, $video, $title, $description, $quote, $permalink );

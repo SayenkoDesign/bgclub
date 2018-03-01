@@ -1,7 +1,11 @@
 // Club
 
 .single-club {
- 
+    
+    .section-intro {
+        padding-bottom: 0;   
+    }
+    
     .section-intro .box {
         max-width: 940px;   
         text-align: left;
@@ -69,4 +73,5 @@
         
     }
     
+
 }

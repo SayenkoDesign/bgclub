@@ -40,7 +40,7 @@
                         <div class="site-title">
                         <?php
                         $site_url = home_url();
-                        $logo = sprintf('%s', get_svg( 'logo' ) );
+                        $logo = sprintf('<img src="%slogo.svg" width="228px" height="50px" />', trailingslashit( THEME_IMG ) );
                         printf('<a href="%s" title="%s">%s</a>',
                                 $site_url, get_bloginfo( 'name' ), $logo );
                         ?>

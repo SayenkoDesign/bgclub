@@ -13,11 +13,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: archive-event.php:102, category.php:65, home.php:65, single-event.php:71, single-post.php:70, single-program.php:83, single-story.php:70, tag.php:65
+#: archive-event.php:102, category.php:65, home.php:65, search.php:62, single-event.php:71, single-post.php:70, single-program.php:83, single-story.php:70, tag.php:65
 msgid "Previous Post"
 msgstr ""
 
-#: archive-event.php:105, category.php:68, home.php:68, single-event.php:74, single-post.php:73, single-program.php:86, single-story.php:73, tag.php:68
+#: archive-event.php:105, category.php:68, home.php:68, search.php:65, single-event.php:74, single-post.php:73, single-program.php:86, single-story.php:73, tag.php:68
 msgid "Next Post"
 msgstr ""
 
@@ -72,16 +72,12 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: search.php:22
-msgid "Search Results for: %s"
-msgstr ""
-
 #: searchform.php:13
 msgctxt "placeholder"
 msgid "Search&hellip;"
 msgstr ""
 
-#: searchform.php:18
+#: searchform.php:20
 msgctxt "submit button"
 msgid "Search"
 msgstr ""

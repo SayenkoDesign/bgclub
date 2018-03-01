@@ -1,5 +1,5 @@
 @mixin button {
-    border-radius: $global-radius;
+    border-radius: 23px;
     border: 2px solid transparent;
     display: block;
     min-width: 185px;
@@ -108,7 +108,7 @@
         &:visited,
         &:active,
         &:focus {
-            color: $white;
+            color: $green;
         }
 
         &:hover{

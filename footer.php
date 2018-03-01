@@ -32,7 +32,8 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
         
             <div class="small-12 large-4 large-push-4 columns">
             <?php
-            printf( '<div class="widget widget-one">%s</div>',  get_svg( 'logo-footer' ) );
+            $logo = sprintf('<img src="%slogo-footer.svg" width="171px" height="91px" />', trailingslashit( THEME_IMG ) );
+            printf( '<div class="widget widget-one">%s</div>',  $logo );
             ?>
             </div>
             

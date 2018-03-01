@@ -15,69 +15,7 @@ get_header(); ?>
 
 <?php
 // Hero
-
-archive_hero();
-function archive_hero() {
-        
-    $post_id = 'options';    
-    
-
-    $fields = get_field( 'club_archive', 'options' );
-    
-    if( empty( $fields ) ) {
-        return;
-    }
-          
-    $heading 		= $fields['heading'];
-    $description	= $fields['description'];
-    
-    $background_image       = $fields['background_image'];
-    $background_position_x  = $fields['background_position_x'];
-    $background_position_y  = $fields['background_position_y'];
-    $hero_overlay           = $fields['overlay'];
-    $hero_overlay           = $hero_overlay ? ' hero-overlay' : '';
-        
-    $style = '';
-    $content = '';
-     
-    if( !empty( $background_image ) ) {
-        $attachment_id = $background_image;
-        $size = 'hero';
-        $background = wp_get_attachment_image_src( $attachment_id, $size );
-        $style = sprintf( 'background-image: url(%s);', $background[0] );
-        
-        if( !empty( $style ) ) {
-            $style .= sprintf( ' background-position: %s %s;', $background_position_x, $background_position_y );
-        }
-    }
-    
-    
-    if( !empty( $heading ) ) {
-        $content .= _s_get_heading( $heading, 'h1' );
-    }
-    
-    
-    if( !empty( $description ) ) {
-        $description = _s_wrap_text( $description, "\n" );
-        $description = _s_get_heading( nl2br( $description ), 'h3' );
-        $content .= $description;
-     }
-
-    $attr = array( 'id' => 'hero', 'class' => 'section hero flex', 'style' => $style );
-    
-    $attr['class'] .= $hero_overlay;
-        
-    
-    _s_section_open( $attr );	
-       
-    printf( '<div class="column row"><div class="entry-content">%s</div></div>', $content );
-    
-     _s_section_close();
-     
-     printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bottom' ) );
-        
-}
-
+get_template_part( 'template-parts/hero', 'club-archive' );
 ?>
 
 <?php
@@ -357,7 +295,7 @@ if ( have_posts() ) :
                         
                         var number = letter.charCodeAt(0) - "A".charCodeAt(0) + 1;
                                                 
-                        var image = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='37' height='52'%3E%3Cdefs%3E%3Cpath id='a' d='M31 89H0V0h62v89H31z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd' transform='translate%28-9 -23%29'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cpath fill='%230081C6' d='M45.126 35.944c-.193-.694-.58-1.434-.869-2.083C40.822 25.867 33.313 23 27.25 23 19.134 23 10.195 28.27 9 39.132v2.217c0 .093.032.925.078 1.342.67 5.174 4.89 10.676 8.04 15.853C20.507 64.09 24.024 69.546 27.508 75c2.15-3.56 4.292-7.166 6.39-10.633.574-1.016 1.239-2.031 1.81-3.002.381-.65 1.113-1.295 1.445-1.896C40.542 53.46 46 47.406 46 41.442v-2.45c0-.645-.828-2.91-.874-3.048zM27.234 47.87c-2.463 0-5.158-1.176-6.488-4.427-.199-.518-.183-1.555-.183-1.65v-1.461c0-4.142 3.681-6.028 6.884-6.028 3.94 0 6.99 3.016 6.99 6.784 0 3.769-3.26 6.782-7.203 6.782z' mask='url%28%23b%29'/%3E%3Ccircle cx='28' cy='41' r='11' fill='%23FFF'/%3E%3Ctext fill='%234A4A4A' font-family='OpenSans-Bold, Open Sans' font-size='14' font-weight='bold' x='28' y='46' text-anchor='middle'%3E " + number + " %3C/text%3E%3C/g%3E%3C/svg%3E";
+                        var image = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='37' height='52'%3E%3Cdefs%3E%3Cpath id='a' d='M31 89H0V0h62v89H31z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd' transform='translate%28-9 -23%29'%3E%3Cmask id='b' fill='%23fff'%3E%3Cuse xlink:href='%23a'/%3E%3C/mask%3E%3Cpath fill='%230081C6' d='M45.126 35.944c-.193-.694-.58-1.434-.869-2.083C40.822 25.867 33.313 23 27.25 23 19.134 23 10.195 28.27 9 39.132v2.217c0 .093.032.925.078 1.342.67 5.174 4.89 10.676 8.04 15.853C20.507 64.09 24.024 69.546 27.508 75c2.15-3.56 4.292-7.166 6.39-10.633.574-1.016 1.239-2.031 1.81-3.002.381-.65 1.113-1.295 1.445-1.896C40.542 53.46 46 47.406 46 41.442v-2.45c0-.645-.828-2.91-.874-3.048zM27.234 47.87c-2.463 0-5.158-1.176-6.488-4.427-.199-.518-.183-1.555-.183-1.65v-1.461c0-4.142 3.681-6.028 6.884-6.028 3.94 0 6.99 3.016 6.99 6.784 0 3.769-3.26 6.782-7.203 6.782z' mask='url%28%23b%29'/%3E%3Ccircle cx='28' cy='41' r='11' fill='%23FFF'/%3E%3Ctext fill='%234A4A4A' font-family='sans-serif' font-size='14' font-weight='bold' x='28' y='46' text-anchor='middle'%3E " + number + " %3C/text%3E%3C/g%3E%3C/svg%3E";
                                                 
                         return new google.maps.Marker({
                           position : point,
@@ -394,7 +332,7 @@ endif;
                   <div class="box bh-sl-form-container">
                     <form id="bh-sl-user-location" method="post" action="#">
                         <div class="form-input">
-                          <label for="bh-sl-address"><?php echo get_svg('map-icon-small');?><span class="screen-reader-text">Zip Code</span></label>
+                          <label for="bh-sl-address"><?php printf('<img src="%sicons/map-icon-small.svg" width="16px" height="23px" />', trailingslashit( THEME_IMG ) );?><span class="screen-reader-text">Zip Code</span></label>
                           <input type="text" id="bh-sl-address" name="bh-sl-address" placeholder="Enter Zip Code" />
                         </div>
             

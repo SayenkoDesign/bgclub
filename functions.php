@@ -141,11 +141,11 @@ add_action( 'widgets_init', '_s_widgets_init' );
 function _s_login_stylesheet() {
     wp_enqueue_style( 'custom-login', trailingslashit( THEME_CSS ) . '/login.css' );
 }
-//add_action( 'login_enqueue_scripts', '_s_login_stylesheet' );
+add_action( 'login_enqueue_scripts', '_s_login_stylesheet' );
 
 // changing the login logo
 function _s_login_logo() {
-	$logo = sprintf( '%slogomark.svg', trailingslashit( THEME_IMG ) );
+	$logo = sprintf('%slogo.svg', trailingslashit( THEME_IMG ) );
 	printf( '<style type="text/css">h1 a { background-image:url(%s)!important; }</style>', $logo );
 }
 add_action('login_head', '_s_login_logo');

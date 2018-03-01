@@ -10,6 +10,11 @@
         box-sizing: inherit;   
     }
     
+    .label {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+    
     .bh-sl-container .bh-sl-map-container {
         margin-top: 0;
         margin-bottom: 0;
@@ -56,10 +61,12 @@
      
     .bh-sl-container .bh-sl-loc-list {
         font-size: 14px;
-        height: 600px;
+        height: auto;
         width: 100%;
+        overflow: auto!important;
         @include breakpoint(xlarge) {
             height: 800px;
+            overflow-x: auto!important;
         }
     }
     

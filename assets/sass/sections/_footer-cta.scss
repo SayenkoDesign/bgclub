@@ -21,6 +21,15 @@
         @include breakpoint(large) {
             display: flex;
             align-items: center;  
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            
+            .columns {
+                float: none;
+                width: auto;
+                padding: 0 45px;
+            }
         }
     }
     

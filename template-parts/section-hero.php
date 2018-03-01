@@ -54,9 +54,11 @@ if( ! function_exists( 'section_hero' ) ) {
             $description = _s_get_heading( nl2br( $description ), 'h3' );
             $content .= $description;
          }
-
+        
+        $button_group = '';
+        
         if( !empty( $buttons ) ) {
-            $button_group = '';
+
             $button_classes = array( 'button green', 'button blue-alt' );
             foreach( $buttons as $key => $button ) {
                  $button_group .= pb_get_cta_button( $button['button'], array( 'class' => $button_classes[$key] ) ); 
@@ -76,7 +78,7 @@ if( ! function_exists( 'section_hero' ) ) {
         
          _s_section_close();
          
-         printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bottom' ) );
+         printf( '<div class="wave-bottom">%s</div>', get_svg( 'wave-bottom' ) );
             
     }
     

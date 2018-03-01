@@ -30,6 +30,9 @@
                 
         
     }
+    else {
+        echo _s_get_post_author( 120, $post->post_author );   
+    }
 	?>
 	
 	<div class="entry-content">

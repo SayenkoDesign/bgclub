@@ -43,7 +43,7 @@ if( ! function_exists( 'section_form' ) ) {
         
         // Do not change
         
-        $args = array( 'class' => $classes, 'style' => $styles );
+        $args = array( 'id' => 'section-form', 'class' => $classes, 'style' => $styles );
          
         _s_section( $output, $settings, $args );
             

@@ -16,6 +16,19 @@
         
     });
     
+    $('li.menu-item-has-children > a').on('click',function(e){
+        
+        var $toggle = $(this).parent().find('.sub-menu-toggle');
+        
+        if( $toggle.is(':visible') ) {
+            $toggle.trigger('click');
+        }
+        
+        e.preventDefault();
+
+    });
+    
+    
     $(document).on('click', '.play-video', playVideo);
     
     function playVideo() {

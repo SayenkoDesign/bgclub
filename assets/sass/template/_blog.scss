@@ -117,7 +117,7 @@
 .single-event {
  
     .hero {
-        margin-bottom: 120px;  
+        
         text-align: center;
     }
     
@@ -182,10 +182,10 @@
     }
             
     .post-author {
-        position: absolute;
-        bottom: -18%;
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
+        top: -130px;
+        margin-bottom: -80px;
+        text-align: center;
         
         img {
             border-radius: 100%;
