@@ -13,7 +13,7 @@ function _s_register_scripts() {
     
 
 	// Project
- 	wp_register_script( 'project' , trailingslashit( THEME_JS ) . 'project.js',
+ 	wp_register_script( 'project' , trailingslashit( THEME_JS ) . 'project.min.js',
 			array(
 					'jquery',
  					'foundation',

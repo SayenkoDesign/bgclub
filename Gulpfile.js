@@ -1,131 +1,162 @@
-'use strict';
+//process.env.DISABLE_NOTIFIER = true; // Uncomment to disable all Gulp notifications.
 
-// Settings
-const proxy_url = 'https://bgclub.vanwp.ca'; // using SSL? Don't forget to set the Watch https keys
+var proxy = 'https://bgclub.vanwp.ca';
 
-// Require our dependencies
-const autoprefixer = require( 'autoprefixer' );
-const babel = require( 'gulp-babel' );
-const browserSync = require( 'browser-sync' );
-const concat = require( 'gulp-concat' );
-const cssnano = require( 'gulp-cssnano' );
-const del = require( 'del' );
-const eslint = require( 'gulp-eslint' );
-const gulp = require( 'gulp' );
-const imagemin = require( 'gulp-imagemin' );
-const mqpacker = require( 'css-mqpacker' );
-const notify = require( 'gulp-notify' );
-const plumber = require( 'gulp-plumber' );
-const postcss = require( 'gulp-postcss' );
-const cssimport = require( 'gulp-cssimport' );
-const reload = browserSync.reload;
-const rename = require( 'gulp-rename' );
-const sass = require( 'gulp-sass' );
-const sassdoc = require( 'sassdoc' );
-const sassLint = require( 'gulp-sass-lint' );
-const sort = require( 'gulp-sort' );
-const sourcemaps = require( 'gulp-sourcemaps' );
-const uglify = require( 'gulp-uglify' );
-const wpPot = require( 'gulp-wp-pot' );
+// Require our dependencies.
+var args         = require('yargs').argv,
+	autoprefixer = require('autoprefixer'),
+	browsersync  = require('browser-sync'),
+	changecase   = require('change-case'),
+	del          = require('del'),
+	mqpacker     = require('css-mqpacker'),
+	fs           = require('fs'),
+	gulp         = require('gulp'),
+	beautify     = require('gulp-cssbeautify'),
+	cache        = require('gulp-cached'),
+	cleancss     = require('gulp-clean-css'),
+	concat       = require('gulp-concat'),
+	csscomb      = require('gulp-csscomb'),
+	cssnano      = require('gulp-cssnano'),
+	filter       = require('gulp-filter'),
+	imagemin     = require('gulp-imagemin'),
+	notify       = require('gulp-notify'),
+	plumber      = require('gulp-plumber'),
+	postcss      = require('gulp-postcss'),
+	rename       = require('gulp-rename'),
+	replace      = require('gulp-replace'),
+	sass         = require('gulp-sass'),
+	sort         = require('gulp-sort'),
+	sourcemaps   = require('gulp-sourcemaps'),
+	uglify       = require('gulp-uglify'),
+	wpPot        = require('gulp-wp-pot'),
+	zip          = require('gulp-zip'),
+	focus        = require('postcss-focus');
 
 // Set assets paths.
-const paths = {
-	'css': [ './*.css', '!*.min.css' ],
-	'images': [ 'assets/images/*', '!assets/images/*.svg' ],
-	'php': [ './*.php', './**/*.php' ],
-	'sass': 'assets/sass/**/*.scss',
- 	'concat_scripts': ['assets/scripts/vendor/*.js','assets/scripts/concat/*.js'],
-	'scripts': [ 'assets/scripts/*.js', '!assets/scripts/*.min.js', '!assets/scripts/*config.js' ,'!assets/scripts/customizer.js' ],
-	'foundationJSpath': 'node_modules/foundation-sites/js/',
+var paths = {
+	all:        ['./**/*', '!./node_modules/', '!./node_modules/**', '!./screenshot.png', '!./assets/images/**'],
+	concat:     ['assets/scripts/vendor/*.js','assets/scripts/concat/*.js'],
+	images:     ['assets/images/*', '!assets/images/*.svg'],
+	php:        ['./*.php', './**/*.php', './**/**/*.php'],
+	scripts:    [ 'assets/scripts/*.js', '!assets/scripts/*.min.js', '!assets/scripts/*config.js' ,'!assets/scripts/customizer.js' ],
+    foundation: ['node_modules/foundation-sites/js/'],
+	styles:     ['assets/styles/*.scss', '!assets/styles/min/']
 };
 
-/**
- * Handle errors and alert the user.
- */
-function handleErrors () {
-	const args = Array.prototype.slice.call( arguments );
 
-	notify.onError( {
-		'title': 'Task Failed [<%= error.message %>',
-		'message': 'See console.',
-		'sound': 'Sosumi' // See: https://github.com/mikaelbr/node-notifier#all-notification-options-with-their-defaults
-	} ).apply( this, args );
-
-	// Prevent the 'watch' task from stopping.
-	this.emit( 'end' );
-}
 
 /**
- * Delete style.css and style.min.css before we minify and optimize
- */
-gulp.task( 'clean:styles', () => {
-	return del( [ 'style.css', 'style.min.css' ] );
-});
- 
-
-/**
- * Compile Sass and run stylesheet through PostCSS.
+ * Compile Sass.
  *
  * https://www.npmjs.com/package/gulp-sass
- * https://www.npmjs.com/package/gulp-postcss
- * https://www.npmjs.com/package/gulp-autoprefixer
- * https://www.npmjs.com/package/css-mqpacker
  */
-gulp.task( 'scss', [ 'clean:styles' ],  () => {
-  return gulp.src( 'assets/sass/*.scss' )
-    .pipe( plumber( {'errorHandler': handleErrors} ) )
-    .pipe( sourcemaps.init() )
-    // Compile Sass using LibSass.
-    .pipe( sass( {
-        'errLogToConsole': true,
-        'includePaths': ['node_modules/motion-ui/src'],
-        'outputStyle': 'expanded' // Options: nested, expanded, compact, compressed
-    } ) )
+gulp.task('styles', function () {
 
-    // Parse with PostCSS plugins.
-    .pipe( postcss( [
-        autoprefixer(),
-        mqpacker( {
-            'sort': true
-        } )
-    ] ) )
+	gulp.src('assets/sass/style.scss')
+
+		// Notify on error
+		.pipe(plumber({
+			errorHandler: notify.onError("Error: <%= error.message %>")
+		}))
+
+		// Initialize source map.
+		.pipe(sourcemaps.init())
+
+		// Process sass
+		.pipe(sass({
+            includePaths: ['node_modules/motion-ui/src'],
+			outputStyle: 'expanded'
+		}))
+
+		// Parse with PostCSS plugins.
+		.pipe(postcss([
+			autoprefixer({
+				browsers: 'last 2 versions'
+			}),
+			mqpacker({
+				sort: true
+			}),
+			focus(),
+		]))
+
+		// Format non-minified stylesheet.
+		.pipe(csscomb())
+
+		// Output non minified css to theme directory.
+		.pipe(gulp.dest('./'))
+
+		// Inject changes via browsersync.
+		.pipe(browsersync.reload({
+			stream: true
+		}))
+
+		// Process sass again.
+		.pipe(sass({
+			outputStyle: 'compressed'
+		}))
+
+		// Combine similar rules.
+		.pipe(cleancss({
+			level: {
+				2: {
+					all: true
+				}
+			}
+		}))
+
+		// Minify and optimize style.css again.
+		.pipe(cssnano({
+			safe: false,
+			discardComments: {
+				removeAll: true,
+			},
+		}))
 
 
-    // Added new CSS nano task
-    .pipe( cssnano( {
-        'safe': true // Use safe optimizations.
-    } ) )
+		// Write source map.
+		.pipe(sourcemaps.write('./', {
+			includeContent: false,
+		}))	
 
-    // Create sourcemap.
-    .pipe(sourcemaps.write('.'))
+		// Filtering stream to only css files.
+		.pipe(filter('**/*.css'))
 
-    // Create style.css.
-    .pipe( gulp.dest( './' ) )
-    .pipe( reload( { stream: true } ) );
+		// Notify on successful compile (uncomment for notifications).
+		.pipe(notify("Compiled: <%= file.relative %>"));
+
+});
+
+/**
+ * Concat javascript files.
+ *
+ * https://www.npmjs.com/package/gulp-uglify
+ */
+gulp.task('concat', function () {
+
+	gulp.src(paths.concat)
+
+		// Notify on error.
+		.pipe(plumber({
+			errorHandler: notify.onError("Error: <%= error.message %>")
+		}))
+
+		// Concatenate scripts.
+		.pipe(concat('project.js'))
+
+		// Output the processed js to this directory.
+		.pipe(gulp.dest('assets/scripts'))
+
+		// Inject changes via browsersync.
+		.pipe(browsersync.reload({
+			stream: true
+		}));
+
 } );
 
 
-/**
- * Optimize images.
- *
- * https://www.npmjs.com/package/gulp-imagemin
- */
-gulp.task( 'imagemin', () => {
-	return gulp.src( paths.images )
-		.pipe( plumber( {'errorHandler': handleErrors} ) )
-		.pipe( imagemin( {
-			'optimizationLevel': 5,
-			'progressive': true,
-			'interlaced': true
-		} ) )
-		.pipe( gulp.dest( 'assets/images' ) );
-});
-
-
-
-
-gulp.task('foundation-js', () => {
-	return gulp.src([
+gulp.task('foundation', function () {
+	
+    gulp.src([
 
 		/* Choose what JS Plugin you'd like to use. Note that some plugins also
 		require specific utility libraries that ship with Foundation—refer to a
@@ -134,262 +165,228 @@ gulp.task('foundation-js', () => {
 		http://foundation.zurb.com/sites/docs/javascript.html */
 
 		// Core Foundation - needed when choosing plugins ala carte
-		paths.foundationJSpath + 'foundation.core.js',
+		paths.foundation + 'foundation.core.js',
 
 		// Choose the individual plugins you want in your project
-		paths.foundationJSpath + 'foundation.dropdown.js',
+		paths.foundation + 'foundation.dropdown.js',
 
-		paths.foundationJSpath + 'foundation.equalizer.js',
+		paths.foundation + 'foundation.equalizer.js',
 
-		paths.foundationJSpath + 'foundation.tabs.js',
+		paths.foundation + 'foundation.tabs.js',
 
-		paths.foundationJSpath + 'foundation.accordion.js',
- 		paths.foundationJSpath + 'foundation.accordionMenu.js',
+		paths.foundation + 'foundation.accordion.js',
+ 		paths.foundation + 'foundation.accordionMenu.js',
 
-		/*
-		paths.foundationJSpath + 'foundation.abide.js',
+		//paths.foundation + 'foundation.abide.js',
 
-		paths.foundationJSpath + 'foundation.drilldown.js',
+		//paths.foundation + 'foundation.drilldown.js',
 
-		paths.foundationJSpath + 'foundation.dropdownMenu.js',
+		//paths.foundation + 'foundation.dropdownMenu.js',
 
-		paths.foundationJSpath + 'foundation.interchange.js',
-		paths.foundationJSpath + 'foundation.magellan.js',
+		//paths.foundation + 'foundation.interchange.js',
+		//paths.foundation + 'foundation.magellan.js',
 
-		paths.foundationJSpath + 'foundation.orbit.js',
-		paths.foundationJSpath + 'foundation.responsiveMenu.js',
-		paths.foundationJSpath + 'foundation.responsiveToggle.js',
+		//paths.foundation + 'foundation.orbit.js',
+		//paths.foundation + 'foundation.responsiveMenu.js',
+		//paths.foundation + 'foundation.responsiveToggle.js',
 
-		paths.foundationJSpath + 'foundation.slider.js',
-		paths.foundationJSpath + 'foundation.sticky.js',
+		//paths.foundation + 'foundation.slider.js',
+		//paths.foundation + 'foundation.sticky.js',
 
+		//paths.foundation + 'foundation.tooltip.js',
 
-		paths.foundationJSpath + 'foundation.tooltip.js',
+		//paths.foundation + 'foundation.offcanvas.js',
 
-		*/
-		//paths.foundationJSpath + 'foundation.offcanvas.js',
+		paths.foundation + 'foundation.toggler.js',
 
-		paths.foundationJSpath + 'foundation.toggler.js',
+		paths.foundation + 'foundation.reveal.js',
 
-		paths.foundationJSpath + 'foundation.reveal.js',
+		paths.foundation + 'foundation.util.mediaQuery.js',
+ 		paths.foundation + 'foundation.util.box.js',
+		paths.foundation + 'foundation.util.triggers.js',
 
-		paths.foundationJSpath + 'foundation.util.mediaQuery.js',
- 		paths.foundationJSpath + 'foundation.util.box.js',
-		paths.foundationJSpath + 'foundation.util.triggers.js',
-
-		paths.foundationJSpath + 'foundation.util.keyboard.js',
-		paths.foundationJSpath + 'foundation.util.motion.js',
-		paths.foundationJSpath + 'foundation.util.timerAndImageLoader.js',
+		paths.foundation + 'foundation.util.keyboard.js',
+		paths.foundation + 'foundation.util.motion.js',
+		paths.foundation + 'foundation.util.timerAndImageLoader.js',
         
-        paths.foundationJSpath + 'foundation.util.nest.js',
+        paths.foundation + 'foundation.util.nest.js',
 
-        
-		/*
-		
-		paths.foundationJSpath + 'foundation.util.touch.js',
+        //paths.foundation + 'foundation.util.touch.js',
 
-		*/
 	])
-	.pipe(babel({
-		presets: ['env'],
-		compact: false
-	}))
-	.pipe(concat('foundation.js'))
- 	.pipe( gulp.dest( 'assets/scripts' ) );
+    
+    // Notify on error.
+    .pipe(plumber({
+        errorHandler: notify.onError("Error: <%= error.message %>")
+    }))
+    
+	// Concatenate scripts.
+    .pipe(concat('project.js'))
+
+    // Output the processed js to this directory.
+    .pipe(gulp.dest('assets/scripts'))
+
+    // Inject changes via browsersync.
+    .pipe(browsersync.reload({
+        stream: true
+    }));
 });
 
 
-
 /**
- * Concatenate and transform JavaScript.
+ * Minify javascript files.
  *
- * https://www.npmjs.com/package/gulp-concat
- * https://github.com/babel/gulp-babel
- * https://www.npmjs.com/package/gulp-sourcemaps
+ * https://www.npmjs.com/package/gulp-uglify
  */
-gulp.task( 'concat', () => {
-	return gulp.src(paths.concat_scripts)
+gulp.task('scripts', ['concat','foundation'], function () {
 
-		// Deal with errors.
-		.pipe( plumber(
-			{'errorHandler': handleErrors}
-		) )
+	gulp.src(paths.scripts)
 
-		// Start a sourcemap.
-		.pipe( sourcemaps.init() )
+		// Notify on error.
+		.pipe(plumber({
+			errorHandler: notify.onError("Error: <%= error.message %>")
+		}))
 
-		// Convert ES6+ to ES2015.
-		.pipe( babel( {
-			'presets': [
-				[ 'env', {
-					modules: false,
-                    'targets': {
-						'browsers': [ 'last 2 versions' ]
-					}
-				} ]
-			]
-		} ) )
+		// Source maps init.
+		.pipe(sourcemaps.init())
 
-		// Concatenate partials into a single script.
-		.pipe( concat( 'project.js' ) )
+		// Cache files to avoid processing files that haven't changed.
+		.pipe(cache('scripts'))
 
-		// Append the sourcemap to project.js.
-		.pipe( sourcemaps.write('.') )
+		// Add .min suffix.
+		.pipe(rename({
+			suffix: '.min'
+		}))
 
-		.pipe( gulp.dest( 'assets/scripts' ) )
+		// Minify.
+		.pipe(uglify())
 
-		.pipe( reload( { stream: true } ) );
+		// Write source map.
+		.pipe(sourcemaps.write('./', {
+			includeContent: false,
+		}))
+
+		// Output the processed js to this directory.
+		.pipe(gulp.dest('assets/scripts'))
+
+		// Inject changes via browsersync.
+		.pipe(browsersync.reload({
+			stream: true
+		}))
+
+		// Notify on successful compile.
+		.pipe(notify("Minified: <%= file.relative %>"));
+
 });
 
 /**
-  * Minify compiled JavaScript.
-  *
-  * https://www.npmjs.com/package/gulp-uglify
-  */
-gulp.task( 'uglify', () => {
-	return gulp.src( paths.scripts )
-		.pipe( rename( {'suffix': '.min'} ) )
-		.pipe( uglify( {
-			'mangle': false
-		} ).on('error', function(e){
-            console.log(e);
-         }) )
-		.pipe( gulp.dest( 'assets/scripts' ) );
-});
-
-
-
-/**
- * Delete the theme's .pot before we create a new one.
+ * Optimize images.
+ *
+ * https://www.npmjs.com/package/gulp-imagemin
  */
-gulp.task( 'clean:pot', () => {
-	return del( [ 'languages/_s.pot' ] );
-});
+gulp.task('images', function () {
 
+	return gulp.src(paths.images)
+
+		// Notify on error.
+		.pipe(plumber({
+			errorHandler: notify.onError("Error: <%= error.message %>")
+		}))
+
+		// Cache files to avoid processing files that haven't changed.
+		.pipe(cache('images'))
+
+		// Optimize images.
+		.pipe(imagemin({
+			progressive: true
+		}))
+
+		// Output the optimized images to this directory.
+		.pipe(gulp.dest('assets/images'))
+
+		// Inject changes via browsersync.
+		.pipe(browsersync.reload({
+			stream: true
+		}))
+
+		// Notify on successful compile.
+		.pipe(notify("Optimized: <%= file.relative %>"));
+
+});
 
 /**
  * Scan the theme and create a POT file.
  *
  * https://www.npmjs.com/package/gulp-wp-pot
  */
-gulp.task( 'wp-pot', [ 'clean:pot' ], () => {
-	return gulp.src( paths.php )
-		.pipe( plumber( {'errorHandler': handleErrors} ) )
-		.pipe( sort() )
-		.pipe( wpPot( {
-			'domain': '_s',
-			'package': '_s',
-		} ) )
-		.pipe( gulp.dest( 'languages/_s.pot' ) );
+gulp.task('translate', function () {
+
+	return gulp.src(paths.php)
+
+		.pipe(plumber({
+			errorHandler: notify.onError("Error: <%= error.message %>")
+		}))
+
+		.pipe(sort())
+
+		.pipe(wpPot({
+			domain: '_s',
+			destFile: '_s',
+			package: '_s'
+		}))
+
+		.pipe(gulp.dest('./languages/'));
+
 });
 
 /**
- * Sass linting.
+ * Package theme.
  *
- * https://www.npmjs.com/package/sass-lint
+ * https://www.npmjs.com/package/gulp-zip
  */
-gulp.task( 'sass:lint', () => {
-	return gulp.src( [
-		'assets/sass/**/*.scss',
-		'!assets/sass/base/_normalize.scss',
-		'!node_modules/**'
-	] )
-		.pipe( sassLint() )
-		.pipe( sassLint.format() )
-		.pipe( sassLint.failOnError() );
+gulp.task('zip', function () {
+
+	gulp.src(['./**/*', '!./node_modules/', '!./node_modules/**', '!./aws.json'])
+		.pipe(zip(__dirname.split("/").pop() + '.zip'))
+		.pipe(gulp.dest('../'));
+
 });
 
 
-/**
- * Sass docs.
- *
- * http://sassdoc.com/getting-started/
- */
-gulp.task( 'sassdoc', function() {
-	let options = {
-		dest: 'docs',
-		verbose: true
-	};
 
-	return gulp.src( 'assets/sass/**/*.scss' )
-		.pipe( sassdoc( options ) );
-} );
-
-
-
-/**
- * JavaScript linting.
- *
- * https://www.npmjs.com/package/gulp-eslint
- */
-gulp.task( 'js:lint', () => {
-	return gulp.src( [
-		'assets/scripts/concat/*.js',
-		'assets/scripts/*.js',
-        '!assets/scripts/vendor/*.js',
-		'!assets/scripts/project.js',
-		'!assets/scripts/*.min.js',
-		'!assets/scripts/*config.js',
-		'!Gruntfile.js',
-		'!Gulpfile.js',
-		'!node_modules/**'
-	] )
-		.pipe( eslint() )
-		.pipe( eslint.format() )
-		.pipe( eslint.failAfterError() );
-});
-
-
-gulp.task('bower', () => {
-    return gulp.src([
-            'node_modules/slick-carousel/slick/slick.js'])
-    .pipe(gulp.dest('assets/scripts/vendor/'));
-});
 
 /**
  * Process tasks and reload browsers on file changes.
  *
  * https://www.npmjs.com/package/browser-sync
  */
-gulp.task( 'watch', function () {
+gulp.task('watch', function () {
 
-	// Kick off BrowserSync.
-	browserSync( {
-		'open': true,             // Open project in a new tab?
-		'notify': true,
-		'injectChanges': true,     // Auto inject changes instead of full reload.
-		'proxy': proxy_url,    // Use http://_s.com:3000 to use BrowserSync.
-		'watchOptions': {
-			'debounceDelay': 1000  // Wait 1 second before injecting.
-		},
-		/*
-		'https': {
-			'key': '/localhost.key',
-			'cert': '/localhost.crt'
-		}
-*/
-		// Kyle's local keys
- 		'https': {
-			'key': '/Users/kylerumble/Documents/Certificates/localhost.key',
+	// HTTPS (optional).
+	browsersync({
+		proxy: proxy,
+		port: 3000,
+		notify: false,
+		open: true,
+		https: {
+		 	'key': '/Users/kylerumble/Documents/Certificates/localhost.key',
 			'cert': '/Users/kylerumble/Documents/Certificates/localhost.crt'
-		},
-        
-	} );
+		}
+	});
 
 	// Run tasks when files change.
- 	gulp.watch( paths.sass, [ 'styles' ] );
-    gulp.watch( paths.scripts, [ 'scripts' ] );
-	gulp.watch( paths.concat_scripts, [ 'concat' ] );
- 	gulp.watch( paths.php, [ 'markup' ] );
-} );
+	gulp.watch(paths.styles, ['styles']);
+	gulp.watch(paths.scripts, ['scripts']);
+	gulp.watch(paths.images, ['images']);
+	gulp.watch(paths.php).on('change', browsersync.reload);
+
+});
 
 /**
- * Create individual tasks.
+ * Create default task.
  */
-gulp.task( 'markup', reload );
-gulp.task( 'i18n', [ 'wp-pot' ] );
-gulp.task( 'scripts', [ 'uglify' ] );
-gulp.task( 'styles', [ 'scss' ] );
-gulp.task( 'docs', [ 'sassdoc' ] );
-gulp.task( 'lint', [ 'sass:lint', 'js:lint' ] );
-gulp.task( 'default', [ 'i18n', 'styles', 'foundation-js', 'concat', 'scripts', 'imagemin'] );
+gulp.task('default', ['watch'], function () {
+
+	gulp.start('styles', 'scripts', 'images');
+
+});
