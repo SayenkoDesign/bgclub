@@ -31,7 +31,6 @@ if( ! function_exists( 'blog_hero' ) ) {
             $heading = $fields['heading'];
         }
         
-        $description	= $fields['description'];
         
         $background_image       = $fields['background_image'];
         $background_position_x  = $fields['background_position_x'];
@@ -39,7 +38,6 @@ if( ! function_exists( 'blog_hero' ) ) {
         $hero_overlay           = $fields['overlay'];
         $hero_overlay           = $hero_overlay ? ' hero-overlay' : '';
         
-        $buttons                = $fields['buttons'];
         
         $style = '';
         $content = '';
@@ -60,24 +58,6 @@ if( ! function_exists( 'blog_hero' ) ) {
             $content .= _s_get_heading( $heading, 'h1' );
         }
         
-        
-        if( !empty( $description ) ) {
-            $description = _s_wrap_text( $description, "\n" );
-            $description = _s_get_heading( nl2br( $description ), 'h3' );
-            $content .= $description;
-         }
-        
-        $button_group = '';
-        
-        if( !empty( $buttons ) ) {
-            
-            $button_classes = array( 'button green', 'button blue-alt' );
-            foreach( $buttons as $key => $button ) {
-                 $button_group .= pb_get_cta_button( $button['button'], array( 'class' => $button_classes[$key] ) ); 
-            }
-            
-            $content .= sprintf( '<p class="button-group">%s</p>', $button_group );
-        }
     
         $attr = array( 'id' => 'hero', 'class' => 'section hero flex', 'style' => $style );
         

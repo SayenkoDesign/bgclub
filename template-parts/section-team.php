@@ -19,7 +19,7 @@ if( ! function_exists( 'section_team' ) ) {
         
                 
         $fg         = new Foundation_Grid( array( 'format' => 'block', 
-                                                 'class' => 'row small-up-1 medium-up-2 large-up-4', 'echo' => false  ) );
+                                                 'class' => 'row small-up-1 medium-up-2 large-up-4 align-center', 'echo' => false  ) );
                                                  
         $team       = $fg->generate( $team_items ); 
         

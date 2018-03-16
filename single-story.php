@@ -6,9 +6,9 @@ get_header(); ?>
 get_template_part( 'template-parts/hero', 'story' );
 ?>
 
-<div class="row">
+<div class="row align-center">
 
-    <div class="large-8 columns small-centered">
+    <div class="large-8 columns">
     
         <div id="primary" class="content-area">
         

@@ -21,13 +21,13 @@ if( ! function_exists( 'section_blog' ) ) {
         
         $settings = get_sub_field( sprintf( '%ssettings', $prefix ) );
                       
-        $blog_category 	    = $fields['blog_category'];
+        $choose_tag 	    = $fields['choose_tag'];
         $featured_story	    = $fields['featured_story'];
         $featured_post      = $fields['featured_post'];
          
           
-        $story     = _get_story( $blog_category, $featured_story );
-        $blog_post = _get_blog_post( $blog_category, $featured_story );
+        $story     = _get_story( $choose_tag, $featured_story );
+        $blog_post = _get_blog_post( $choose_tag, $featured_story );
         $events    = _get_events_list();
         
         if( empty( $story ) || empty( $blog_post ) ) {
@@ -35,7 +35,7 @@ if( ! function_exists( 'section_blog' ) ) {
         }
         
         
-        $output = sprintf( '<div class="row expanded small-collapse" data-equalizer data-equalize-on="xxlarge"><div class="xxlarge-6 columns">%s</div><div class="xxlarge-6 columns"><div class="blog-events" data-equalizer-watch>%s%s</div></div></div>', 
+        $output = sprintf( '<div class="row expanded small-collapse" data-equalizer data-equalize-on="xxlarge"><div class="small-12 xxlarge-6 columns">%s</div><div class="small-12 xxlarge-6 columns"><div class="blog-events" data-equalizer-watch>%s%s</div></div></div>', 
                             $story, $blog_post, $events );
         
         // Do not change
@@ -69,7 +69,7 @@ if( ! function_exists( '_get_story' ) ) {
             
             if( !empty( $cat ) ) {
                 $tax_query[] = array(
-                    'taxonomy'         => 'category',
+                    'taxonomy'         => 'post_tag',
                     'terms'            =>  [$cat],
                     'field'            => 'term_id',   
                     'operator'         => 'IN',
@@ -90,12 +90,16 @@ if( ! function_exists( '_get_story' ) ) {
         // don't want to use $wp_query, use our custom variable instead.
         if ( $loop->have_posts() ) : 
             while ( $loop->have_posts() ) : $loop->the_post(); 
-    
+                $style = '';
                 $background = get_the_post_thumbnail_url( get_the_ID(), 'large' ); 
+                $background_position_x  = get_field( 'background_position_x' );
+                $background_position_y  = get_field( 'background_position_y' );
                 if( !empty( $background ) ) {
-                    $background = sprintf( ' style="background-image: url(%s)"', $background );
+                    $style = sprintf( 'background-image: url(%s);', $background );
+                    $style .= sprintf( ' background-position: %s %s;', $background_position_x, $background_position_y );
+                    $style = sprintf( ' style="%s"', $style );
                 }
-                
+                                
                 $video = get_field( 'video', false, false );
                 if( !empty( $video ) ) {
                     $video = youtube_embed( $video );
@@ -107,7 +111,7 @@ if( ! function_exists( '_get_story' ) ) {
                 $quote = sprintf('<div class="quote"><img src="%sicons/quote.svg" width="69px" height="49px" /></div>', trailingslashit( THEME_IMG ) );
                 $permalink  = sprintf( '<p><a href="%s" class="button green">%s</a></p>', get_permalink(), 'Full Story' );
                 
-                $out = sprintf( '<div class="story"%s data-equalizer-watch><div class="entry-title clearfix">%s%s</div>%s%s%s</div>', $background, $video, $title, $description, $quote, $permalink );
+                $out = sprintf( '<div class="story"%s data-equalizer-watch><div class="entry-title clearfix">%s%s</div>%s%s%s</div>', $style, $video, $title, $description, $quote, $permalink );
     
             endwhile;
         endif;
@@ -139,7 +143,7 @@ if( ! function_exists( '_get_blog_post' ) ) {
             
             if( !empty( $cat ) ) {
                 $tax_query[] = array(
-                    'taxonomy'         => 'category',
+                    'taxonomy'         => 'post_tag',
                     'terms'            =>  [$cat],
                     'field'            => 'term_id',   
                     'operator'         => 'IN',
@@ -223,7 +227,7 @@ if( ! function_exists( '_get_events_list' ) ) {
         
         if( !empty( $cat ) ) {
             $tax_query[] = array(
-                'taxonomy'         => 'category',
+                'taxonomy'         => 'post_tag',
                 'terms'            =>  [$cat],
                 'field'            => 'term_id',   
                 'operator'         => 'IN',

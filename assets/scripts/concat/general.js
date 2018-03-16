@@ -16,6 +16,8 @@
         
     });
     
+    // Toggle menu
+    
     $('li.menu-item-has-children > a').on('click',function(e){
         
         var $toggle = $(this).parent().find('.sub-menu-toggle');
@@ -65,6 +67,5 @@
         $(this).find('.video-placeholder').html('');
       }
     );
-    
     
 }(document, window, jQuery));

@@ -8,12 +8,15 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
+    "babel-core": "*",
+    "babel-preset-env": "*",
     "browser-sync": "*",
-    "css-mqpacker": "*",
-    "gulp": "*",
-    "gulp-autoprefixer": "*",
     "change-case": "^3.0.1",
+    "css-mqpacker": "*",
     "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "*",
+    "gulp-autoprefixer": "*",
     "gulp-cached": "*",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",
@@ -34,10 +37,10 @@
     "gulp-sourcemaps": "*",
     "gulp-uglify": "*",
     "gulp-wp-pot": "^1.1.1",
-    "postcss-focus": "*",
     "gulp-zip": "*",
-    "motion-ui": "latest",
-    "slick-carousel": "latest"
+    "motion-ui": "*",
+    "postcss-focus": "*",
+    "slick-carousel": "*"
   },
   "scripts": {
     "test": "echo \"No test specified\""

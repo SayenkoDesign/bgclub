@@ -21,30 +21,33 @@ if( ! function_exists( 'section_content' ) ) {
         
         $settings = get_sub_field( sprintf( '%ssettings', $prefix ) );
                       
-        $heading 		    = $fields['heading'];
-        $editor	            = $fields['editor'];
-        $photo	            = $fields['photo'];
-        $photo_alignment	= strtolower( $fields['photo_alignment'] );
-        $button             = $fields['button'];
-         
-          
+        $heading 		        = $fields['heading'];
+        $editor	                = $fields['editor'];
+        $photo	                = $fields['photo'];
+        $photo_alignment	    = strtolower( $fields['photo_alignment'] );
+        $background_position_x  = $fields['background_position_x'];
+        $background_position_y  = $fields['background_position_y'];
+        $button                 = $fields['button'];
+                  
         $content = '';
          
         if( !empty( $photo ) ) {
+            $style = '';
             $attachment_id = $photo;
             $size = 'large';
             $photo = wp_get_attachment_image_src( $attachment_id, $size );
-            $photo = sprintf( ' style="background-image:url(%s);"', $photo[0] );
-            
+            $style = sprintf( 'background-image:url(%s);', $photo[0] );
+            $style .= sprintf( ' background-position: %s %s;', $background_position_x, $background_position_y );
+            $style = sprintf( ' style="%s"', $style );
             // Alignment
             $left = $right = '';
+            $spacer = '';
             
-            if( 'right' == $photo_alignment ) {
-                $left = 'large-push-6';  
-                $right = 'large-pull-6';   
+            if( 'left' == $photo_alignment ) {
+                $spacer = '<div class="small-12 large-6 columns show-for-large">&nbsp;</div>';  
             }
             
-            $photo = sprintf( '<div class="photo photo-%s"%s></div><div class="small-12 large-6 %s columns show-for-large"></div>', $photo_alignment, $photo, $left );
+            $photo = sprintf( '<div class="photo photo-%s"%s></div>', $photo_alignment, $style );
         }
         
         if( !empty( $heading ) ) {
@@ -59,7 +62,7 @@ if( ! function_exists( 'section_content' ) ) {
             $content .= sprintf( '<p>%s</p>', pb_get_cta_button( $button, array( 'class' => 'button green' ) ) );
         }        
                  
-        $content = sprintf( '<div class="small-12 large-6 %s columns"><div class="entry-content">%s</div></div>', $right, $content );
+        $content = sprintf( '%s<div class="small-12 large-6 columns"><div class="entry-content">%s</div></div>', $spacer, $content );
         
         
         $output = sprintf( '<div class="row large-collapse">%s%s</div>', $photo, $content );

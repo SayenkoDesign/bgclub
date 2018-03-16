@@ -53,9 +53,11 @@
         background-size: cover;
         background-repeat: no-repeat; 
         padding-top: 50%;  
+        width:100%;
         
         @include breakpoint(medium) {
             min-height: 500px; 
+            
         }
          
         @include breakpoint(large) {

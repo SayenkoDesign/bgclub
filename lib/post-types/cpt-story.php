@@ -37,7 +37,7 @@ class CPT_Story extends CPT_Core {
 				'show_in_nav_menus'   => false,
 				'exclude_from_search' => false,
 				'rewrite'             => array( 'slug' => 'stories' ),
-				'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+				'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
                 'menu_position' => 5
 				 )
 

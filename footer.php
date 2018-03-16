@@ -82,8 +82,8 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
 <footer id="colophon" class="site-footer" role="contentinfo">
      <div class="wrap">
         
-        <div class="row">
-                <div class="small-12 large-4 large-centered columns text-center">
+        <div class="row align-center">
+                <div class="small-12 large-4 columns text-center">
                 <?php
                 printf( '<p><span>&copy; %s Boys & Girls Club of King County. All rights reserved.</span><span><a href="%2$s">Seattle Web Design</a> by <a href="%2$s" target="_blank">Sayenko Design</a>.</span><span>BGCA is a 501(c)3 (nonprofit) organization and donations are tax deductible.</span></p>', 
                 date( 'Y' ), 'https://www.sayenkodesign.com' );

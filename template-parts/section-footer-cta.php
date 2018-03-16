@@ -78,6 +78,6 @@ function _s_footer_cta() {
 	$attr = array( 'id' => 'footer-cta', 'class' => 'section footer-cta' );
 					
 	_s_section_open( $attr );  
-		printf( '<div class="row"><div class="large-6 columns">%s</div><div class="large-6 columns">%s</div></div>', $content, $button_group );
+		printf( '<div class="row align-center align-middle"><div class="columns shrink">%s</div><div class="columns shrink">%s</div></div>', $content, $button_group );
 	_s_section_close();		
  }

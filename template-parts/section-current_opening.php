@@ -18,7 +18,7 @@ if( ! function_exists( 'section_current_opening' ) ) {
         $current_opening_items = get_sub_field( 'current_openings_grid' );
                         
         $fg = new Foundation_Grid( array( 'format' => 'block', 
-                                         'class' => 'row small-up-1 medium-up-2 large-up-4', 'echo' => false  ) );
+                                         'class' => 'row small-up-1 medium-up-2 large-up-4 align-center', 'echo' => false  ) );
                                          
         $current_opening = $fg->generate( $current_opening_items ); 
         

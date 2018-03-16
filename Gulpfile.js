@@ -5,6 +5,7 @@ var proxy = 'https://bgclub.vanwp.ca';
 // Require our dependencies.
 var args         = require('yargs').argv,
 	autoprefixer = require('autoprefixer'),
+    babel        = require( 'gulp-babel' ),
 	browsersync  = require('browser-sync'),
 	changecase   = require('change-case'),
 	del          = require('del'),
@@ -38,9 +39,9 @@ var paths = {
 	concat:     ['assets/scripts/vendor/*.js','assets/scripts/concat/*.js'],
 	images:     ['assets/images/*', '!assets/images/*.svg'],
 	php:        ['./*.php', './**/*.php', './**/**/*.php'],
-	scripts:    [ 'assets/scripts/*.js', '!assets/scripts/*.min.js', '!assets/scripts/*config.js' ,'!assets/scripts/customizer.js' ],
+	scripts:    [ 'assets/scripts/*.js', '!assets/scripts/*.min.js', '!assets/scripts/*config.js', '!assets/scripts/customizer.js' ],
     foundation: ['node_modules/foundation-sites/js/'],
-	styles:     ['assets/styles/*.scss', '!assets/styles/min/']
+	styles:     ['assets/sass/**/*.scss']
 };
 
 
@@ -65,7 +66,7 @@ gulp.task('styles', function () {
 		// Process sass
 		.pipe(sass({
             includePaths: ['node_modules/motion-ui/src'],
-			outputStyle: 'expanded'
+			outputStyle: 'compressed'
 		}))
 
 		// Parse with PostCSS plugins.
@@ -79,47 +80,29 @@ gulp.task('styles', function () {
 			focus(),
 		]))
 
-		// Format non-minified stylesheet.
-		.pipe(csscomb())
-
-		// Output non minified css to theme directory.
-		.pipe(gulp.dest('./'))
-
-		// Inject changes via browsersync.
-		.pipe(browsersync.reload({
-			stream: true
-		}))
-
-		// Process sass again.
-		.pipe(sass({
-			outputStyle: 'compressed'
-		}))
-
-		// Combine similar rules.
-		.pipe(cleancss({
-			level: {
-				2: {
-					all: true
-				}
-			}
-		}))
-
 		// Minify and optimize style.css again.
 		.pipe(cssnano({
-			safe: false,
+			safe: true,
 			discardComments: {
-				removeAll: true,
+				//removeAll: true,
 			},
 		}))
 
 
 		// Write source map.
-		.pipe(sourcemaps.write('./', {
-			includeContent: false,
+		.pipe(sourcemaps.write('.', {
+			includeContent: true,
 		}))	
+        
+        .pipe(gulp.dest('./'))
 
 		// Filtering stream to only css files.
 		.pipe(filter('**/*.css'))
+        
+        // Inject changes via browsersync.
+		.pipe(browsersync.reload({
+			stream: true
+		}))
 
 		// Notify on successful compile (uncomment for notifications).
 		.pipe(notify("Compiled: <%= file.relative %>"));
@@ -220,8 +203,13 @@ gulp.task('foundation', function () {
         errorHandler: notify.onError("Error: <%= error.message %>")
     }))
     
+    .pipe(babel({
+		presets: ['env'],
+		compact: false
+	}))
+    
 	// Concatenate scripts.
-    .pipe(concat('project.js'))
+    .pipe(concat('foundation.js'))
 
     // Output the processed js to this directory.
     .pipe(gulp.dest('assets/scripts'))
@@ -238,13 +226,13 @@ gulp.task('foundation', function () {
  *
  * https://www.npmjs.com/package/gulp-uglify
  */
-gulp.task('scripts', ['concat','foundation'], function () {
+gulp.task('scripts', ['concat'], function () {
 
 	gulp.src(paths.scripts)
 
 		// Notify on error.
 		.pipe(plumber({
-			errorHandler: notify.onError("Error: <%= error.message %>")
+			errorHandler: notify.onError("Scripts Error: <%= error.message %>")
 		}))
 
 		// Source maps init.
@@ -376,6 +364,7 @@ gulp.task('watch', function () {
 
 	// Run tasks when files change.
 	gulp.watch(paths.styles, ['styles']);
+    gulp.watch(paths.concat, ['scripts']);
 	gulp.watch(paths.scripts, ['scripts']);
 	gulp.watch(paths.images, ['images']);
 	gulp.watch(paths.php).on('change', browsersync.reload);
@@ -387,6 +376,6 @@ gulp.task('watch', function () {
  */
 gulp.task('default', ['watch'], function () {
 
-	gulp.start('styles', 'scripts', 'images');
+	gulp.start('styles', 'foundation', 'scripts', 'images');
 
 });

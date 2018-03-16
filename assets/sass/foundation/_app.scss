@@ -6,13 +6,13 @@
 
 // Select the components you want to use
 @include foundation-global-styles;
-@include foundation-grid; // float-based grid
+//@include foundation-grid; // float-based grid
 // Flexbox
 // If you want to run a flexbox-powered grid system, uncomment @include
 // foundation-flex-grid mixin and comment out the foundation-grid mixin.
 //
-//@include foundation-flex-grid;
-//@include foundation-flex-classes;
+@include foundation-flex-grid;
+@include foundation-flex-classes;
 @include foundation-typography;
 //@include foundation-forms;
 //@include foundation-button;

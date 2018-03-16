@@ -58,7 +58,7 @@ if( ! function_exists( 'section_leadership' ) ) {
                                    $photo, $name, $position, $email, $phone );                    
             }
             
-            $output .= sprintf( '<div class="row small-up-1 medium-up-2 large-up-3 xlarge-up-5 grid-staff" data-equalizer data-equalize-on="medium">%s</div>', $staff );
+            $output .= sprintf( '<div class="row small-up-1 medium-up-2 large-up-3 xlarge-up-5 grid grid-staff" data-equalizer data-equalize-on="medium">%s</div>', $staff );
         }
         
         

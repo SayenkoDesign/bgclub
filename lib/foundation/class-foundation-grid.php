@@ -33,7 +33,7 @@ class Foundation_Grid extends Foundation {
             'image_size' => 'large',
             'title_position' => 'after',
             'title_tag' => 'h3',
-            'class' => 'row small-up-1 large-up-3',
+            'class' => 'row small-up-1 large-up-3 grid align-center',
             'format' => 'item', // item (has link/button)| block (entire item is clickable)
             'return' => 'string', //string|array
             'echo' => false
