@@ -21,6 +21,8 @@
 	include_once( 'includes/taxonomy-core/Taxonomy_Core.php' );
     
     include_once( 'includes/table-class.php' );
+    
+    include_once( 'includes/class-drop-walker-nav.php' );
 
     include_once( 'includes/theme-functions/array.php' );
 
@@ -48,7 +50,7 @@
     
     include_once( 'functions/blog.php' );
     
-    include_once( 'functions/mega-menu.php' );
+    // include_once( 'functions/mega-menu.php' );
 
 	include_once( 'functions/gravity-forms.php' );
 

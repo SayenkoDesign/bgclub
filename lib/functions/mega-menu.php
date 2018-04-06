@@ -344,4 +344,4 @@ final class Mega_Menu_Walker_Edits {
     
 }
 
-new Mega_Menu_Walker_Edits();
+// new Mega_Menu_Walker_Edits();

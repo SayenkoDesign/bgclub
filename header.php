@@ -53,38 +53,47 @@
                             dynamic_sidebar('header');
                         }
                         ?>                    
-                    </div>            
-                    
-                    <nav id="site-navigation" class="nav-primary" role="navigation">
-                        <?php
-                            // Desktop Menu
-                            $args = array(
-                                'theme_location' => 'primary',
-                                'menu' => 'Primary Menu',
-                                'container' => 'div',
-                                'container_class' => '',
-                                'container_id' => '',
-                                'menu_id'        => 'primary-menu',
-                                'menu_class'     => 'dropdown menu',
-                                'before' => '',
-                                'after' => '',
-                                'link_before' => '',
-                                'link_after' => '',
-                                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
-                             );
-                            wp_nav_menu($args);
-                        ?>
-                    </nav>  
+                    </div>                                
                 
                 </div> 
                   
 			</div>
+                        
+            <nav id="site-navigation" class="nav-primary" role="navigation">
+            
+                <div class="row small-collapse large-uncollapse">
+                
+                    <div class="small-12 column">
+                    <?php
+                        // Desktop Menu
+                        $args = array(
+                            'theme_location' => 'primary',
+                            'menu' => 'Primary Menu',
+                            'container' => 'div',
+                            'container_class' => '',
+                            'container_id' => '',
+                            'menu_id'        => 'primary-menu',
+                            'menu_class'     => 'menu',
+                            'before' => '',
+                            'after' => '',
+                            'link_before' => '',
+                            'link_after' => '',
+                            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                            'walker'	 => new Drop_Menu_Walker(),
+                         );
+                        wp_nav_menu($args);
+                    ?>
+                    </div>
+                </div>
+            </nav>  
+            
+        <?php
+        printf( '<div class="wave-top show-for-medium">%s</div>', get_svg( 'wave-top' ) );
+        ?>    
               
 		</div><!-- wrap -->
         
-        <?php
-        printf( '<div class="wave-top show-for-medium">%s</div>', get_svg( 'wave-top' ) );
-        ?>
+        
          
 	</header><!-- #masthead -->
 

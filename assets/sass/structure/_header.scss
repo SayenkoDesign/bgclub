@@ -19,9 +19,14 @@ Header
     z-index: 999;
         
     .wrap {
+        
+         @include breakpoint(xlarge) {
+            margin-bottom: 20px; 
+            position: relative;  
+         }
+        
           
          .columns {
-            position: relative;   
             
             @include breakpoint(large) {
                 display: flex;

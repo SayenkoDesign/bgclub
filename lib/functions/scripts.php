@@ -16,6 +16,7 @@ function _s_register_scripts() {
  	wp_register_script( 'project' , trailingslashit( THEME_JS ) . 'project.min.js',
 			array(
 					'jquery',
+                    'underscore',
  					'foundation',
  					),
 				NULL, TRUE );

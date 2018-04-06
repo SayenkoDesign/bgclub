@@ -11,10 +11,31 @@
         $( '.nav-primary' ).doubleTapToGo();
         
         if( ! Foundation.MediaQuery.atLeast('xlarge') ) {
-          $( '.nav-primary' ).doubleTapToGo( 'destroy' );
-        }
+            $( '.nav-primary' ).doubleTapToGo( 'destroy' );          
+        }        
         
     });
+    
+    var timer;
+    
+    $(".nav-primary .menu > li").on( 'mouseenter', function () {
+            
+            var nav = $(this).closest('nav');
+            
+            timer = setTimeout(function(){
+                if( $('.sub-menu', nav).height() === 0 ){
+                    $(nav).find('.sub-menu, .menu > li').attr('data-is','open');
+                } 
+            }, 250);
+            
+    } );
+    
+    $('body').on( 'mouseleave', '.nav-primary', function () {
+        clearTimeout(timer);
+        $(this).find('.sub-menu, .menu > li').attr('data-is','close');
+    } );
+   
+
     
     // Toggle menu
     
