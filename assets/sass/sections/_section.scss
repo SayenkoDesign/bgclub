@@ -19,4 +19,12 @@ section {
         }
     }
     
+    .entry-header {
+        p {
+            line-height: $paragraph-line-height;
+            margin-bottom: $paragraph-margin-bottom;
+        }
+	 
+    }
+    
 }

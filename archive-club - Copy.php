@@ -35,8 +35,7 @@ if ( have_posts() ) :
         $location['id'] = ++$counter;
         $location['name'] = get_the_title();
         $location['permalink'] = get_permalink();
-        
-        // City is now just a description field. Field label changes in ACF field. 
+                
         $fields = array( 'id', 'name', 'city', 'address', 'email', 'phone', 'hours', 'grades_served', 'register', 'map_marker' );
         
         
@@ -79,12 +78,12 @@ if ( have_posts() ) :
             <div class="list-label"><span>{{marker}}</span></div>
             <div class="list-details">
                 <div class="list-content">
-                    <div class="loc-name"><a href="{{permalink}}">{{{name}}}</a></div>
-                    <div class="loc-description">{{{city}}}</div>
+                    <div class="loc-city">{{city}}</div>
+                    <div class="loc-name">{{{name}}}</div>
                     <div class="loc-addr">{{{address}}}</div> 
                     <div class="loc-phone">{{phone}}</div>
                     <div class="loc-hours">{{{hours}}}</div>
-                    <div class="loc-links"><a href="{{permalink}}">Learn More</a></div>
+                    <div class="loc-links"><a href="{{permalink}}">Learn More</a> | <a href="{{register}}" target="_blank">Register</a></div>
                 </div>
             </div>
         </li>
@@ -95,7 +94,6 @@ if ( have_posts() ) :
         {{#location}}
         <div class="loc-name">{{{name}}}</div>
         <div>{{{address}}}</div>
-        <div class="loc-links"><a href="{{permalink}}">Learn More</a></div>
         {{/location}}
         </script>
         

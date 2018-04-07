@@ -11,6 +11,8 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'column row' ); ?>>
 	
 	<?php
+    $display_author = get_post_meta( get_the_ID(), 'display_author', true );
+    $post_author = '';
          
     if( !is_single() ) {
         
@@ -21,15 +23,20 @@
         $post_categories =  get_the_category_list( '' );
         
         $post_title = sprintf( '<h2><a href="%s">%s</a></h2>', get_permalink(), get_the_title() );
-        $post_author = _s_get_post_author();
+        
+        if( $display_author ) {
+            $post_author = _s_get_post_author();
+        }    
     
-        printf( '<div class="post-hero" style="%s"><div class="flex"><header class="entry-header">%s%s%s</header></div></div>', 
+        printf( '<div class="post-hero" style="%s"><div class="flex"><header class="entry-header">%s%s</header></div></div>%s', 
                 $post_image, $post_categories, $post_title, $post_author );
                 
         
     }
     else {
-        echo _s_get_post_author( 120, $post->post_author );   
+        if( $display_author ) {
+             echo _s_get_post_author( 120, $post->post_author ); 
+        }  
     }
 	?>
 	

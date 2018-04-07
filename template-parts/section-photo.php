@@ -53,7 +53,7 @@ if( ! function_exists( 'section_photo' ) ) {
             $grid = join( '', $items );
         }
         
-        $output = sprintf( '<div class="photo-grid grid-count-%s">%s</div>', $count, $grid );
+        $output = sprintf( '<div class="photo-grid grid-count-%s clearfix">%s</div>', $count, $grid );
         
         // Do not change
         

@@ -1,5 +1,7 @@
 // Leadership
 
+
+
 .section-leadership {
     background-color: $light-gray;   
     padding: 60px 0 0;
@@ -23,32 +25,32 @@
     
     .grid-staff {
         
-        display: flex;
-        flex-wrap: wrap;
-        text-align: center;
-        
-        .column {
-            //width: auto!important;
-            float: none!important;
-            flex-grow: 1;
-            flex-basis: 0;
+        .thumbnail {
+            position: absolute;
+            z-index: 2;
+            width: 150px;
+            height: 150px;
+            top: -75px;
+            left: 50%;
+            transform: translate(-50%,0);
+            text-align: center;
         }
         
         img {
             border-radius: 50%;   
-            position: relative;
-            z-index: 2;
+            max-height: 100%;
         }
         
         .details {
             border: 5px solid #FFFFFF;
             border-radius: 15px;
-            margin: 0 auto;
+            margin: 75px auto 0;
             padding: 85px 20px 20px;
-            margin-top: -75px;
+            position: relative;
+            text-align: center;
             
             h3 {
-                margin-bottom: 12px;   
+                margin-bottom: 2px;   
             }
             
             p {
@@ -61,28 +63,17 @@
             }
         }
     }
-    
-    .grid-board {
-        text-align: center; 
-        
-        @include breakpoint(large) {
-            display: flex;
-            align-items: center;  
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            
-            .column {
-                float: none;
-                width: auto;
-                padding: 0 45px;
-            }
-        }
-        
-        p {
-            font-size: 18px;
-            font-weight: 700;   
-        }
-    }
+  
+}
 
+.grid-board {
+        
+    text-align: center; 
+    max-width: 640px!important;
+    margin: 0 auto!important;
+    
+    p {
+        font-size: 18px;
+        font-weight: 700;   
+    }
 }

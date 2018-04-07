@@ -72,19 +72,19 @@ get_header(); ?>
         $content .= sprintf( '<p><a href="%s" class="tel">%s %s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us', $location['phone'] );
         
         $content .= $social;
-        $left = sprintf( '<div class="large-6 columns">%s</div>', $content );
+        $left = sprintf( '<div class="small-12 large-6 columns">%s</div>', $content );
         
         $content = sprintf( '<p><strong>Hours</strong>%s</p>', $location['hours'] );
         $content .= sprintf( '<p><strong>Grades Served</strong>%s</p>', $location['grades_served'] );
-        $right = sprintf( '<div class="large-6 columns">%s</div>', $content );
+        $right = sprintf( '<div class="small-12 large-6 columns">%s</div>', $content );
         
         $left = sprintf( '<div class="row">%s%s</div>', $left, $right );
         
-        $left = sprintf( '<div class="medium-6 large-8 columns">%s</div>',  $left );
+        $left = sprintf( '<div class="small-12 medium-6 large-8 columns">%s</div>',  $left );
         
         $content = sprintf( '<p><a href="%s" class="button green">%s</a></p>', '#club-contact', 'Message Us' );
         $content .= sprintf( '<p><a href="%s" class="button green">%s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us' );
-        $right = sprintf( '<div class="medium-6 large-4 columns">%s</div>',  $content );
+        $right = sprintf( '<div class="small-12 medium-6 large-4 columns">%s</div>',  $content );
         
         $attr = array( 'id' => 'club-intro', 'class' => 'section-intro' );        	
         

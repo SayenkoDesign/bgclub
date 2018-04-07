@@ -133,11 +133,12 @@ $transition--basic: all $timing-base $easing-base;
 		background: transparent;
         
         display: flex;
+        justify-content: center;
 
 		.menu-item {
 			background: transparent;
 			border: none;
-			display: inline-block;
+			
 			width: auto;
 			padding: 0 12px;
             

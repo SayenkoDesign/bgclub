@@ -160,23 +160,59 @@
     .bh-sl-container .bh-sl-loc-list .list-details .list-content {
         padding: 36px 12px 18px;
         
-        .loc-city {
+        .loc-name {
             color: $blue;
             font-size: 22px;
             line-height: 32px;
             font-weight: 700;
+            
+            a {
+                text-decoration: none;
+                
+                &:hover {
+                    color: $green;   
+                }
+            }
         }
         
-        .loc-name {
+        .loc-city {
             font-size: 16px;
             line-height: 22px;
             font-weight: normal;
+        }
+        
+        .loc-phone {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 600;
         }
         
         .loc-addr,
         .loc-phone,
         .loc-links {
             padding-top: 14px;
+        }
+        
+        .loc-links a {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 600;
+            text-decoration: none;
+            
+            &:hover {
+                color: $green;   
+            }
+        }
+    }
+    
+    
+    .bh-sl-map {
+        .loc-links {
+            padding-top: 10px;  
+            
+            a {
+                text-decoration: none;   
+            }
         }
     }
     

@@ -43,7 +43,7 @@ wp_reset_postdata();
 
 <div class="row">
 
-    <div class="large-8 columns">
+    <div class="small-12 large-8 columns">
     
         <div id="primary" class="content-area">
         
@@ -81,7 +81,7 @@ wp_reset_postdata();
     
     </div>
     
-    <div class="large-4 columns">
+    <div class="small-12 large-4 columns">
     
         <?php get_sidebar(); ?>
     

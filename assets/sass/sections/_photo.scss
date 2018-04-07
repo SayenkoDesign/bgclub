@@ -1,9 +1,19 @@
 /* CSS Document */
 
+.section-photo + .section-photo {
+      .photo-grid {
+        margin-top: 0;   
+      } 
+}
+
 .section-photo {
     
     $photo-grid-height: 562px;
     $photo-grid-gap: 15px;
+    
+    .photo-grid {
+        margin-top: -15px;   
+    }
     
     .grid-block {
         width: 100%;  

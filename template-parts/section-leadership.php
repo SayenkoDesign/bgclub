@@ -49,16 +49,16 @@ if( ! function_exists( 'section_leadership' ) ) {
                 $name = ! empty(  $member['staff_name'] ) ? _s_get_heading( $member['staff_name'], 'h3' ) : '';
                 $position = ! empty(  $member['staff_position'] ) ? sprintf( '<h6>%s</h6>', $member['staff_position'] ) : '';
                 
-                $email = ! empty(  $member['staff_email'] ) ? sprintf( '<p><a href="mailto:%1$s">%1$s</a></p>', 
+                $email = ! empty(  $member['staff_email'] ) ? sprintf( '<p><a href="mailto:%s">Email</a></p>', 
                                    antispambot( $member['staff_email'] ) ) : '';
                 $phone = ! empty(  $member['staff_phone'] ) ? sprintf( '<p><a href="%s">%s</a></p>', 
                                    _s_format_telephone_url( $member['staff_phone'] ), $member['staff_phone'] ) : '';
                                    
-                $staff .= sprintf( '<div class="column column-block">%s<div class="details" data-equalizer-watch>%s%s%s%s</div></div>', 
+                $staff .= sprintf( '<div class="column column-block"><div class="details" data-equalizer-watch="item"><div class="thumbnail">%s</div>%s%s%s%s</div></div>', 
                                    $photo, $name, $position, $email, $phone );                    
             }
             
-            $output .= sprintf( '<div class="row small-up-1 medium-up-2 large-up-3 xlarge-up-5 grid grid-staff" data-equalizer data-equalize-on="medium">%s</div>', $staff );
+            $output .= sprintf( '<div class="row align-center small-up-1 medium-up-2 large-up-3 xlarge-up-5 grid grid-staff" data-equalizer="item" data-equalize-on="medium">%s</div>', $staff );
         }
         
         
@@ -106,7 +106,7 @@ if( ! function_exists( 'section_leadership' ) ) {
                 $board_columns .= sprintf( '<div class="column column-block">%s</div>', join( '', $column ) );
             }
             
-            $output .= sprintf( '<div class="row small-up-1%s grid-board">%s</div>', $column_classes[$columns], $board_columns );
+            $output .= sprintf( '<div class="row align-center small-up-1%s grid-board">%s</div>', $column_classes[$columns], $board_columns );
         }
         
         $output .= '</div>';

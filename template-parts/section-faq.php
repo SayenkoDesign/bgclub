@@ -12,7 +12,7 @@ if( ! function_exists( 'section_faq' ) ) {
         // Heading/Description
         $section = get_sub_field( sprintf( '%ssection', $prefix ) );
         $heading = $section['heading'];
-        $description = $section['description'];
+        $description = _s_get_textarea( $section['description'] );
         
         $rows = get_sub_field( 'faq_accordion' );
         
@@ -39,7 +39,7 @@ if( ! function_exists( 'section_faq' ) ) {
                   
         if( !empty( $heading ) ) {
             $heading    = _s_get_heading( $heading );
-            printf( '<div class="column row"><header class="entry-header">%s</header>%s</div>', $heading, $description );
+            printf( '<div class="column row"><header class="entry-header">%s%s</header></div>', $heading, $description );
         }
            
         print( '<div class="entry-content">' );
