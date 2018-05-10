@@ -37,7 +37,7 @@ class CPT_Program extends CPT_Core {
 				'show_in_nav_menus'   => false,
 				'exclude_from_search' => false,
 				'rewrite'             => array( 'slug' => 'programs' ),
-				'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions' ),
+				'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions', 'author' ),
 			)
 
         );
@@ -50,7 +50,7 @@ class CPT_Program extends CPT_Core {
 	 
      function pre_get_posts($query) {
 						
-		if ( $query->is_main_query() && is_post_type_archive( self::POST_TYPE ) ) {
+		if ( $query->is_main_query() && is_post_type_archive( self::POST_TYPE ) && !is_admin() ) {
 			
             $terms = array();
             											

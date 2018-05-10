@@ -31,9 +31,10 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
         <div class="row">
         
             <div class="small-12 large-4 large-push-4 columns">
+            
             <?php
             $logo = sprintf('<img src="%slogo-footer.svg" width="171px" height="91px" />', trailingslashit( THEME_IMG ) );
-            printf( '<div class="widget widget-one">%s</div>',  $logo );
+            printf( '<div class="widget widget-one"><h3>Great Futures Start Here.</h3>%s</div>',  $logo );
             ?>
             </div>
             
@@ -84,10 +85,33 @@ printf( '<div class="wave-bottom show-for-medium">%s</div>', get_svg( 'wave-bott
         
         <div class="row align-center">
                 <div class="small-12 large-4 columns text-center">
-                <?php
-                printf( '<p><span>&copy; %s Boys & Girls Club of King County. All rights reserved.</span><span><a href="%2$s">Seattle Web Design</a> by <a href="%2$s" target="_blank">Sayenko Design</a>.</span><span>BGCA is a 501(c)3 (nonprofit) organization and donations are tax deductible.</span></p>', 
-                date( 'Y' ), 'https://www.sayenkodesign.com' );
                 
+                <?php
+                
+                print( '<p>' );
+                
+                printf( '<span>&copy; %s Boys & Girls Clubs of King County. All rights reserved.</span>', date( 'Y' ) );
+                
+                if( has_nav_menu( 'footer' ) ) {
+                    $args = array( 
+                    'theme_location'  => 'footer', 
+                     'container'       => false,
+                     'echo'            => false,
+                     'items_wrap'      => '%3$s',
+                     'link_before'     => '<span>',
+                     'link_after'      => '</span>',
+                     'depth'           => 0,
+                    ); 
+                
+                    printf( '<span>%s</span>', str_replace('<a', '<b> | </b><a', strip_tags( wp_nav_menu( $args ), '<a>' ) ) );
+                 
+                }
+                               
+                print( '<span>BGCKC is a 501(c)3 (nonprofit) organization and donations are tax deductible.</span>' );
+                
+                //printf( '<span><a href="%1$s">Seattle Web Design</a> by <a href="%1$s" target="_blank">Sayenko Design</a>.</span>','https://www.sayenkodesign.com' );
+                
+                print( '</p>' );
                 ?>
 				</div>
 		</div>

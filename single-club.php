@@ -69,7 +69,7 @@ get_header(); ?>
         
         $content .= sprintf( '<p><a href="%s" class="arrow">%s</a></p>', $location['directions'], 'Get Directions' );
         
-        $content .= sprintf( '<p><a href="%s" class="tel">%s %s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us', $location['phone'] );
+        $content .= sprintf( '<p class="tel"><a href="%s">%s</a></p>', _s_format_telephone_url( $location['phone'] ), $location['phone'] );
         
         $content .= $social;
         $left = sprintf( '<div class="small-12 large-6 columns">%s</div>', $content );
@@ -82,7 +82,7 @@ get_header(); ?>
         
         $left = sprintf( '<div class="small-12 medium-6 large-8 columns">%s</div>',  $left );
         
-        $content = sprintf( '<p><a href="%s" class="button green">%s</a></p>', '#club-contact', 'Message Us' );
+        $content = sprintf( '<p><a href="%s" class="button green">%s</a></p>', '#section-leadership', 'Message Us' ); // #club-contact
         $content .= sprintf( '<p><a href="%s" class="button green">%s</a></p>', _s_format_telephone_url( $location['phone'] ), 'Call Us' );
         $right = sprintf( '<div class="small-12 medium-6 large-4 columns">%s</div>',  $content );
         

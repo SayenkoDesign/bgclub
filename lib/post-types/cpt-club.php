@@ -37,15 +37,25 @@ class CPT_Club extends CPT_Core {
 				'show_in_nav_menus'   => false,
 				'exclude_from_search' => false,
 				'rewrite'             => array( 'slug' => 'clubs' ),
-				'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'revisions' ),
+				'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'revisions', 'author' ),
 			)
 
         );
 		
+        add_action( 'pre_get_posts', array( $this,'pre_get_posts' ) );
 		
      }
 	 
-     
+     function pre_get_posts($query) {
+						
+		if ( $query->is_main_query() && is_post_type_archive( self::POST_TYPE ) && !is_admin() ) {
+			            											
+			$query->set('posts_per_page', '-1' );
+		
+		}
+			
+		return $query;
+	}    
      
      /**
 	 * Registers admin columns to display. Hooked in via CPT_Core.

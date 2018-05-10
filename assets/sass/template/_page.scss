@@ -26,6 +26,17 @@ button:focus {
 .wave-top,
 .wave-bottom {
     line-height: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    height: 0;
+    padding-top: 1.875%;
+    position: relative;
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
 
 .site-content .wave-bottom {
@@ -34,4 +45,31 @@ button:focus {
 
 h2.page-title {
     text-align: center;   
+}
+
+body blockquote {
+    border-left: none;
+    position: relative;
+    padding-left: 85px;
+    
+    p {
+        color: $blue;
+        font-size: 22px; 
+        line-height: 1.45!important;  
+        font-style: italic;
+        font-weight: 700;
+    }
+    
+    &:before {
+        content: '';
+        display: block;
+        width: 69px;
+        height: 49px;
+        background-image: url(assets/images/icons/quote.svg);   
+        background-size: 69px 49px;
+        position: absolute;
+        top: 10px;
+        left: 0;
+    }
+       
 }

@@ -9,7 +9,7 @@ function _s_footer_cta() {
 	        
     $footer_cta = false;
     
-    if( is_single() ) {
+    if( is_singular() ) {
         $footer_cta = get_field( 'choose_footer_cta' );
     }
     else {

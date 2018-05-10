@@ -125,7 +125,7 @@ get_template_part( 'template-parts/hero', 'program-archive' );
                         $description  = apply_filters( 'the_content', get_the_excerpt() );
                         $permalink = sprintf( '<p><a href="%s" class="learn-more">%s</a></p>', get_permalink(), 'Learn More' );
                         
-                        printf( '<div class="panel"><div class="thumbnail"%s>%s</div><div class="entry-content"><div class="description" data-equalizer-watch>%s</div>%s</div></div>', $background, $title, $description, $permalink );
+                        printf( '<div class="panel"><a href="%s" class="thumbnail"%s>%s</a><div class="entry-content"><div class="description" data-equalizer-watch>%s</div>%s</div></div>', get_permalink(), $background, $title, $description, $permalink );
                         
                         echo '</article>';
         

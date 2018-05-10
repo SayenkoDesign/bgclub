@@ -21,15 +21,14 @@ if( ! function_exists( 'section_blog' ) ) {
         
         $settings = get_sub_field( sprintf( '%ssettings', $prefix ) );
                       
-        $choose_tag 	    = $fields['choose_tag'];
-        $featured_story	    = $fields['featured_story'];
-        $featured_post      = $fields['featured_post'];
-         
-          
+        $choose_tag 	    = get_sub_field( 'choose_tag' );
+        $featured_story	    = get_sub_field( 'featured_story' );
+        $featured_post      = get_sub_field( 'featured_post' );
+                   
         $story     = _get_story( $choose_tag, $featured_story );
-        $blog_post = _get_blog_post( $choose_tag, $featured_story );
-        $events    = _get_events_list();
-        
+        $blog_post = _get_blog_post( $choose_tag, $featured_post );
+        $events    = _get_events_list( $choose_tag );           
+                
         if( empty( $story ) || empty( $blog_post ) ) {
             return;
         }
@@ -80,7 +79,7 @@ if( ! function_exists( '_get_story' ) ) {
             }       
             
         }
-    
+            
         // Use $loop, a custom variable we made up, so it doesn't overwrite anything
         $loop = new WP_Query( $args );
         
@@ -111,7 +110,7 @@ if( ! function_exists( '_get_story' ) ) {
                 $quote = sprintf('<div class="quote"><img src="%sicons/quote.svg" width="69px" height="49px" /></div>', trailingslashit( THEME_IMG ) );
                 $permalink  = sprintf( '<p><a href="%s" class="button green">%s</a></p>', get_permalink(), 'Full Story' );
                 
-                $out = sprintf( '<div class="story"%s data-equalizer-watch><div class="entry-title clearfix">%s%s</div>%s%s%s</div>', $style, $video, $title, $description, $quote, $permalink );
+                $out = sprintf( '<div class="story"%s data-equalizer-watch><div class="wrap"><div class="entry-title clearfix">%s%s</div>%s%s%s</div></div>', $style, $video, $title, $description, $quote, $permalink );
     
             endwhile;
         endif;
@@ -165,14 +164,18 @@ if( ! function_exists( '_get_blog_post' ) ) {
         if ( $loop->have_posts() ) : 
             while ( $loop->have_posts() ) : $loop->the_post(); 
     
-                $categories = get_the_category();
-                $cat_name = '';
-                $cat_link = get_permalink( get_option( 'page_for_posts' ) );;
- 
-                if ( ! empty( $categories ) ) {
-                    $cat_name = sprintf( '<h4>%s</h4>', esc_html( $categories[0]->name ) );   
-                    $cat_link = esc_url( get_category_link( $categories[0]->term_id ) );
+                $tag_name = '';
+                $tag_link = get_permalink( get_option( 'page_for_posts' ) );
+                
+                if( !empty( $cat ) ) {
+                    $tag = get_term_by( 'term_id', $cat, 'post_tag' );
+                    
+                    if ( ! is_wp_error( $tag ) ) {
+                        $tag_name = sprintf( '<h4>%s</h4>', esc_html( $tag->name ) );   
+                        $tag_link = esc_url( get_term_link( $cat ) );
+                    }
                 }
+ 
                 
                 
                 $background = get_the_post_thumbnail_url( get_the_ID(), 'large' ); 
@@ -184,10 +187,10 @@ if( ! function_exists( '_get_blog_post' ) ) {
                 $title = the_title( '<h3>', '</h3>', false );
                 $description  = apply_filters( 'the_content', get_the_excerpt() );
                 $permalink  = sprintf( '<a href="%s" class="learn-more">%s</a>', get_permalink(), 'Read More' );
-                $more       = sprintf( '<a href="%s" class="learn-more">%s</a>', $cat_link, 'More Posts' );
-                $links      = sprintf( '<p class="links">%s%s</p>', $permalink, $more );
+                $more       = sprintf( '<a href="%s" class="learn-more">%s</a>', $tag_link, 'View More Posts' );
+                $links      = sprintf( '<p class="links">%s</p><p class="links">%s</p>', $permalink, $more );
                 
-                $out = sprintf( '<div class="blog-post"><div class="entry-content">%s%s%s%s</div>%s</div>', $cat_name, $title, $description, $links, $background );
+                $out = sprintf( '<div class="blog-post"><div class="entry-content">%s%s%s%s</div>%s</div>', $tag_name, $title, $description, $links, $background );
     
             endwhile;
         endif;
@@ -201,7 +204,22 @@ if( ! function_exists( '_get_blog_post' ) ) {
 
 
 if( ! function_exists( '_get_events_list' ) ) {
-    function _get_events_list( $cat = false ) {
+    function _get_events_list( $cat = false ) {        
+
+        $tag_name = 'Category';
+        $tag_link = get_post_type_archive_link( 'event' );
+        
+        if( !empty( $cat ) ) {
+            $tag = get_term_by( 'term_id', $cat, 'post_tag' );
+            
+            if ( ! is_wp_error( $tag ) ) {
+                $tag_name = sprintf( '<h4>%s</h4>', esc_html( $tag->name ) );   
+                $tag_link = esc_url( get_term_link( $cat ) );
+            }
+        }
+        
+        $more = sprintf( '<a href="%s" class="learn-more">%s</a>', $tag_link, 'View More Events' );
+        $links = sprintf( '<p class="links">%s</p>', $more );
         
         // arguments, adjust as needed
         $args = array(
@@ -257,6 +275,8 @@ if( ! function_exists( '_get_events_list' ) ) {
             endwhile;
             
             $out .= '</ul>';
+            
+            $out .= $links;
         else:
             $out .= sprintf( '<p>%s</p>', 'No upcoming events' );
         endif;

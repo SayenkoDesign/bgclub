@@ -37,7 +37,7 @@ class CPT_Event extends CPT_Core {
 				'show_in_nav_menus'   => false,
 				'exclude_from_search' => false,
 				'rewrite'             => array( 'slug' => 'events' ),
-				'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+				'supports' => array( 'title', 'editor', 'thumbnail', 'revisions', 'author' ),
 				 )
 
         );

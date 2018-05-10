@@ -142,6 +142,11 @@ h3 {
     
     ol:not([class]) {
         list-style: decimal;
+        margin-left: 18px;
+        
+        li {
+             margin-bottom: 8px;   
+        }
     }
  	
 }

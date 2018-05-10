@@ -79,6 +79,10 @@
         span {
              display: block;
              margin-bottom: 5px;
+             
+             b:first-child {
+                display: none;   
+             }
         }
         
         a {

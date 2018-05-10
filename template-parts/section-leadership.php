@@ -49,13 +49,23 @@ if( ! function_exists( 'section_leadership' ) ) {
                 $name = ! empty(  $member['staff_name'] ) ? _s_get_heading( $member['staff_name'], 'h3' ) : '';
                 $position = ! empty(  $member['staff_position'] ) ? sprintf( '<h6>%s</h6>', $member['staff_position'] ) : '';
                 
-                $email = ! empty(  $member['staff_email'] ) ? sprintf( '<p><a href="mailto:%s">Email</a></p>', 
+                $email = ! empty(  $member['staff_email'] ) ? sprintf( '<a href="mailto:%s">Email</a>', 
                                    antispambot( $member['staff_email'] ) ) : '';
-                $phone = ! empty(  $member['staff_phone'] ) ? sprintf( '<p><a href="%s">%s</a></p>', 
-                                   _s_format_telephone_url( $member['staff_phone'] ), $member['staff_phone'] ) : '';
+                $bio = ! empty(  $member['staff_bio'] ) ? sprintf( '<a href="%s">Bio</a>', 
+                                   $member['staff_bio'] ) : '';
+                
+                $divider = '';    
+                $email_bio = '';          
+                if( $email && $bio ) {
+                    $divider = ' | ';
+                }
+                
+                if( $email || $bio ) {
+                    $email_bio = sprintf( '<p>%s%s%s</p>', $email, $divider, $bio );   
+                }             
                                    
-                $staff .= sprintf( '<div class="column column-block"><div class="details" data-equalizer-watch="item"><div class="thumbnail">%s</div>%s%s%s%s</div></div>', 
-                                   $photo, $name, $position, $email, $phone );                    
+                $staff .= sprintf( '<div class="column column-block"><div class="details" data-equalizer-watch="item"><div class="thumbnail">%s</div>%s%s%s</div></div>', 
+                                   $photo, $name, $position, $email_bio );                    
             }
             
             $output .= sprintf( '<div class="row align-center small-up-1 medium-up-2 large-up-3 xlarge-up-5 grid grid-staff" data-equalizer="item" data-equalize-on="medium">%s</div>', $staff );
@@ -98,7 +108,7 @@ if( ! function_exists( 'section_leadership' ) ) {
                                      1 => '', 
                                      2 => ' medium-up-2', 
                                      3 => ' large-up-3', 
-                                     4 => ' medium-up-2 large-up-4', );
+                                     4 => ' medium-up-2 large-up-3', );
             
             $board_items = c2c_array_partition( $board_items, $columns );
             $board_columns = '';
@@ -116,7 +126,7 @@ if( ! function_exists( 'section_leadership' ) ) {
         
         // Do not change
         
-        $args = array( 'class' => $classes, 'style' => $styles );
+        $args = array( 'id' => 'section-leadership', 'class' => $classes, 'style' => $styles );
         
         _s_section( $output, $settings, $args );
     }

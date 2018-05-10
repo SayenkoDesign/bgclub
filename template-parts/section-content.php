@@ -30,6 +30,8 @@ if( ! function_exists( 'section_content' ) ) {
         $button                 = $fields['button'];
                   
         $content = '';
+        
+        $spacer = '';
          
         if( !empty( $photo ) ) {
             $style = '';
@@ -41,7 +43,7 @@ if( ! function_exists( 'section_content' ) ) {
             $style = sprintf( ' style="%s"', $style );
             // Alignment
             $left = $right = '';
-            $spacer = '';
+            
             
             if( 'left' == $photo_alignment ) {
                 $spacer = '<div class="small-12 large-6 columns show-for-large">&nbsp;</div>';  

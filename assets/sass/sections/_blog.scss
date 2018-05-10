@@ -10,6 +10,23 @@
         background-position: center center;
         min-height: 720px;
         padding: 40px 20px;
+        position: relative;
+        
+        &:after {
+            content: '';
+            background: rgba(#044E6D, .8); 
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+        } 
+        
+        .wrap {
+            position: relative;
+            z-index: 3;   
+        }
         
         @include breakpoint(medium) {
             padding: 40px;
@@ -139,7 +156,7 @@
         }
         
         p.links {
-            //margin: 0 -10px;
+            margin-bottom: 12px;
  
             a {
                 margin: 0 10px $global-margin auto;   
@@ -181,6 +198,10 @@
                     color: $gray;
                 }
             }
+        }
+        
+        .links {
+            padding-top: 10px;   
         }
     }
     
