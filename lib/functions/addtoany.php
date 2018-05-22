@@ -48,6 +48,12 @@ function _s_get_addtoany_share_icons( $url = '', $title = '' ) {
 
 
 
+function share_shortcode() {
+    return sprintf( '<h4 class="text-left">%s</h4>%s', __( 'Share This:', '_s' ), _s_get_addtoany_share_icons() );
+}
+
+add_shortcode( 'bg_share', 'share_shortcode' );
+
 function _s_get_addtoany_share_email( $url = '', $title = '' ) {
 	
 	global $post;

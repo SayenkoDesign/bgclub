@@ -15,7 +15,7 @@ function section_hero() {
     
     $heading = sprintf( '<h1>%s</h1>', get_the_title() );
     $heading .= sprintf( '<h3>Event Date: %s</h3>', get_field( 'event_start_date' ) );
-    $description = sprintf( '<p>Posted on: %s</p>', _s_get_posted_on() );
+    $description = ''; // sprintf( '<p>Posted on: %s</p>', _s_get_posted_on() );
     
  	
 	$style = '';
